@@ -1,5 +1,5 @@
 var Global = {
-		API_URL: "http://demo.hainamswitchboards.com",
+	API_URL: "http://localhost:8080/data",
 		URLPath: ""
 	},
 	App = {

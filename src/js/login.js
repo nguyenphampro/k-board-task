@@ -1,15 +1,15 @@
 function __login__postData(u,p) {
 	$.ajax({
-		url: Global.API_URL + "/oauth/token",
-		type: "POST",
+		url: Global.API_URL + "/user.json",
+		type: "GET",
 		async: true,
 		dataType: "text",
 		cache: !0,
-		data: "grant_type=password&username=" + u + "&password=" + p + "",
+		data: "username=" + u + "&password=" + p + "",
 		complete: function (data) {
 			var getToken = JSON.parse(data.responseText)
-			if (getToken.access_token && getToken.access_token.length>0) {
-				localStorage.Token = getToken.access_token
+			if (getToken[u].username === u && getToken[u].password === p) {
+				localStorage.Token = md5(getToken)
 				window.location.href = '/'
 			}
 		}
