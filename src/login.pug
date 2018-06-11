@@ -1,0 +1,11 @@
+extends _layout.pug
+block variables
+	- var title = 'Đăng nhập'
+block content
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include __login.js
+			include ./assets/login.min.js
+	else
+		include __login
+		script(key=val, src='./js/login.js?v='+text)

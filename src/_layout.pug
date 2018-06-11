@@ -1,0 +1,61 @@
+block variables
+doctype html
+//
+	License Name: HAI NAM
+	Serial Number: #{key.slice(70, 75).toUpperCase()}-#{key.slice(80, 85).toUpperCase()}-#{key.slice(90, 95).toUpperCase()}-#{key.slice(40, 45).toUpperCase()}-#{key.slice(30, 35).toUpperCase()}
+html(lang='en')
+	- var text = Math.random()
+	- var hash = key
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(http-equiv='X-UA-Compatible', content='ie=edge')
+		meta(name='msapplication-TileColor', content='#48a4bc')
+		meta(name='theme-color', content='#48a4bc')
+		title #{title}
+		link(rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-icon-57x57.png")
+		link(rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-icon-60x60.png")
+		link(rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-icon-72x72.png")
+		link(rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-icon-76x76.png")
+		link(rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-icon-114x114.png")
+		link(rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-icon-120x120.png")
+		link(rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-icon-144x144.png")
+		link(rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-icon-152x152.png")
+		link(rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-icon-180x180.png")
+		link(rel="icon" type="image/png" sizes="192x192" href="./favicon/android-icon-192x192.png")
+		link(rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png")
+		link(rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png")
+		link(rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png")
+		link(rel="manifest" href="./favicon/manifest.json")
+		meta(name="msapplication-TileColor" content="#ffffff")
+		meta(name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png")
+		meta(name="theme-color" content="#ffffff")
+		link(rel='stylesheet', key=val, href='./css/bootstrap.min.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/fa-brands.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/fa-regular.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/fa-solid.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/fontawesome.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/jquery-ui.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/jquery-ui-timepicker-addon.min.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/jquery.contextMenu.min.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/table.css?v='+text)
+		link(rel='stylesheet', key=val, href='./css/main.css?v='+text)
+		script(key=val, src='./vendor/jquery.min.js?v='+text)
+		script(key=val, src='./vendor/jquery-ui.min.js?v='+text)
+		script(key=val, src='./vendor/popper.min.js?v='+text)
+		script(key=val, src='./vendor/bootstrap.min.js?v='+text)
+		script(key=val, src='./vendor/validator.min.js?v='+text)
+		script(key=val, src='./vendor/moment.min.js?v='+text)
+		script(key=val, src='./vendor/jquery.contextMenu.min.js?v='+text)
+		script(key=val, src='./vendor/jquery-ui-timepicker-addon.min.js?v='+text)
+		script(key=val, src='./vendor/md5.min.js?v='+text)
+		if process.env.ENVGLOBAL === 'true'
+			script(key=val, src='./assets/main.min.js?v='+text)
+		else
+			script(key=val, src='./js/main.js?v='+text)
+		block script
+	body(class=hasmenu)
+		block header
+		main
+			block content
+		block footer

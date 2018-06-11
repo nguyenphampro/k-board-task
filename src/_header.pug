@@ -1,0 +1,25 @@
+header.topbar
+	.container-fluid
+		.row.align-items-center
+			.col.logo
+				a(href="/", title="title") K-BOARD-TASK
+			.col-auto
+				ul.nav.justify-content-end.align-items-center
+					li.nav-item.dropdown
+						a.nav-link(href="#", id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+							img(src="./img/photo.png", alt="")
+						.dropdown-menu.dropdown-menu-right(aria-labelledby="navbarDropdown")
+							a#login.dropdown-item(href='/login') Đăng nhập
+							a#logout.dropdown-item(href='javascript:void(0);' onclick="logOut()") Đăng xuất
+
+section.toolbarleft
+	ul.nav.justify-content-end.align-items-center
+		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Bảng điều khiển")
+			a.nav-link.active(href='/')
+				i.fa.fa-th
+		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tạo mới một tác vụ")
+			a.nav-link.active(href='/addtask')
+				i.fa.fa-plus
+		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Danh sách nhân viên")
+			a.nav-link.active(href='/users')
+				i.fa.fa-user

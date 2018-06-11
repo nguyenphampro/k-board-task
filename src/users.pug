@@ -1,0 +1,26 @@
+extends _layout.pug
+block variables
+	- var title = 'Thành viên'
+	- var hasmenu = 'hasmenu'
+block header
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _header.js
+	else
+		include _header.pug
+block content
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include __users.js
+			include ./assets/users.min.js
+	else
+		include __users
+		script(key=val, src='./js/users.js?v='+text)
+block script
+	script(key=val, src='./vendor/pagination.min.js?v='+text)
+block footer
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _footer.js
+	else
+		include _footer.pug

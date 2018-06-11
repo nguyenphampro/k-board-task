@@ -1,0 +1,69 @@
+section.taskdetails
+	article.container.mt-5
+		.row
+			.col-lg-8.offset-lg-2
+				.card
+					.card-header
+						ul.nav.nav-tabs.card-header-tabs(id="myTab" role="tablist")
+							li.nav-item
+								a.nav-link.active(id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true")
+									i.fa.fa-list-alt.mr-2
+									span#data-name
+							li.nav-item
+								a.nav-link(id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false")
+									i.fa.fa-info-circle.mr-2
+									span Thông tin
+
+
+					.card-body.bg-white.p-4
+						.row
+							.col
+								#myTabContent.tab-content
+									#home.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="home-tab")
+
+										dl.row.mb-0
+											dt.col-sm-3#key-jobstates-state-1 Trạng thái
+											dd.col-sm-9
+												#jobstates-state
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-jobdetail-project-1 Dự án
+											dd.col-sm-9#data-jobdetail-project.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-metadescription-1 Nội dung
+											dd.col-sm-9#data-metadescription.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-jobdetail-material-1 Chất liệu
+											dd.col-sm-9#data-jobdetail-material.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-jobdetail-paintcolor-1 Màu sắc
+											dd.col-sm-9#data-jobdetail-paintcolor.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3 Tập tin
+											dd.col-sm-9
+												a.btn.btn-warning#pdffiles(href="#", target="_blank")
+													i.fa.fa-file-pdf.mr-2
+													| Mở tập tin PDF
+									#profile.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")
+										dl.row.mb-0
+											dt.col-sm-3#key-objectid-1 ID
+											dd.col-sm-9#data-objectid
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-createddate-1 Ngày tạo
+											dd.col-sm-9#data-createddate.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3#key-jobstates-activatedts-1 Ngày Active
+											dd.col-sm-9#data-jobstates-activatedts.text-muted
+										hr
+										dl.row.mb-0
+											dt.col-sm-3 Xóa Task
+											dd.col-sm-9
+												button.btn.btn-danger#pdffiles(onclick="__delTask()") Xóa
+
+
