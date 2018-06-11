@@ -3,28 +3,20 @@ function __delTask() {
 	var URLID = getParameterByName('id')
 	if (confirm("Bạn có chắc chắn xóa task này?")) {
 		$.ajax({
-			url: Global.API_URL + "/tasks.json?id=" + URLID,
-			type: "GET",
+			url: "/delete",
+			type: "POST",
 			async: true,
 			dataType: "json",
 			cache: !0,
+			data: {
+				id: URLID
+			},
 			contentType: "application/json; charset=utf-8",
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
 			},
 			complete: function (data) {
 				var getContents = JSON.parse(data.responseText)
-				// Filter ID
-				for (var key in getContents) {
-					if (getContents.hasOwnProperty(key)) {
-						var element = getContents[key].ObjectId;
-						if (element === URLID) {
-							getContents = getContents[key]
-						}
-					}
-				}
-				console.log(getContents)
-				// Phần này chưa viết xóa JSON
 				window.location.href = '/'
 			}
 		})
@@ -71,7 +63,7 @@ function __gettask_getLists() {
 				if (getContents.hasOwnProperty(key)) {
 					var element = getContents[key];
 					if (key.toLowerCase() === 'createddate' || key.toLowerCase() === 'activatedts') {
-						$('#data-' + key.toLowerCase()).html(moment(checkNull(element)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(element)).format('HH:MM'))
+						$('#data-' + key.toLowerCase()).html(moment(checkNull(element)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(element)).format('HH:mm'))
 					} else {
 						$('#data-' + key.toLowerCase()).html(checkNull(element))
 					}

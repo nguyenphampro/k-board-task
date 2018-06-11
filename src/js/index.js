@@ -70,10 +70,14 @@ function __index__updateTask(id, i) {
 		checkstatus = 'D'
 	}
 	$.ajax({
-		url: Global.API_URL + "/tasks.json?jobid=" + id + "&newState=" + checkstatus + "",
-		type: "GET",
+		url: "/update",
+		type: "POST",
 		dataType: "json",
 		cache: !0,
+		data: {
+			id: id,
+			status: checkstatus
+		},
 		complete: function (data) {
 			var val
 			val = data.responseJSON;
@@ -201,11 +205,14 @@ $(function () {
 			var newId = $(this).attr('id')
 			if (confirm("Bạn có chắc chắn xóa task này?")) {
 				$.ajax({
-					url: Global.API_URL + "/etracking/cnctask/setstate?jobid=" + newId + "&newState=N&returnAllStates=true",
+					url: "/delete",
 					type: "POST",
 					async: true,
 					dataType: "json",
 					cache: !0,
+					data: {
+						id: newId
+					},
 					contentType: "application/json; charset=utf-8",
 					beforeSend: function (xhr) {
 						xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));

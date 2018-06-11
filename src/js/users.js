@@ -1,7 +1,7 @@
 
 function __user_getLists() {
 	$.ajax({
-		url: Global.API_URL + "/accesscontrol/appuser/list",
+		url: Global.API_URL + "/user.json",
 		type: "GET",
 		async: true,
 		dataType: "json",
@@ -12,11 +12,12 @@ function __user_getLists() {
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
 		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
 			var iTems = [], index = 1, Table_Header = '<thead> <tr> <th scope="col">#</th> <th scope="col">Họ và tên</th> <th scope="col">Email</th> <th scope="col">Username</th> </tr></thead>'
-			for (var key in data.responseJSON) {
-				if (data.responseJSON.hasOwnProperty(key)) {
-					var element = data.responseJSON[key];
-					var item = '<tr><th>' + (index) + '</th><td><a href="/getuser?id=' + checkNull(element.UserId) + '">' + checkNull(element.FullName) + '</a></td><td>' + checkNull(element.Email) + '</td><td>' + checkNull(element.UserName) + '</td></tr>';
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key];
+					var item = '<tr><th>' + (index) + '</th><td><a href="/getuser?id=' + key + '">' + checkNull(element.fullname) + '</a></td><td>' + checkNull(element.email) + '</td><td>' + checkNull(element.username) + '</td></tr>';
 					iTems.push(item)
 					index++
 				}

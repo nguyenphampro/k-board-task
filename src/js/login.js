@@ -14,6 +14,8 @@ function __login__postData(u,p) {
 					var element = getToken[key];
 					if (getToken[key].username === u && getToken[key].password === p) {
 						localStorage.Token = md5(getToken)
+						localStorage.CurrentUser = u
+						localStorage.CurrentUserID = key
 						ready = true
 					}
 				}

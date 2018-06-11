@@ -1,3 +1,4 @@
+
 function __addTask_submitForm() {
 	$("#datepicker").datetimepicker({
 		controlType: 'select',
@@ -27,26 +28,26 @@ function __addTask_submitForm() {
 };
 
 function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDate, files, txtNewProject, txtNewColor, txtNewMaterial) {
+	var gettime = moment(Date.now()).format('YYYY-MM-DD') + ' ' + moment(Date.now()).format('HH:mm')
 	var newData = JSON.stringify({
-		ObjectId: null,
-		ObjectType: 'cnc.task',
+		ObjectType: "k.task",
+		ObjectId: md5(txtNewTitle),
+		MetaIndex: parseInt(txtNewSelect),
 		Name: txtNewTitle,
-		MetaIndex: txtNewSelect,
-		MetaBitValue: null,
+		CreatedDate: gettime,
 		MetaDescription: txtNewMesage,
 		MetaTextValue: files,
-		CreatedDate: txtNewDate,
-		Properties: {
-			JobDetail: {
-				Project: txtNewProject,
-				Material: txtNewMaterial,
-				PaintColor: txtNewColor
-			}
-		}
+		CreateID: parseInt(localStorage.getItem('CurrentUserID')),
+		workID: parseInt(App.workID),
+		State: "P",
+		ActivatedTS: txtNewDate,
+		Project: txtNewProject,
+		Material: txtNewMaterial,
+		PaintColor: txtNewColor
 	})
 	$.ajax({
-		url: Global.API_URL + "/etracking/cnctask/save",
-		type: "PUT",
+		url: "/save",
+		type: "POST",
 		async: true,
 		dataType: "json",
 		cache: !0,
@@ -58,20 +59,6 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
 		complete: function (data) {
-			var newId = data.responseJSON.ObjectId;
-			$.ajax({
-				url: Global.API_URL + "/etracking/cnctask/setstate?jobid=" + newId + "&newState=P&returnAllStates=true",
-				type: "POST",
-				async: true,
-				dataType: "json",
-				cache: !0,
-				contentType: "application/json; charset=utf-8",
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
-				},
-				complete: function (data) {
-				}
-			})
 		}
 	})
 }
@@ -100,4 +87,33 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 
 $(document).ready(function () {
 	__addTask_submitForm()
+	$('#cru').html(localStorage.getItem('CurrentUser'))
+	$.ajax({
+		url: Global.API_URL + "/user.json",
+		type: "GET",
+		async: true,
+		dataType: "json",
+		cache: !0,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+		},
+		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+			var iTems = [];
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key];
+					var item = '<option value="' + key +'">' + element.fullname + ' (' + element.username + ')</option>';
+					iTems.push(item)
+				}
+			}
+			$('#asuser').html(iTems).select2({}).on("select2:opening", function (e) {
+				App.workID = e.target.value
+			}).on("change", function (e) {
+				App.workID = e.target.value
+			});
+		}
+	})
 });

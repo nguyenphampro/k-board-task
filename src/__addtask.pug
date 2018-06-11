@@ -8,6 +8,11 @@ section
 					.card-body.p-3
 						.row
 							.col-lg
+								.form-label-group.mb-4
+									input#text.form-control(type='text', placeholder="Title", required)
+									label(for="text") Tiêu đề
+						.row
+							.col-lg
 								.input-group.mb-4
 									.input-group-prepend
 										span.input-group-text Độ ưu tiên
@@ -16,25 +21,37 @@ section
 										option(value="1", selected) Normal
 										option(value="2") Medium
 										option(value="3") High
+								.input-group.mb-4
+									.input-group-prepend
+										span.input-group-text Tạo bởi
+									.form-control#cru
 								.form-label-group.mb-4
-									input#namepro.form-control(type='text', placeholder="Tên dự án")
-									label(for="namepro") Tên dự án
-								.form-label-group.mb-4
-									input#color.form-control(type='text', placeholder="Màu sắc")
-									label(for="color") Màu sắc
-								.form-label-group.mb-4
-									input#material.form-control(type='text', placeholder="Chất liệu")
-									label(for="material") Chất liệu
+									input#datepicker.form-control(type="text", placeholder="Active Date (dd/mm/yyyy)", autocomplete="off", required)
+									label(for="datepicker") Ngày có hiệu lực
 							.col-lg
 								.form-group.mb-4
 									.custom-file
 										input#customFile.custom-file-input(type='file', name="customFile")
 										label#customFileLabel.custom-file-label(for='customFile') Chọn tập tin
+								.input-group.mb-4
+									.input-group-prepend
+										span.input-group-text Người nhận
+									select#asuser.custom-select.select2(required)
 								.form-label-group.mb-4
-									input#text.form-control(type='text', placeholder="Title", required)
-									label(for="text") Tiêu đề
-								//- .form-label-group.mb-4
-									input#datepicker.form-control(type="text", placeholder="Active Date (dd/mm/yyyy)", autocomplete="off", required)
+									input#namepro.form-control(type='text', placeholder="Tên dự án")
+									label(for="namepro") Tên dự án
+
+						.row
+							.col-lg
+								.form-label-group.mb-4
+									input#material.form-control(type='text', placeholder="Chất liệu")
+									label(for="material") Chất liệu
+							.col-lg
+								.form-label-group.mb-4
+									input#color.form-control(type='text', placeholder="Màu sắc")
+									label(for="color") Màu sắc
+						.row
+							.col
 								.form-label-group.mb-4
 									textarea#message.form-control(rows="4", placeholder="Description", required)
 									label(for="message") Nội dung

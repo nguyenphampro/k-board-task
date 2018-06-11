@@ -1,10 +1,14 @@
 {
 	"1": {
 		"username": "admin",
+		"fullname": "Bảo Nguyên",
+		"email": "baonguyenyam@gmail.com",
 		"password": "admin"
 	},
 	"2": {
 		"username": "demo",
+		"fullname": "Thanh Nguyễn",
+		"email": "thanhnguyen.baonguyen@gmail.com",
 		"password": "demo"
 	}
 }

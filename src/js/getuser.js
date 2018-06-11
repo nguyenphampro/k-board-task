@@ -13,15 +13,23 @@ function __getuser_getLists() {
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
 		complete: function (data) {
-			var Email = checkNull(data.responseJSON.Email),
-				FullName = checkNull(data.responseJSON.FullName),
-				UserName = checkNull(data.responseJSON.UserName),
-				PhoneNumber = checkNull(data.responseJSON.PhoneNumber),
+			var getContents = JSON.parse(data.responseText)
+			// Filter ID
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key].ObjectId;
+					if (key === URLID) {
+						getContents = getContents[key]
+					}
+				}
+			}
+			var Email = checkNull(getContents.email),
+				FullName = checkNull(getContents.fullname),
+				UserName = checkNull(getContents.username),
 				avartar = md5(Email)
 			$('#Email').html(Email)
 			$('#FullName').html(FullName)
 			$('#UserName').html(UserName)
-			$('#PhoneNumber').html(PhoneNumber)
 			$('#avataruser').attr('src', 'https://www.gravatar.com/avatar/' + avartar + '?s=250')
 		}
 	})
