@@ -2,7 +2,7 @@
 function __getuser_getLists() {
 	var URLID = getParameterByName('id')
 	$.ajax({
-		url: Global.API_URL + "/accesscontrol/appuser/get?id=" + URLID,
+		url: Global.API_URL + "/user.json?id=" + URLID,
 		type: "GET",
 		async: true,
 		dataType: "json",

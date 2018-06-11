@@ -3,8 +3,8 @@ function __delTask() {
 	var URLID = getParameterByName('id')
 	if (confirm("Bạn có chắc chắn xóa task này?")) {
 		$.ajax({
-			url: Global.API_URL + "/etracking/cnctask/setstate?jobid=" + URLID + "&newState=N&returnAllStates=true",
-			type: "POST",
+			url: Global.API_URL + "/tasks.json?id=" + URLID,
+			type: "GET",
 			async: true,
 			dataType: "json",
 			cache: !0,
@@ -13,6 +13,18 @@ function __delTask() {
 				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
 			},
 			complete: function (data) {
+				var getContents = JSON.parse(data.responseText)
+				// Filter ID
+				for (var key in getContents) {
+					if (getContents.hasOwnProperty(key)) {
+						var element = getContents[key].ObjectId;
+						if (element === URLID) {
+							getContents = getContents[key]
+						}
+					}
+				}
+				console.log(getContents)
+				// Phần này chưa viết xóa JSON
 				window.location.href = '/'
 			}
 		})
@@ -24,7 +36,7 @@ function __delTask() {
 function __gettask_getLists() {
 	var URLID = getParameterByName('id')
 	$.ajax({
-		url: Global.API_URL + "/etracking/cnctask/getjob?jobid=" + URLID,
+		url: Global.API_URL + "/tasks.json?id=" + URLID,
 		type: "GET",
 		async: true,
 		dataType: "json",
@@ -35,20 +47,30 @@ function __gettask_getLists() {
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
 		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+			// Filter ID
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key].ObjectId;
+					if (element === URLID) {
+						getContents = getContents[key]
+					}
+				}
+			}
 			var col = 'secondary'
-			if (data.responseJSON.MetaIndex == 1) {
+			if (getContents.MetaIndex == 1) {
 				col = 'primary'
-			} else if (data.responseJSON.MetaIndex == 2) {
+			} else if (getContents.MetaIndex == 2) {
 				col = 'success'
-			} else if (data.responseJSON.MetaIndex == 3) {
+			} else if (getContents.MetaIndex == 3) {
 				col = 'danger'
 			}
 			$('.taskdetails .card').addClass('border-' + col)
 			$('.taskdetails .card-header').addClass('bg-' + col)
-			for (const key in data.responseJSON) {
-				if (data.responseJSON.hasOwnProperty(key)) {
-					var element = data.responseJSON[key];
-					if (key.toLowerCase() === 'createddate') {
+			for (const key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key];
+					if (key.toLowerCase() === 'createddate' || key.toLowerCase() === 'activatedts') {
 						$('#data-' + key.toLowerCase()).html(moment(checkNull(element)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(element)).format('HH:MM'))
 					} else {
 						$('#data-' + key.toLowerCase()).html(checkNull(element))
@@ -56,34 +78,16 @@ function __gettask_getLists() {
 					$('#key-' + key.toLowerCase()).html(checkNull(key))
 				}
 			}
-			for (const key in data.responseJSON.Properties.JobDetail) {
-				if (data.responseJSON.Properties.JobDetail.hasOwnProperty(key)) {
-					var element = data.responseJSON.Properties.JobDetail[key];
-					$('#data-jobdetail-' + key.toLowerCase()).html(checkNull(element))
-					$('#key-jobdetail-' + key.toLowerCase()).html(checkNull(key))
-				}
-			}
-			for (const key in data.responseJSON.Properties.JobStates[0]) {
-				if (data.responseJSON.Properties.JobStates[0].hasOwnProperty(key)) {
-					var element = data.responseJSON.Properties.JobStates[0][key];
-					if (key.toLowerCase() === 'activatedts') {
-						$('#data-jobstates-' + key.toLowerCase()).html(moment(checkNull(element)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(element)).format('HH:MM'))
-					} else {
-						$('#data-jobstates-' + key.toLowerCase()).html(checkNull(element))
-					}
-					$('#key-jobstates-' + key.toLowerCase()).html(checkNull(key))
-				}
-			}
 			var colp = '<span class="badge badge-light p-1">Không hiệu lực</span>'
-			if (data.responseJSON.Properties.JobStates[0].State === 'P') {
+			if (getContents.State === 'P') {
 				colp = '<span class="badge badge-secondary p-1">Nhiệm vụ</span>'
-			} else if (data.responseJSON.Properties.JobStates[0].State === 'I') {
+			} else if (getContents.State === 'I') {
 				colp = '<span class="badge badge-info p-1">Đang thực thi</span>'
-			} else if (data.responseJSON.Properties.JobStates[0].State === 'D') {
+			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
 			}
 			$('#jobstates-state').html(colp)
-			$('#pdffiles').attr('href', '/files/' + data.responseJSON.MetaTextValue)
+			$('#pdffiles').attr('href', '/files/' + getContents.MetaTextValue)
 		}
 	})
 }

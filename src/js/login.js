@@ -8,8 +8,19 @@ function __login__postData(u,p) {
 		data: "username=" + u + "&password=" + p + "",
 		complete: function (data) {
 			var getToken = JSON.parse(data.responseText)
-			if (getToken[u].username === u && getToken[u].password === p) {
-				localStorage.Token = md5(getToken)
+			var ready = false
+			for (const key in getToken) {
+				if (getToken.hasOwnProperty(key)) {
+					var element = getToken[key];
+					if (getToken[key].username === u && getToken[key].password === p) {
+						localStorage.Token = md5(getToken)
+						ready = true
+					}
+				}
+			}
+			if(!ready) {
+				alert('Vui lòng kiểm tra lại thông tin')
+			} else {
 				window.location.href = '/'
 			}
 		}

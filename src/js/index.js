@@ -1,5 +1,4 @@
 if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
-
 } else {
 	window.location.href = '/login'
 }
@@ -19,7 +18,7 @@ function reFresh(params) {
 
 function __index__getData(e, go) {
 	$.ajax({
-		url: Global.API_URL + "/etracking/cnctask/getjobs?withState=true",
+		url: Global.API_URL + "/tasks.json",
 		type: "GET",
 		dataType: "json",
 		cache: !0,
@@ -31,13 +30,24 @@ function __index__getData(e, go) {
 			var newTemplate = []
 			for (const key in App.Data) {
 				if (App.Data.hasOwnProperty(key)) {
-					if (App.Data[key].Properties.JobStates) {
-						varsame = App.Data[key].Properties.JobStates[0].State
-						var jt = App.Data[key].Properties.JobStates[0]
-						var jd = App.Data[key].Properties.JobDetail
+					if (App.Data[key]) {
+						var varsame = App.Data[key].State
 						var element = App.Data[key];
 						if (varsame === go) {
-							newTemplate.push(App.__template(element.ObjectId, element.MetaIndex, element.Name, element.CreatedDate, element.MetaDescription, element.MetaTextValue, element.Owner.FullName, jt.Activator.FullName, jt.ActivatedTS, jd.Project, jd.Material, jd.PaintColor ))
+							newTemplate.push(App.__template(
+							element.ObjectId,
+							element.MetaIndex,
+							element.Name,
+							element.CreatedDate,
+							element.MetaDescription,
+							element.MetaTextValue,
+							// Phần này chưa viết gọi tên từ ID name
+							element.CreateID,
+							element.workID,
+							element.ActivatedTS,
+							element.Project,
+							element.Material,
+							element.PaintColor))
 						}
 					}
 				}
@@ -60,13 +70,14 @@ function __index__updateTask(id, i) {
 		checkstatus = 'D'
 	}
 	$.ajax({
-		url: Global.API_URL + "/etracking/cnctask/setstate?jobid=" + id + "&newState=" + checkstatus + "&returnAllStates=true",
-		type: "POST",
+		url: Global.API_URL + "/tasks.json?jobid=" + id + "&newState=" + checkstatus + "",
+		type: "GET",
 		dataType: "json",
 		cache: !0,
 		complete: function (data) {
 			var val
 			val = data.responseJSON;
+			// Phần này chưa viết update JSON
 		}
 	})
 }
