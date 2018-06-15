@@ -10,6 +10,7 @@
 			"settings": true,
 			"deltassk": true,
 			"modifytask": true,
+			"adduser": true,
 			"userlist": true
 		}
 	},
@@ -24,6 +25,7 @@
 			"settings": false,
 			"deltassk": false,
 			"modifytask": false,
+			"adduser": false,
 			"userlist": false
 		}
 	}

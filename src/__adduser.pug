@@ -1,0 +1,90 @@
+section
+	if(ck.permision_adduser === 'true')
+		article.container.mt-5
+			.row
+				.col-lg-8.offset-lg-2
+					form#adduser.box.card.validator.border-primary(role="validator")
+						.card-header.bg-primary.text-white(ripple)
+							h2.h5.mb-0 Thêm thành viên
+						.card-body.p-3
+							.row
+								.col-lg
+									.form-label-group.mb-4
+										input#username.form-control(type='text', placeholder="Tài khoản", required)
+										label(for="username") Tài khoản
+								.col-lg
+									.form-label-group.mb-4
+										input#password.form-control(type='password', placeholder="Mật khẩu", required)
+										label(for="password") Mật khẩu
+							.row
+								.col-lg
+									.form-label-group.mb-4
+										input#email.form-control(type='text', placeholder="Email", required)
+										label(for="email") Email
+								.col-lg
+									.form-label-group.mb-4
+										input#fullname.form-control(type='text', placeholder="Họ và tên", required)
+										label(for="fullname") Họ và tên
+							.row
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="dashboard")
+											input(type="checkbox" id="dashboard")
+											span
+												small
+											span Cho tùy chỉnh dashboard
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="createtask")
+											input(type="checkbox" id="createtask")
+											span
+												small
+											span Cho tạo task
+							.row
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="deltassk")
+											input(type="checkbox" id="deltassk")
+											span
+												small
+											span Cho xóa task
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="modifytask")
+											input(type="checkbox" id="modifytask")
+											span
+												small
+											span Cho chỉnh sửa task
+							.row
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="adduser")
+											input(type="checkbox" id="adduser")
+											span
+												small
+											span Cho thêm thành viên
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="userlist")
+											input(type="checkbox" id="userlist")
+											span
+												small
+											span Cho xem danh sách thành viên
+							.row
+								.col-lg
+									.checkbox.switcher.mb-4
+										label.mb-0.mt-1(for="settings")
+											input(type="checkbox" id="settings")
+											span
+												small
+											span Cho tùy chỉnh hệ thống
+								.col-lg
+
+
+
+							.row
+								.col.text-right
+									button.add-button.btn.btn-primary(type='submit', name='btnAddNew', ripple)
+										| Thêm mới
+										i.fa.fa-save.ml-2
+

@@ -136,6 +136,10 @@ router.get('/settings', function (req, res) {
 	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('settings', genall)
 })
+router.get('/adduser', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
+	res.render('adduser', genall)
+})
 
 app.use('/', router);
 app.use('/login', router);
@@ -144,6 +148,7 @@ app.use('/users', router);
 app.use('/getuser', router);
 app.use('/gettask', router);
 app.use('/settings', router);
+app.use('/adduser', router);
 
 // handling 404 errors
 app.get('*', function (req, res, next) {
@@ -234,4 +239,5 @@ PugCom(site.views + '/__users.pug', site.views + '/__users.js')
 PugCom(site.views + '/__getuser.pug', site.views + '/__getuser.js')
 PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
 PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
+PugCom(site.views + '/__adduser.pug', site.views + '/__adduser.js')
 
