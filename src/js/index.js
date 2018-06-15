@@ -41,9 +41,8 @@ function __index__getData(e, go) {
 							element.CreatedDate,
 							element.MetaDescription,
 							element.MetaTextValue,
-							// Phần này chưa viết gọi tên từ ID name
-							element.CreateID,
-							element.workID,
+							getUserName(element.CreateID),
+							getUserName(element.workID),
 							element.ActivatedTS,
 							element.Project,
 							element.Material,
@@ -57,6 +56,39 @@ function __index__getData(e, go) {
 			__index__callAction()
 		},
 		error: function (jqXHR, textStatus, errorThrown) {}
+	})
+}
+
+console.log(getUserName(1))
+
+function getUserName(params) {
+	var URLID = params
+	var newval = ''
+	return $.ajax({
+		url: Global.API_URL + "/user.json?id=" + URLID,
+		type: "GET",
+		async: true,
+		dataType: "json",
+		cache: !0,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+		},
+		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+			// Filter ID
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = getContents[key].ObjectId;
+					if (parseInt(key) == URLID) {
+						getContents = getContents[key]
+					}
+				}
+			}
+			newval = checkNull(getContents.fullname)
+			// return newval
+		}
 	})
 }
 
