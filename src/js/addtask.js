@@ -43,7 +43,7 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 		ActivatedTS: txtNewDate,
 		Project: txtNewProject,
 		Material: txtNewMaterial,
-		PaintColor: txtNewColor
+		Est: txtNewColor
 	})
 	$.ajax({
 		url: "/save",

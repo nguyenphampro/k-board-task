@@ -41,12 +41,12 @@ function __index__getData(e, go) {
 							element.CreatedDate,
 							element.MetaDescription,
 							element.MetaTextValue,
-							getUserName(element.CreateID),
-							getUserName(element.workID),
+							element.CreateID,
+							element.workID,
 							element.ActivatedTS,
 							element.Project,
-							element.Material,
-							element.PaintColor))
+							element.Est,
+							element.Material))
 						}
 					}
 				}
@@ -69,41 +69,6 @@ function __index__getData(e, go) {
 		},
 		error: function (jqXHR, textStatus, errorThrown) {}
 	})
-}
-
-// console.log(getUserName(1))
-// // getUserName(1)
-
-function getUserName(params) {
-	var URLID = params
-	var newval = null
-	$.ajax({
-		url: Global.API_URL + "/user.json?id=" + URLID,
-		type: "GET",
-		async: false,
-		dataType: "json",
-		cache: !0,
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-		},
-		complete: function (data) {
-			var getContents = JSON.parse(data.responseText)
-			// Filter ID
-			for (var key in getContents) {
-				if (getContents.hasOwnProperty(key)) {
-					if (key === URLID.toString()) {
-						getContents = getContents[key]
-						newval = getContents.fullname
-					}
-				}
-			}
-		}
-	})
-	if(newval) {
-		return newval
-	}
 }
 
 function __index__updateTask(id, i) {

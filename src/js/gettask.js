@@ -80,6 +80,8 @@ function __gettask_getLists() {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
 			}
 			$('#jobstates-state').html(colp)
+			$('#data-createuser').html('<a href="/getuser?id=' + getContents.CreateID+'">'+getUserName(getContents.CreateID)+'</a>')
+			$('#data-workuser').html('<a href="/getuser?id=' + getContents.workID + '">' + getUserName(getContents.workID) + '</a>')
 			$('#pdffiles').attr('data-files', getContents.MetaTextValue)
 		}
 	})

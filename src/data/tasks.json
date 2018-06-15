@@ -13,7 +13,7 @@
 		"ActivatedTS": "2018-06-03 09:30",
 		"Project": "Sale Exec 1",
 		"Material": "Hehe",
-		"PaintColor": "Red"
+		"Est": "3h"
 	},
 	{
 		"ObjectType": "k.task",
@@ -29,7 +29,7 @@
 		"ActivatedTS": "2018-06-03 09:30",
 		"Project": "Sale Exec 1",
 		"Material": "Hehe",
-		"PaintColor": "Red"
+		"Est": "3h"
 	},
 	{
 		"ObjectType": "k.task",
@@ -45,6 +45,6 @@
 		"ActivatedTS": "2018-06-03 09:30",
 		"Project": "Sale Exec 1",
 		"Material": "Hehe",
-		"PaintColor": "Red"
+		"Est": "3h"
 	}
 ]

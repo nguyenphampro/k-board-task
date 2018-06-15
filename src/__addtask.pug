@@ -9,8 +9,8 @@ section
 						.row
 							.col-lg
 								.form-label-group.mb-4
-									input#text.form-control(type='text', placeholder="Title", required)
-									label(for="text") Tiêu đề
+									input#text.form-control(type='text', placeholder="Tên nhiệm vụ", required)
+									label(for="text") Tên nhiệm vụ
 						.row
 							.col-lg
 								.input-group.mb-4
@@ -38,8 +38,8 @@ section
 										span.input-group-text Người nhận
 									select#asuser.custom-select.select2(required)
 								.form-label-group.mb-4
-									input#namepro.form-control(type='text', placeholder="Tên dự án")
-									label(for="namepro") Tên dự án
+									input#color.form-control(type='text', placeholder="Dự kiến (VD: 3h, 1d...)")
+									label(for="color") Dự kiến (VD: 3h, 1d...)
 
 						.row
 							.col-lg
@@ -48,8 +48,8 @@ section
 									label(for="material") Chất liệu
 							.col-lg
 								.form-label-group.mb-4
-									input#color.form-control(type='text', placeholder="Màu sắc")
-									label(for="color") Màu sắc
+									input#namepro.form-control(type='text', placeholder="Tên dự án")
+									label(for="namepro") Tên dự án
 						.row
 							.col
 								.form-label-group.mb-4
@@ -85,7 +85,7 @@ section
 											i.fa.fa-briefcase.mr-2
 											a(href="javascript:void(0)", data-namepro) Tên dự án
 										.col-auto
-											span(data-color) Màu sắc
+											span(data-color) Dự kiến
 										.col-auto
 											span(data-material) Chất liệu
 								hr
