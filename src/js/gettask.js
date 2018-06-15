@@ -76,6 +76,9 @@ function __gettask_getLists() {
 			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
 			}
+			if (localStorage.getItem('permision_deltassk') && localStorage.getItem('permision_deltassk') === 'true') {
+				$('.del').removeClass('d-none')
+			}
 			$('#jobstates-state').html(colp)
 			$('#data-createuser').html('<a href="/getuser?id=' + getContents.CreateID+'">'+getUserName(getContents.CreateID)+'</a>')
 			$('#data-workuser').html('<a href="/getuser?id=' + getContents.workID + '">' + getUserName(getContents.workID) + '</a>')

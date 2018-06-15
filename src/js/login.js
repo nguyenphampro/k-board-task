@@ -17,6 +17,8 @@ function __login__postData(u,p) {
 						Cookies.set('Token', md5(getToken), Settings.Cookies);
 						localStorage.CurrentUser = u
 						Cookies.set('CurrentUser', u, Settings.Cookies);
+						localStorage.FullName = getToken[key].fullname
+						Cookies.set('FullName', getToken[key].fullname, Settings.Cookies);
 						localStorage.CurrentUserID = key
 						Cookies.set('CurrentUserID', key, Settings.Cookies);
 						for (var keyloged in getToken[key].permision) {

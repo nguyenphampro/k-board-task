@@ -210,6 +210,7 @@ function ccCreateRipple() {
 
 $(document).ready(function () {
 	ccCreateRipple()
+	$('header .name').html(localStorage.getItem('FullName'))
 });
 
 checkLogin()
