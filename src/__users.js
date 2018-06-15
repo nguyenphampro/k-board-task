@@ -1,9 +1,1 @@
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (ck) {pug_html = pug_html + "\u003Csection\u003E";
-if ((ck.permision_userlist === 'true')) {
-pug_html = pug_html + "\u003Carticle class=\"container mt-5\"\u003E\u003Cdiv class=\"row align-items-center\"\u003E\u003Cdiv class=\"col\"\u003E\u003Ch2 class=\"display-4\"\u003EThành viên\u003C\u002Fh2\u003E\u003C\u002Fdiv\u003E";
-if ((ck.permision_adduser === 'true')) {
-pug_html = pug_html + "\u003Cdiv class=\"col-auto\"\u003E\u003Ca class=\"btn btn-primary\" href=\"\u002Fadduser\" title=\"title\"\u003EThêm mới\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col userlists\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row justify-content-end\"\u003E\u003Cdiv class=\"col\"\u003ETrang\u003C\u002Fdiv\u003E\u003Cdiv class=\"col-auto\"\u003E\u003Cdiv id=\"pagination\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Farticle\u003E";
-}
-pug_html = pug_html + "\u003C\u002Fsection\u003E";}.call(this,"ck" in locals_for_with?locals_for_with.ck:typeof ck!=="undefined"?ck:undefined));;document.write(dsuyqfdLvo);;
+var rbooEjznvl =  "\u003Csection\u003E\u003Carticle class=\"container mt-5\"\u003E\u003Cdiv class=\"row align-items-center\"\u003E\u003Cdiv class=\"col\"\u003E\u003Ch2 class=\"display-4\"\u003EThành viên\u003C\u002Fh2\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"col-auto\"\u003E\u003Ca class=\"btn btn-primary\" href=\"\u002Fadduser\" title=\"title\"\u003EThêm mới\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row\"\u003E\u003Cdiv class=\"col userlists\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"row justify-content-end\"\u003E\u003Cdiv class=\"col\"\u003ETrang\u003C\u002Fdiv\u003E\u003Cdiv class=\"col-auto\"\u003E\u003Cdiv id=\"pagination\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Farticle\u003E\u003C\u002Fsection\u003E";;document.write(rbooEjznvl);;

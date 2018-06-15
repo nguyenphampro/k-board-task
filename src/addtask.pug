@@ -3,18 +3,16 @@ block variables
 	- var title = 'Thêm mới nhiệm vụ'
 	- var hasmenu = 'hasmenu'
 block header
-	if process.env.ENVGLOBAL === 'true'
-		script
-			include _header.js
-	else
-		include _header.pug
+	include _header.pug
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			include __addtask.js
+			if(ck.permision_modifytask === 'true')
+				include __addtask.js
 			include ./assets/addtask.min.js
 	else
-		include __addtask
+		if(ck.permision_modifytask === 'true')
+			include __addtask
 		script(key=val, src='./js/addtask.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'

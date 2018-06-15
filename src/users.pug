@@ -3,18 +3,16 @@ block variables
 	- var title = 'Thành viên'
 	- var hasmenu = 'hasmenu'
 block header
-	if process.env.ENVGLOBAL === 'true'
-		script
-			include _header.js
-	else
-		include _header.pug
+	include _header.pug
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			include __users.js
+			if(ck.permision_userlist === 'true')
+				include __users.js
 			include ./assets/users.min.js
 	else
-		include __users
+		if(ck.permision_userlist === 'true')
+			include __users
 		script(key=val, src='./js/users.js?v='+text)
 block script
 	script(key=val, src='./vendor/pagination.min.js?v='+text)

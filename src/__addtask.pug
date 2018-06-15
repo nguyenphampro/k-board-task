@@ -1,123 +1,122 @@
 section
-	if(ck.permision_modifytask === 'true')
-		article.container.mt-5
-			.row
-				.col-lg-8
-					form#addtask.box.card.validator.border-primary(role="validator")
-						.card-header.bg-primary.text-white(ripple)
-							h2.h5.mb-0 Thêm nhiệm vụ
-						.card-body.p-3
-							.row
-								.col-lg
-									.form-label-group.mb-4
-										input#text.form-control(type='text', placeholder="Tên nhiệm vụ", required)
-										label(for="text") Tên nhiệm vụ
-							.row
-								.col-lg
-									.input-group.mb-4
-										.input-group-prepend
-											span.input-group-text Độ ưu tiên
-										select#select.custom-select(required)
-											option(value="0") Low
-											option(value="1", selected) Normal
-											option(value="2") Medium
-											option(value="3") High
-									.input-group.mb-4
-										.input-group-prepend
-											span.input-group-text Tạo bởi
-										.form-control#cru
-									.form-label-group.mb-4
-										input#datepicker.form-control(type="text", placeholder="Active Date (dd/mm/yyyy)", autocomplete="off", required)
-										label(for="datepicker") Ngày có hiệu lực
-								.col-lg
-									.form-group.mb-4
-										.custom-file
-											input#customFile.custom-file-input(type='file', name="customFile")
-											label#customFileLabel.custom-file-label(for='customFile') Chọn tập tin
-									.input-group.mb-4
-										.input-group-prepend
-											span.input-group-text Người nhận
-										select#asuser.custom-select.select2(required)
-									.form-label-group.mb-4
-										input#color.form-control(type='text', placeholder="Dự kiến (VD: 3h, 1d...)")
-										label(for="color") Dự kiến (VD: 3h, 1d...)
+	article.container.mt-5
+		.row
+			.col-lg-8
+				form#addtask.box.card.validator.border-primary(role="validator")
+					.card-header.bg-primary.text-white(ripple)
+						h2.h5.mb-0 Thêm nhiệm vụ
+					.card-body.p-3
+						.row
+							.col-lg
+								.form-label-group.mb-4
+									input#text.form-control(type='text', placeholder="Tên nhiệm vụ", required)
+									label(for="text") Tên nhiệm vụ
+						.row
+							.col-lg
+								.input-group.mb-4
+									.input-group-prepend
+										span.input-group-text Độ ưu tiên
+									select#select.custom-select(required)
+										option(value="0") Low
+										option(value="1", selected) Normal
+										option(value="2") Medium
+										option(value="3") High
+								.input-group.mb-4
+									.input-group-prepend
+										span.input-group-text Tạo bởi
+									.form-control#cru
+								.form-label-group.mb-4
+									input#datepicker.form-control(type="text", placeholder="Active Date (dd/mm/yyyy)", autocomplete="off", required)
+									label(for="datepicker") Ngày có hiệu lực
+							.col-lg
+								.form-group.mb-4
+									.custom-file
+										input#customFile.custom-file-input(type='file', name="customFile")
+										label#customFileLabel.custom-file-label(for='customFile') Chọn tập tin
+								.input-group.mb-4
+									.input-group-prepend
+										span.input-group-text Người nhận
+									select#asuser.custom-select.select2(required)
+								.form-label-group.mb-4
+									input#color.form-control(type='text', placeholder="Dự kiến (VD: 3h, 1d...)")
+									label(for="color") Dự kiến (VD: 3h, 1d...)
 
-							.row
-								.col-lg
-									.form-label-group.mb-4
-										input#material.form-control(type='text', placeholder="Chất liệu")
-										label(for="material") Chất liệu
-								.col-lg
-									.form-label-group.mb-4
-										input#namepro.form-control(type='text', placeholder="Tên dự án")
-										label(for="namepro") Tên dự án
-							.row
-								.col
-									.form-label-group.mb-4
-										textarea#message.form-control(rows="4", placeholder="Description", required)
-										label(for="message") Nội dung
+						.row
+							.col-lg
+								.form-label-group.mb-4
+									input#material.form-control(type='text', placeholder="Chất liệu")
+									label(for="material") Chất liệu
+							.col-lg
+								.form-label-group.mb-4
+									input#namepro.form-control(type='text', placeholder="Tên dự án")
+									label(for="namepro") Tên dự án
+						.row
+							.col
+								.form-label-group.mb-4
+									textarea#message.form-control(rows="4", placeholder="Description", required)
+									label(for="message") Nội dung
 
-							.row
-								.col.text-right
-									button.add-button.btn.btn-primary(type='submit', name='btnAddNew', ripple)
-										| Thêm mới
-										i.fa.fa-save.ml-2
-				.col-lg-4
-					h5.h5.mb-4 Xem trước
-					ul.sortable.connectedSortable.list-group(data-step="step-2")
-						li.list-group-item.list-group-item-action.status-1
-							.move
-							.content
-								.pot.pot-1
-									a(href="javascript:void(0)")
-										h3(data-text) Tiêu đề
-									p.mb-0.pb-2.pr-5
-										span(data-message) Nội dung
-										button.pdf.btn.btn-link.btn-sm(type="button")
-											| Xem PDF
-											i.fa.fa-file-pdf.ml-2
-										button.btn.btn-sm.btn-tg(type="button" data-toggle="collapse" data-target="#demotoggle" aria-expanded="false" aria-controls="demotoggle")
-											i.fa.fa-angle-down
-								#demotoggle.collapse.collapse.show
-									.details.small
-										hr
-										.row
-											.col
-												i.fa.fa-briefcase.mr-2
-												a(href="javascript:void(0)", data-namepro) Tên dự án
-											.col-auto
-												span(data-color) Dự kiến
-											.col-auto
-												span(data-material) Chất liệu
+						.row
+							.col.text-right
+								button.add-button.btn.btn-primary(type='submit', name='btnAddNew', ripple)
+									| Thêm mới
+									i.fa.fa-save.ml-2
+			.col-lg-4
+				h5.h5.mb-4 Xem trước
+				ul.sortable.connectedSortable.list-group(data-step="step-2")
+					li.list-group-item.list-group-item-action.status-1
+						.move
+						.content
+							.pot.pot-1
+								a(href="javascript:void(0)")
+									h3(data-text) Tiêu đề
+								p.mb-0.pb-2.pr-5
+									span(data-message) Nội dung
+									button.pdf.btn.btn-link.btn-sm(type="button")
+										| Xem PDF
+										i.fa.fa-file-pdf.ml-2
+									button.btn.btn-sm.btn-tg(type="button" data-toggle="collapse" data-target="#demotoggle" aria-expanded="false" aria-controls="demotoggle")
+										i.fa.fa-angle-down
+							#demotoggle.collapse.collapse.show
+								.details.small
 									hr
-									.create.small
-										.row.no-gutters
-											.col
-												i.fa.fa-user.mr-2
-												a(href="javascript:void(0)") Người tạo
-											.col-auto
-												span.text-date.timedemo(data-toggle="tooltip" data-placement="top" title="" data-original-title="")
-										hr
-										.row.no-gutters
-											.col
-												i.fa.fa-cog.mr-2
-												a(href="javascript:void(0)") Người thực hiện
-											.col-auto
-												span.text-date.timedemo(data-toggle="tooltip" data-placement="top" title="" data-original-title="")
-					h5.h5.mt-4 Chú thích
-					hr
-					p.mb-1
-						strong L
-						| : low - độ ưu tiên thấp
-					p.mb-1
-						strong N
-						| : normal - độ ưu tiên mặc định
-					p.mb-1
-						strong M
-						| : medium - độ ưu tiên trung bình
-					p.mb-1
-						strong H
-						| : high - độ ưu tiên cao
-					p.mb-1.small Thời gian của
-						code.ml-2.mr-2 Người thực hiện
-						| sẽ được tính từ khi nhiệm vụ được kéo sang bảng thực hiện.
+									.row
+										.col
+											i.fa.fa-briefcase.mr-2
+											a(href="javascript:void(0)", data-namepro) Tên dự án
+										.col-auto
+											span(data-color) Dự kiến
+										.col-auto
+											span(data-material) Chất liệu
+								hr
+								.create.small
+									.row.no-gutters
+										.col
+											i.fa.fa-user.mr-2
+											a(href="javascript:void(0)") Người tạo
+										.col-auto
+											span.text-date.timedemo(data-toggle="tooltip" data-placement="top" title="" data-original-title="")
+									hr
+									.row.no-gutters
+										.col
+											i.fa.fa-cog.mr-2
+											a(href="javascript:void(0)") Người thực hiện
+										.col-auto
+											span.text-date.timedemo(data-toggle="tooltip" data-placement="top" title="" data-original-title="")
+				h5.h5.mt-4 Chú thích
+				hr
+				p.mb-1
+					strong L
+					| : low - độ ưu tiên thấp
+				p.mb-1
+					strong N
+					| : normal - độ ưu tiên mặc định
+				p.mb-1
+					strong M
+					| : medium - độ ưu tiên trung bình
+				p.mb-1
+					strong H
+					| : high - độ ưu tiên cao
+				p.mb-1.small Thời gian của
+					code.ml-2.mr-2 Người thực hiện
+					| sẽ được tính từ khi nhiệm vụ được kéo sang bảng thực hiện.

@@ -3,18 +3,16 @@ block variables
 	- var title = 'Tuỳ chỉnh'
 	- var hasmenu = 'hasmenu'
 block header
-	if process.env.ENVGLOBAL === 'true'
-		script
-			include _header.js
-	else
-		include _header.pug
+	include _header.pug
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			include __settings.js
+			if(ck.permision_settings === 'true')
+				include __settings.js
 			include ./assets/settings.min.js
 	else
-		include __settings
+		if(ck.permision_settings === 'true')
+			include __settings
 		script(key=val, src='./js/settings.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'
