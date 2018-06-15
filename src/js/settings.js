@@ -18,10 +18,13 @@ $(document).ready(function () {
 		$(this).on('change', function(e){
 			if($(this).attr('type') === 'number') {
 				localStorage.setItem($(this).attr('id'), e.target.value);
+				Cookies.set($(this).attr('id'), e.target.value, Settings.Cookies);
 			} else if($(this).attr('type') === 'checkbox') {
 				localStorage.setItem($(this).attr('id'), $(this).prop("checked"));
+				Cookies.set($(this).attr('id'), $(this).prop("checked"), Settings.Cookies);
 			} else if($(this).attr('type') === 'text') {
 				localStorage.setItem($(this).attr('id'), e.target.value);
+				Cookies.set($(this).attr('id'), e.target.value, Settings.Cookies);
 			}
 		})
 	})

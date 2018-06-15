@@ -23,13 +23,22 @@ var Settings = {
 	ActiveNumberStep1Drag: localStorage.getItem('ActiveNumberStep1Drag') ? localStorage.getItem('ActiveNumberStep1Drag') : 3,
 	ActiveNumberStep2Drop: localStorage.getItem('ActiveNumberStep2Drop') ? localStorage.getItem('ActiveNumberStep2Drop') : 1,
 	OneWay: localStorage.getItem('OneWay') ? localStorage.getItem('OneWay') : true,
-	ActiveDashboard: localStorage.getItem('ActiveDashboard') ? localStorage.getItem('ActiveDashboard') : false
+	Cookies: localStorage.getItem('Cookies') ? localStorage.getItem('Cookies') : { expires: 365, path: '/' },
+	Permission: {
+		ActiveDashboard: localStorage.getItem('permision_dashboard') ? localStorage.getItem('permision_dashboard') : false,
+		CreateTask: localStorage.getItem('permision_createtask') ? localStorage.getItem('permision_createtask') : false,
+		Settings: localStorage.getItem('permision_settings') ? localStorage.getItem('permision_settings') : false,
+		DeleteTask: localStorage.getItem('permision_deltassk') ? localStorage.getItem('permision_deltassk') : false,
+		ModifyTask: localStorage.getItem('permision_modifytask') ? localStorage.getItem('permision_modifytask') : false,
+		UserList: localStorage.getItem('permision_userlist') ? localStorage.getItem('permision_userlist') : false
+	}
 }
 
 for (var key in Settings) {
 	if (Settings.hasOwnProperty(key)) {
 		var element = Settings[key];
 		localStorage.setItem(key, element);
+		Cookies.set(key, element, Settings.Cookies);
 	}
 }
 
@@ -121,6 +130,19 @@ function getUserName(params) {
 	}
 }
 
+function checkLogin() {
+	if (window.location.pathname === '/login') {
+		if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
+			window.location.href = '/'
+		}
+	} else {
+		if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
+		} else {
+			window.location.href = '/login'
+		}
+	}
+}
+
 function getParameterByName(t, e) {
 	e || (e = window.location.href), t = t.replace(/[\[\]]/g, "\\$&");
 	var a = new RegExp("[?&]" + t + "(=([^&#]*)|&|#|$)").exec(e);
@@ -138,6 +160,7 @@ function checkReadyLogin() {
 
 function logOut() {
 	localStorage.removeItem("CurrentUser"), localStorage.removeItem("CurrentUserID"), localStorage.removeItem("Token"), window.location.href = "/login"
+	Cookies.remove("CurrentUser"), Cookies.remove("CurrentUserID"), Cookies.remove("Token"), window.location.href = "/login"
 }
 
 function b64EncodeUnicode(str) {
@@ -184,3 +207,5 @@ function ccCreateRipple() {
 $(document).ready(function () {
 	ccCreateRipple()
 });
+
+checkLogin()

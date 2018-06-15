@@ -17,15 +17,18 @@ section.toolbarleft
 		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Bảng điều khiển")
 			a.nav-link.active(href='/')
 				i.fa.fa-th
-		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tạo mới một tác vụ")
-			a.nav-link.active(href='/addtask')
-				i.fa.fa-plus
-		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Danh sách nhân viên")
-			a.nav-link.active(href='/users')
-				i.fa.fa-user
-		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tuỳ chỉnh")
-			a.nav-link.active(href='/settings')
-				i.fa.fa-cog
+		if(ck.permision_createtask === 'true')
+			li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tạo mới một tác vụ")
+				a.nav-link.active(href='/addtask')
+					i.fa.fa-plus
+		if(ck.permision_userlist === 'true')
+			li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Danh sách nhân viên")
+				a.nav-link.active(href='/users')
+					i.fa.fa-user
+		if(ck.permision_settings === 'true')
+			li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tuỳ chỉnh")
+				a.nav-link.active(href='/settings')
+					i.fa.fa-cog
 // Modal
 #pdfModal.modal(tabindex='-1', role='dialog', aria-labelledby='pdfModalLabel', aria-hidden='true')
 	.modal-dialog(role='document')

@@ -1,26 +1,27 @@
 section
-	article.container.mt-5#settingspage
-		.row
-			.col
-				h2.display-4 Tuỳ chỉnh hệ thống
-		.row.mt-3
-			.col-lg
-				.checkbox.switcher.mb-4
-					label.mb-0.mt-1(for="OneWay")
-						input(type="checkbox" id="OneWay")
-						span
-							small
-						span Chỉ cho kéo một chiều
-				.input-group.mb-4
-					.input-group-prepend
-						span.input-group-text Số hiển thị trên một trang
-					input#pageSize.form-control.text-right(value="", type="number")
-			.col-lg
-				.input-group.mb-4
-					.input-group-prepend
-						span.input-group-text Số nhiệm vụ được kéo thả tối đa
-					input#ActiveNumberStep1Drag.form-control.text-right(value="", type="number")
-				.input-group.mb-4
-					.input-group-prepend
-						span.input-group-text Số nhiệm vụ đang thực hiện tối đa
-					input#ActiveNumberStep2Drop.form-control.text-right(value="", type="number")
+	if(ck.permision_settings === 'true')
+		article.container.mt-5#settingspage
+			.row
+				.col
+					h2.display-4 Tuỳ chỉnh hệ thống
+			.row.mt-3
+				.col-lg
+					.checkbox.switcher.mb-4
+						label.mb-0.mt-1(for="OneWay")
+							input(type="checkbox" id="OneWay")
+							span
+								small
+							span Chỉ cho kéo một chiều
+					.input-group.mb-4
+						.input-group-prepend
+							span.input-group-text Số hiển thị trên một trang
+						input#pageSize.form-control.text-right(value="", type="number")
+				.col-lg
+					.input-group.mb-4
+						.input-group-prepend
+							span.input-group-text Số nhiệm vụ được kéo thả tối đa
+						input#ActiveNumberStep1Drag.form-control.text-right(value="", type="number")
+					.input-group.mb-4
+						.input-group-prepend
+							span.input-group-text Số nhiệm vụ đang thực hiện tối đa
+						input#ActiveNumberStep2Drop.form-control.text-right(value="", type="number")

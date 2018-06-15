@@ -1,10 +1,6 @@
-if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
-} else {
-	window.location.href = '/login'
-}
 
 function reFresh(params) {
-	$('[data-step="step-' + params + '"]').html('Loading...')
+	$('[data-step="step-' + params + '"]').html('Đang tải...')
 	setTimeout(() => {
 		if (params == 1) {
 			__index__getData('step-1', 'P')
@@ -164,7 +160,7 @@ function __index__sortAble() {
 		}
 	}).disableSelection();
 	// ALL Step
-	if (!Settings.ActiveDashboard || Settings.ActiveDashboard === 'false') {
+	if (!Settings.Permission.ActiveDashboard || Settings.Permission.ActiveDashboard === 'false') {
 		$(".connectedSortable").sortable('disable')
 	}
 }
@@ -242,7 +238,7 @@ $(function () {
 				return false
 			}
 		},
-		items: {
+		items: localStorage.getItem('permision_modifytask') === 'true' ? {
 			open: {
 				name: "Xem chi tiết", icon: "edit", callback: function (itemKey, opt, rootMenu, originalEvent) {
 					var newIdg = $(this).attr('id')
@@ -252,6 +248,13 @@ $(function () {
 			label: { type: "label", customName: "Label", callback: $.noop },
 			sep2: "---------",
 			delete: { name: "Xóa", icon: "delete" }
+		} : {
+				open: {
+					name: "Xem chi tiết", icon: "edit", callback: function (itemKey, opt, rootMenu, originalEvent) {
+						var newIdg = $(this).attr('id')
+						window.location.href = '/gettask?id=' + newIdg
+					}
+				}
 		}
 	});
 });

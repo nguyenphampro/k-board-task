@@ -10,6 +10,7 @@ var pug = require('pug');
 var multer = require('multer');
 var minify = require('express-minify');
 var crypto = require('crypto');
+var cookie = require('cookie');
 var json_body_parser = bodyParser.json();
 var urlencoded_body_parser = bodyParser.urlencoded({ extended: true });
 var site = {
@@ -18,6 +19,11 @@ var site = {
 	views: './src'
 }
 var files = ''
+// if (typeof localStorage === "undefined" || localStorage === null) {
+// 	var LocalStorage = require('node-localstorage').LocalStorage;
+// 	localStorage = new LocalStorage(site.root);
+// }
+
 app.use(json_body_parser);
 app.use(urlencoded_body_parser);
 app.use('/', express.static(site.root + '/src'));
@@ -103,24 +109,31 @@ var genall = {
 }
 
 router.get('/', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('index', genall)
 })
 router.get('/login', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('login', genall)
 })
 router.get('/addtask', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('addtask', genall)
 })
 router.get('/users', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('users', genall)
 })
 router.get('/getuser', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('getuser', genall)
 })
 router.get('/gettask', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('gettask', genall)
 })
 router.get('/settings', function (req, res) {
+	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('settings', genall)
 })
 

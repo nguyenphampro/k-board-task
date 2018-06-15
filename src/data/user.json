@@ -5,7 +5,12 @@
 		"email": "baonguyenyam@gmail.com",
 		"password": "admin",
 		"permision": {
-			"dashboard": true
+			"dashboard": true,
+			"createtask": true,
+			"settings": true,
+			"deltassk": true,
+			"modifytask": true,
+			"userlist": true
 		}
 	},
 	"2": {
@@ -14,7 +19,12 @@
 		"email": "thanhnguyen.baonguyen@gmail.com",
 		"password": "demo",
 		"permision": {
-			"dashboard": false
+			"dashboard": false,
+			"createtask": false,
+			"settings": false,
+			"deltassk": false,
+			"modifytask": false,
+			"userlist": false
 		}
 	}
 }

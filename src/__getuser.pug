@@ -1,18 +1,19 @@
 section
-	article.container.mt-5
-		.row
-			.col
-				.card
-					.card-header
-						ul.nav.nav-tabs.card-header-tabs
-							li.nav-item
-								a.nav-link.active(href="#")
-									i.fa.fa-user.mr-2
-									span#FullName
-					.card-body.bg-white.p-4
-						.row
-							.col-auto.mb-3
-								img.img-thumbnail.img-fluid#avataruser(src="", alt="")
-							.col
-								h5.card-title#Email
-								p.card-text#UserName
+	if(ck.permision_userlist === 'true')
+		article.container.mt-5
+			.row
+				.col
+					.card
+						.card-header
+							ul.nav.nav-tabs.card-header-tabs
+								li.nav-item
+									a.nav-link.active(href="#")
+										i.fa.fa-user.mr-2
+										span#FullName
+						.card-body.bg-white.p-4
+							.row
+								.col-auto.mb-3
+									img.img-thumbnail.img-fluid#avataruser(src="", alt="")
+								.col
+									h5.card-title#Email
+									p.card-text#UserName

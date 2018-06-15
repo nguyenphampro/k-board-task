@@ -14,12 +14,17 @@ function __login__postData(u,p) {
 					var element = getToken[key];
 					if (getToken[key].username === u && getToken[key].password === p) {
 						localStorage.Token = md5(getToken)
+						Cookies.set('Token', md5(getToken), Settings.Cookies);
 						localStorage.CurrentUser = u
+						Cookies.set('CurrentUser', u, Settings.Cookies);
 						localStorage.CurrentUserID = key
-						if (!getToken[key].permision.dashboard) {
-							localStorage.ActiveDashboard = false
-						} else {
-							localStorage.ActiveDashboard = true
+						Cookies.set('CurrentUserID', key, Settings.Cookies);
+						for (var keyloged in getToken[key].permision) {
+							if (getToken[key].permision.hasOwnProperty(keyloged)) {
+								var element = getToken[key].permision[keyloged];
+								localStorage.setItem('permision_'+keyloged, element);
+								Cookies.set('permision_' + keyloged, element, Settings.Cookies);
+							}
 						}
 						ready = true
 					}

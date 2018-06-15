@@ -1,11 +1,12 @@
 section
-	article.container.mt-5
-		.row
-			.col
-				h2.display-4 Thành viên
-		.row
-			.col.userlists
-		.row.justify-content-end
-			.col Trang
-			.col-auto
-				#pagination
+	if(ck.permision_userlist === 'true')
+		article.container.mt-5
+			.row
+				.col
+					h2.display-4 Thành viên
+			.row
+				.col.userlists
+			.row.justify-content-end
+				.col Trang
+				.col-auto
+					#pagination
