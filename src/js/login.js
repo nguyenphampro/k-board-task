@@ -16,7 +16,11 @@ function __login__postData(u,p) {
 						localStorage.Token = md5(getToken)
 						localStorage.CurrentUser = u
 						localStorage.CurrentUserID = key
-						localStorage.ActiveDashboard = true
+						if (!getToken[key].permision.dashboard) {
+							localStorage.ActiveDashboard = false
+						} else {
+							localStorage.ActiveDashboard = true
+						}
 						ready = true
 					}
 				}

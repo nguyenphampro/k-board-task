@@ -3,12 +3,18 @@
 		"username": "admin",
 		"fullname": "Bảo Nguyên",
 		"email": "baonguyenyam@gmail.com",
-		"password": "admin"
+		"password": "admin",
+		"permision": {
+			"dashboard": true
+		}
 	},
 	"2": {
 		"username": "demo",
 		"fullname": "Thanh Nguyễn",
 		"email": "thanhnguyen.baonguyen@gmail.com",
-		"password": "demo"
+		"password": "demo",
+		"permision": {
+			"dashboard": false
+		}
 	}
 }

@@ -89,14 +89,14 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 }
 
 function buildDemoTask() {
-	$('#select').on('change blur keyup keypress', function (e) {
+	$('#select').on('change keypress', function (e) {
 		$('.list-group-item').removeClass('status-3').removeClass('status-2').removeClass('status-1').removeClass('status-0')
 		$('.list-group-item').addClass('status-' + e.target.value)
 		$('.list-group-item .pot').removeClass('pot-3').removeClass('pot-2').removeClass('pot-1').removeClass('pot-0')
 		$('.list-group-item .pot').addClass('pot-' + e.target.value)
 	})
 	$('#addtask input, #addtask textarea').each(function () {
-		$(this).on('change blur keyup keypress', function (e) {
+		$(this).on('change keypress', function (e) {
 			$('[data-' + $(this).attr('id') + ']').html(e.target.value)
 		})
 	})

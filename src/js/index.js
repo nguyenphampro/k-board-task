@@ -71,15 +71,16 @@ function __index__getData(e, go) {
 	})
 }
 
-console.log(getUserName(1))
+// console.log(getUserName(1))
+// // getUserName(1)
 
 function getUserName(params) {
 	var URLID = params
-	var newval = ''
-	return $.ajax({
+	var newval = null
+	$.ajax({
 		url: Global.API_URL + "/user.json?id=" + URLID,
 		type: "GET",
-		async: true,
+		async: false,
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
@@ -92,16 +93,17 @@ function getUserName(params) {
 			// Filter ID
 			for (var key in getContents) {
 				if (getContents.hasOwnProperty(key)) {
-					var element = getContents[key].ObjectId;
-					if (parseInt(key) == URLID) {
+					if (key === URLID.toString()) {
 						getContents = getContents[key]
+						newval = getContents.fullname
 					}
 				}
 			}
-			newval = checkNull(getContents.fullname)
-			// return newval
 		}
 	})
+	if(newval) {
+		return newval
+	}
 }
 
 function __index__updateTask(id, i) {

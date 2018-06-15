@@ -23,12 +23,7 @@ var Settings = {
 	ActiveNumberStep1Drag: localStorage.getItem('ActiveNumberStep1Drag') ? localStorage.getItem('ActiveNumberStep1Drag') : 3,
 	ActiveNumberStep2Drop: localStorage.getItem('ActiveNumberStep2Drop') ? localStorage.getItem('ActiveNumberStep2Drop') : 1,
 	OneWay: localStorage.getItem('OneWay') ? localStorage.getItem('OneWay') : true,
-	ActiveDashboard: localStorage.getItem('ActiveDashboard') ? localStorage.getItem('ActiveDashboard') : false,
-	HideBarCode_Left: localStorage.getItem('HideBarCode_Left') ? localStorage.getItem('HideBarCode_Left') : '72',
-	HideBarCode_Top: localStorage.getItem('HideBarCode_Top') ? localStorage.getItem('HideBarCode_Top') : '150',
-	HideBarCode_Width: localStorage.getItem('HideBarCode_Width') ? localStorage.getItem('HideBarCode_Width') : '170',
-	HideBarCode_Height: localStorage.getItem('HideBarCode_Height') ? localStorage.getItem('HideBarCode_Height') : '70',
-	HideBarCode_Bg: localStorage.getItem('HideBarCode_Bg') ? localStorage.getItem('HideBarCode_Bg') : '#FF0000'
+	ActiveDashboard: localStorage.getItem('ActiveDashboard') ? localStorage.getItem('ActiveDashboard') : false
 }
 
 for (var key in Settings) {
@@ -90,7 +85,7 @@ function __main__checkContent() {
 }
 
 function initIframe() {
-	$('#pdfModal .modal-body iframe').contents().find('#viewerContainer .page:first-child .canvasWrapper').append('<div class="hidebarcode" style="position: absolute; left: ' + Settings.HideBarCode_Left + 'px; top: ' + Settings.HideBarCode_Top + 'px; width: ' + Settings.HideBarCode_Width + 'px; height: ' + Settings.HideBarCode_Height + 'px; background: ' + Settings.HideBarCode_Bg + '; z-index: 9999;"></div>')
+	// Hàm này được gọi từ khi file PDF được load hoàn tất
 }
 
 function getParameterByName(t, e) {

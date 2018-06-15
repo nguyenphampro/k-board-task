@@ -45,7 +45,7 @@
     "node": ">=0.12.0"
   },
   "name": "k-board-task",
-  "description": "* Jade Template\r * Nunjucks Template",
+  "description": "Todo tasks",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {

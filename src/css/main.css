@@ -710,3 +710,19 @@ div.checkbox.switcher label, div.radio.switcher label {
   div.checkbox.switcher label input:checked + span small, div.radio.switcher label input:checked + span small {
 	left: 50%;
   }
+.input-group .select2.select2-container--default .select2-selection--single {
+	border-radius: 0 3px 3px 0
+}
+.select2.select2-container--default .select2-selection--single{
+	border: 1px solid #ced4db;
+	height: initial;
+	border-radius: 0
+}
+.select2.select2-container--default .select2-selection--single .select2-selection__rendered{
+	line-height: 1.5rem;
+	    padding: .375rem 1.5rem .375rem .75rem;
+}
+.select2.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 100%;
+	    top: 0;
+}
