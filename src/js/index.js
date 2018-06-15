@@ -83,7 +83,7 @@ function __index__updateTask(id, i) {
 		cache: !0,
 		data: {
 			id: id,
-			status: checkstatus
+			State: checkstatus
 		},
 		complete: function (data) {
 			var val
@@ -196,10 +196,10 @@ $(function () {
      **************************************************/
 	$.contextMenu.types.label = function (item, opt, root) {
 		$('<span>Độ ưu tiên<ul>'
-			+ '<li class="label1" title="label 1">label 1</li>'
-			+ '<li class="label2" title="label 2">label 2</li>'
-			+ '<li class="label3" title="label 3">label 3</li>'
-			+ '<li class="label4" title="label 4">label 4</li></ul></span>')
+			+ '<li class="label1" title="label 1">Thấp</li>'
+			+ '<li class="label2" title="label 2">Bình thường</li>'
+			+ '<li class="label3" title="label 3">Trung bình</li>'
+			+ '<li class="label4" title="label 4">Cao</li></ul></span>')
 			.appendTo(this)
 			.on('click', 'li', function () {
 				console.log('Clicked on ' + $(this).text());

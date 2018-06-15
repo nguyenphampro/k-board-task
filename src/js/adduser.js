@@ -9,16 +9,18 @@ function __user_addNew() {
 				password: $('#password').val(),
 				email: $('#email').val(),
 				fullname: $('#fullname').val(),
-				dashboard: $('#dashboard').prop("checked"),
-				createtask: $('#createtask').prop("checked"),
-				deltassk: $('#deltassk').prop("checked"),
-				modifytask: $('#modifytask').prop("checked"),
-				adduser: $('#adduser').prop("checked"),
-				userlist: $('#userlist').prop("checked"),
-				settings: $('#settings').prop("checked")
+				permision: {
+					dashboard: $('#dashboard').prop("checked"),
+					createtask: $('#createtask').prop("checked"),
+					deltassk: $('#deltassk').prop("checked"),
+					modifytask: $('#modifytask').prop("checked"),
+					adduser: $('#adduser').prop("checked"),
+					userlist: $('#userlist').prop("checked"),
+					settings: $('#settings').prop("checked")
+				}
 			})
 			$.ajax({
-				url: "/adduser",
+				url: "/newuser",
 				type: "POST",
 				async: true,
 				dataType: "json",
@@ -31,8 +33,12 @@ function __user_addNew() {
 				error: function (jqXHR, textStatus, errorThrown) {
 				},
 				complete: function (data) {
-					alert('Đã cập nhật thành viên mới!')
-					$('#adduser')[0].reset();
+					if (data.responseText === 'error'){
+						alert('Đã tồn tại tài khoản này')
+					} else {
+						alert('Đã cập nhật thành viên mới!')
+						$('#adduserfrm')[0].reset();
+					}
 				}
 			})
 		}

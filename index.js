@@ -19,10 +19,6 @@ var site = {
 	views: './src'
 }
 var files = ''
-// if (typeof localStorage === "undefined" || localStorage === null) {
-// 	var LocalStorage = require('node-localstorage').LocalStorage;
-// 	localStorage = new LocalStorage(site.root);
-// }
 
 app.use(json_body_parser);
 app.use(urlencoded_body_parser);
@@ -93,6 +89,99 @@ app.post('/upload', function (req, res) {
 		}
 		return res.end(files);
 	});
+});
+
+app.post('/newuser', function (req, res) {
+	var json = req.body
+	var checkUser = req.body.username
+
+	fs.readFile(site.root + 'src/data/user.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			var response = false
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].username;
+					if (element === checkUser) {
+						response = true
+					}
+				}
+			}
+			if (!response) {
+				var getDat = JSON.parse(data)
+				var count = (ObjectLength(getDat) + 1).toString()
+				getDat[count] = json
+				var jsonJS = JSON.stringify(getDat, null, 4);
+				fs.writeFileSync(site.root + 'src/data/user.json', jsonJS, 'utf8', function (err) {
+					if (err) {
+						return console.log(err);
+					}
+				});
+				return res.end("done");
+			} else {
+				return res.end("error");
+			}
+		}
+	});
+});
+
+app.post('/delete', function (req, res) {
+	var json = req.body
+	console.log(json)
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].ObjectId;
+					if (element === json.id) {
+						indata[key] = null
+						var jsonJS = JSON.stringify(indata, null, 4);
+					}
+				}
+			}
+			console.log(jsonJS)
+			// fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+			// 	if (err) {
+			// 		return console.log(err);
+			// 	}
+			// });
+		}
+	});
+
+	return res.end("done");
+});
+
+app.post('/update', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].ObjectId;
+					if (element === json.id) {
+						indata[key].State = json.State
+						var jsonJS = JSON.stringify(indata, null, 4);
+					}
+				}
+			}
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
 });
 
 router.use(function (req, res, next) {
@@ -170,6 +259,16 @@ app.use(function (err, req, res, next) {
 	res.status(500);
 	res.render('500.pug', { title: "500 Internal server error", desc: "Application is shutting down on the web server." });
 });
+
+function ObjectLength(object) {
+	var length = 0;
+	for (var key in object) {
+		if (object.hasOwnProperty(key)) {
+			++length;
+		}
+	}
+	return length;
+};
 
 function makeid(e) {
 	var text = "";

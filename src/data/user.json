@@ -1,32 +1,47 @@
 {
-	"1": {
-		"username": "admin",
-		"fullname": "Bảo Nguyên",
-		"email": "baonguyenyam@gmail.com",
-		"password": "admin",
-		"permision": {
-			"dashboard": true,
-			"createtask": true,
-			"settings": true,
-			"deltassk": true,
-			"modifytask": true,
-			"adduser": true,
-			"userlist": true
-		}
-	},
-	"2": {
-		"username": "demo",
-		"fullname": "Thanh Nguyễn",
-		"email": "thanhnguyen.baonguyen@gmail.com",
-		"password": "demo",
-		"permision": {
-			"dashboard": false,
-			"createtask": false,
-			"settings": false,
-			"deltassk": false,
-			"modifytask": false,
-			"adduser": false,
-			"userlist": false
-		}
-	}
+    "1": {
+        "username": "admin",
+        "fullname": "Bảo Nguyên",
+        "email": "baonguyenyam@gmail.com",
+        "password": "admin",
+        "permision": {
+            "dashboard": true,
+            "createtask": true,
+            "settings": true,
+            "deltassk": true,
+            "modifytask": true,
+            "adduser": true,
+            "userlist": true
+        }
+    },
+    "2": {
+        "username": "demo",
+        "fullname": "Thanh Nguyễn",
+        "email": "thanhnguyen.baonguyen@gmail.com",
+        "password": "demo",
+        "permision": {
+            "dashboard": false,
+            "createtask": false,
+            "settings": false,
+            "deltassk": false,
+            "modifytask": false,
+            "adduser": false,
+            "userlist": false
+        }
+    },
+    "3": {
+        "username": "mod",
+        "password": "mod",
+        "email": "mod@mod.com",
+        "fullname": "Trần Phạm",
+        "permision": {
+            "dashboard": true,
+            "createtask": true,
+            "deltassk": false,
+            "modifytask": false,
+            "adduser": false,
+            "userlist": true,
+            "settings": true
+        }
+    }
 }
