@@ -51,9 +51,21 @@ function __index__getData(e, go) {
 					}
 				}
 			}
+			if (Settings.OneWay || Settings.OneWay === 'true') {
+				if (e === 'step-1') {
+					var index = 1
+					$('[data-step="' + e + '"]').find('li').each(function () {
+						if (index <= Settings.ActiveNumberStep1Drag) {
+						} else {
+							$(this).addClass('disabled')
+						}
+						index++
+					})
+				}
+			}
 			$('[data-step="' + e + '"]').html(newTemplate)
 			$('[data-toggle="tooltip"]').tooltip()
-			__index__callAction()
+			__main__callAction()
 		},
 		error: function (jqXHR, textStatus, errorThrown) {}
 	})
@@ -118,36 +130,12 @@ function __index__updateTask(id, i) {
 	})
 }
 
-function __index__callAction() {
-	$("#k-board-task .sortable .pdf").each(function () {
-		$(this).click(function () {
-			var title = $(this).parents('.content').find('h3').html()
-			var pdf = $(this).attr('data-files')
-			$('#pdfModal .modal-title').html(title)
-			$('#pdfModal .modal-body').html('<iframe></iframe>')
-			$('#pdfModal .modal-body iframe').attr('src', Global.URLPath + '/pdfjs/web/viewer.html?files=/files/' + pdf)
-			setTimeout(() => {
-				var height = $('#pdfModal .modal-body').height()
-				$('#pdfModal .modal-body iframe').css({
-					'height': height + 'px'
-				})
-				$('#pdfModal .modal-body').css({
-					'height': height + 'px'
-				})
-			}, 1000);
-
-		})
-	})
-}
-
-function initIframe() {
-	$('#pdfModal .modal-body iframe').contents().find('#viewerContainer .page:first-child .canvasWrapper').append('<div class="hidebarcode"></div>')
-}
-
 
 function __index__sortAble() {
-	$("#k-board-task .sortable").sortable({
-		connectWith: ".connectedSortable",
+	// Step 1
+	$("#k-board-task .sortable[data-step='step-1']").sortable({
+		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-2']",
+		items: "li:not(.disabled)",
 		placeholder: "ui-highlight",
 		// handle: ".move",
 		start: function (e, ui) {
@@ -156,32 +144,62 @@ function __index__sortAble() {
 			ui.placeholder.addClass('list-group-item list-group-item-action');
 		},
 		update: function (e, ui) {
-			__index__checkContent()
+			__main__checkContent()
 		},
 		receive: function (e, ui) {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
 		}
-	}).disableSelection();
-}
-
-function __index__addForm() {
-	__index__checkContent()
-	$('#pdfModal').on('hidden.bs.modal', function (e) {
-		$('#pdfModal .modal-body').html('Đang tải...')
-	})
-	$('#activecode').click(function () {
-		$('#pdfModal .modal-body iframe').contents().find('#viewerContainer .canvasWrapper .hidebarcode').remove()
-	})
-}
-
-function __index__checkContent() {
-	$("#k-board-task .sortable").each(function () {
-		if ($(this).html().length > 0) {
-			$(this).removeClass('active')
-		} else {
-			$(this).addClass('active')
+	}).disableSelection()
+	// Step 2
+	$("#k-board-task .sortable[data-step='step-2']").sortable({
+		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-3']",
+		items: "li:not(.disabled)",
+		placeholder: "ui-highlight",
+		// handle: ".move",
+		start: function (e, ui) {
+			ui.placeholder.height(ui.item.outerHeight());
+			ui.placeholder.html(ui.item.html());
+			ui.placeholder.addClass('list-group-item list-group-item-action');
+		},
+		update: function (e, ui) {
+			__main__checkContent()
+		},
+		receive: function (e, ui) {
+			if ($(this).children().length > Settings.ActiveNumberStep2Drop) {
+				$(ui.sender).sortable('cancel');
+			} else {
+				__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
+				if (Settings.OneWay || Settings.OneWay === 'true') {
+					reFresh(1)
+				}
+			}
 		}
-	})
+	}).disableSelection();
+	// Step 3
+	$("#k-board-task .sortable[data-step='step-3']").sortable({
+		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "",
+		items: "li:not(.disabled)",
+		placeholder: "ui-highlight",
+		// handle: ".move",
+		start: function (e, ui) {
+			ui.placeholder.height(ui.item.outerHeight());
+			ui.placeholder.html(ui.item.html());
+			ui.placeholder.addClass('list-group-item list-group-item-action');
+		},
+		update: function (e, ui) {
+			__main__checkContent()
+		},
+		receive: function (e, ui) {
+			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
+			if (Settings.OneWay || Settings.OneWay === 'true') {
+				reFresh(2)
+			}
+		}
+	}).disableSelection();
+	// ALL Step
+	if (!Settings.ActiveDashboard || Settings.ActiveDashboard === 'false') {
+		$(".connectedSortable").sortable('disable')
+	}
 }
 
 function __index__onResize() {
@@ -202,7 +220,7 @@ $(document).ready(function () {
 	__index__getData('step-2', 'I')
 	__index__getData('step-3', 'D')
 	__index__sortAble()
-	__index__addForm()
+	__main__addForm()
 });
 
 $(window).resize(function () {

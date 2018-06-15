@@ -75,15 +75,18 @@ function __gettask_getLists() {
 				colp = '<span class="badge badge-secondary p-1">Nhiệm vụ</span>'
 			} else if (getContents.State === 'I') {
 				colp = '<span class="badge badge-info p-1">Đang thực thi</span>'
+				$('.viewpdf').removeClass('d-none')
 			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
 			}
 			$('#jobstates-state').html(colp)
-			$('#pdffiles').attr('href', '/files/' + getContents.MetaTextValue)
+			$('#pdffiles').attr('data-files', getContents.MetaTextValue)
 		}
 	})
 }
 
 $(document).ready(function () {
 	__gettask_getLists()
+	__main__callAction()
+	__main__addForm()
 });

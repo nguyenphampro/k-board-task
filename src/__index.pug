@@ -67,16 +67,3 @@
 					.card-body
 						ul.sortable.connectedSortable.list-group(data-step="step-3")
 
-
-// Modal
-#pdfModal.modal(tabindex='-1', role='dialog', aria-labelledby='pdfModalLabel', aria-hidden='true')
-	.modal-dialog(role='document')
-		.modal-content
-			.modal-header
-				h5#pdfModalLabel.modal-title
-				button.close(type='button', data-dismiss='modal', aria-label='Close')
-					span(aria-hidden='true') ×
-			.modal-body Đang tải...
-			.modal-footer
-				button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-				button#activecode.btn.btn-primary(type='button') Active Code

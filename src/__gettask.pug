@@ -1,5 +1,6 @@
 section.taskdetails
-	article.container.mt-5
+	article.container.mt-5.content
+		h3.d-none PDF file
 		.row
 			.col-lg-8.offset-lg-2
 				.card
@@ -41,11 +42,11 @@ section.taskdetails
 										dl.row.mb-0
 											dt.col-sm-3#key-paintcolor-1 Màu sắc
 											dd.col-sm-9#data-paintcolor.text-muted
-										hr
-										dl.row.mb-0
+										hr.viewpdf.d-none
+										dl.row.mb-0.viewpdf.d-none
 											dt.col-sm-3 Tập tin
 											dd.col-sm-9
-												a.btn.btn-warning#pdffiles(href="#", target="_blank")
+												button.btn.btn-warning.pdf#pdffiles(data-toggle="modal" data-target="#pdfModal" data-backdrop="static" data-keyboard="false" type="button" data-files="")
 													i.fa.fa-file-pdf.mr-2
 													| Mở tập tin PDF
 									#profile.tab-pane.fade(role="tabpanel" aria-labelledby="profile-tab")

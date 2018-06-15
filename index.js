@@ -59,13 +59,22 @@ var Storage = multer.diskStorage({
 		callback(null, site.views + "/files");
 	},
 	filename: function (req, file, callback) {
-		let type = 'pdf'
-		files = crypto.createHash('md5').update(Date.now() + "_" + removeVietnam(file.originalname.substring(0, 10))).digest('hex') + '.' + type
+		files = crypto.createHash('md5').update(Date.now() + "_" + removeVietnam(file.originalname.substring(0, 10))).digest('hex') + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]
 		callback(null, files);
 	}
 });
 var upload = multer({
-	storage: Storage
+	storage: Storage,
+	fileFilter: function (req, file, callback) {
+		var ext = path.extname(file.originalname);
+		if (ext !== '.pdf') {
+			return callback(new Error('Only PDF are allowed'))
+		}
+		callback(null, true)
+	},
+	limits: {
+		fileSize: 1024 * 1024 * 1024
+	}
 }).array(
 	"customFile",
 	10
@@ -111,6 +120,9 @@ router.get('/getuser', function (req, res) {
 router.get('/gettask', function (req, res) {
 	res.render('gettask', genall)
 })
+router.get('/settings', function (req, res) {
+	res.render('settings', genall)
+})
 
 app.use('/', router);
 app.use('/login', router);
@@ -118,6 +130,7 @@ app.use('/addtask', router);
 app.use('/users', router);
 app.use('/getuser', router);
 app.use('/gettask', router);
+app.use('/settings', router);
 
 // handling 404 errors
 app.get('*', function (req, res, next) {
@@ -207,4 +220,5 @@ PugCom(site.views + '/__addtask.pug', site.views + '/__addtask.js')
 PugCom(site.views + '/__users.pug', site.views + '/__users.js')
 PugCom(site.views + '/__getuser.pug', site.views + '/__getuser.js')
 PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
+PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
 

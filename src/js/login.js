@@ -16,6 +16,7 @@ function __login__postData(u,p) {
 						localStorage.Token = md5(getToken)
 						localStorage.CurrentUser = u
 						localStorage.CurrentUserID = key
+						localStorage.ActiveDashboard = true
 						ready = true
 					}
 				}

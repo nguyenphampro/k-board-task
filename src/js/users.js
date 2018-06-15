@@ -25,7 +25,7 @@ function __user_getLists() {
 			$('.userlists').html('<table class="table-md table-striped table-hover">' + Table_Header + '<tbody></tbody></table>')
 			$('#pagination').pagination({
 				dataSource: iTems,
-				pageSize: 5,
+				pageSize: Settings.pageSize,
 				ulClassName: 'pagination',
 				showPrevious: false,
 				showNext: false,

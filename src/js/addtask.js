@@ -73,9 +73,13 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 		cache: false,
 		data: data,
 		success: function (data) {
-			__addTask_createTask(a, b, c, d, data, e, f, g)
-			alert('Đã cập nhật task mới!')
-			$('#addtask')[0].reset();
+			if (data.toString() === 'error') {
+				alert('Chỉ hỗ trợ tập tin PDF')
+			} else {
+				__addTask_createTask(a, b, c, d, data, e, f, g)
+				alert('Đã cập nhật task mới!')
+				$('#addtask')[0].reset();
+			}
 		},
 		error: function () {
 			alert('Lỗi khi upload!');
@@ -84,9 +88,27 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 	return false;
 }
 
+function buildDemoTask() {
+	$('#select').on('change blur keyup keypress', function (e) {
+		$('.list-group-item').removeClass('status-3').removeClass('status-2').removeClass('status-1').removeClass('status-0')
+		$('.list-group-item').addClass('status-' + e.target.value)
+		$('.list-group-item .pot').removeClass('pot-3').removeClass('pot-2').removeClass('pot-1').removeClass('pot-0')
+		$('.list-group-item .pot').addClass('pot-' + e.target.value)
+	})
+	$('#addtask input, #addtask textarea').each(function () {
+		$(this).on('change blur keyup keypress', function (e) {
+			$('[data-' + $(this).attr('id') + ']').html(e.target.value)
+		})
+	})
+	$('.timedemo').attr('data-original-title', moment(Date.now()).format('DD/MM/YYYY') + ' lúc ' + moment(Date.now()).format('HH:mm'))
+	$('.timedemo').html(moment(Date.now()).fromNow())
+}
+
+
 
 $(document).ready(function () {
 	__addTask_submitForm()
+	buildDemoTask()
 	$('#cru').html(localStorage.getItem('CurrentUser'))
 	$.ajax({
 		url: Global.API_URL + "/user.json",

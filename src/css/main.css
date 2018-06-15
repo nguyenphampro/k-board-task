@@ -109,8 +109,7 @@ dd {
     transform: rotate(0deg);
 }
 
-[data-step="step-2"] .btn-tg,
-[data-step="step-3"] .btn-tg{
+[data-step="step-2"] .btn-tg{
 	top: 2rem;
 	right: .5rem
 }
@@ -167,6 +166,7 @@ body {
   bottom: 0;
   width: 100%;
   height: 60px;
+  z-index: 999;
   line-height: 60px; /* Vertically center the text there */
   background-color: #f5f5f5;
 }
@@ -293,11 +293,12 @@ header.topbar .nav-item .nav-link img {
 	background: #f9f9f9;
 }
 
-[data-step="step-1"] .pdf {
+[data-step="step-1"] .pdf,
+[data-step="step-3"] .pdf {
 	display: none;
 }
 
-.pdf {
+.sortable .pdf {
 	    position: absolute;
 	    top: 0;
 	    right: 0;
@@ -335,6 +336,9 @@ header.topbar .nav-item .nav-link img {
 	margin-bottom: .25rem;
 	border-radius: 3px;
 	overflow: hidden;
+}
+.list-group .list-group-item.disabled{
+	opacity: .5;
 }
 .list-group .list-group-item:last-child{
 	margin-bottom: 0;
@@ -668,8 +672,41 @@ header.topbar .nav-item .nav-link img {
 	background: white;
 	color: #444;
 }
-.logo a {
-	text-decoration: none;
-	font-weight: bold;
-	color: #48a3b8;
-}
+
+div.checkbox.switcher label, div.radio.switcher label {
+	padding: 0;
+  }
+  div.checkbox.switcher label *, div.radio.switcher label * {
+	vertical-align: middle;
+  }
+  div.checkbox.switcher label input, div.radio.switcher label input {
+	display: none;
+  }
+  div.checkbox.switcher label input + span, div.radio.switcher label input + span {
+	position: relative;
+	display: inline-block;
+	margin-right: 10px;
+	width: 56px;
+	height: 28px;
+	background: #f2f2f2;
+	border: 1px solid #eee;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+  }
+  div.checkbox.switcher label input + span small, div.radio.switcher label input + span small {
+	position: absolute;
+	display: block;
+	width: 50%;
+	height: 100%;
+	background: #fff;
+	border-radius: 50%;
+	transition: all 0.3s ease-in-out;
+	left: 0;
+  }
+  div.checkbox.switcher label input:checked + span, div.radio.switcher label input:checked + span {
+	background: #269bff;
+	border-color: #269bff;
+  }
+  div.checkbox.switcher label input:checked + span small, div.radio.switcher label input:checked + span small {
+	left: 50%;
+  }

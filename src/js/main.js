@@ -18,6 +18,26 @@ var Global = {
 		}
 	};
 
+var Settings = {
+	pageSize: localStorage.getItem('pageSize') ? localStorage.getItem('pageSize') : 5,
+	ActiveNumberStep1Drag: localStorage.getItem('ActiveNumberStep1Drag') ? localStorage.getItem('ActiveNumberStep1Drag') : 3,
+	ActiveNumberStep2Drop: localStorage.getItem('ActiveNumberStep2Drop') ? localStorage.getItem('ActiveNumberStep2Drop') : 1,
+	OneWay: localStorage.getItem('OneWay') ? localStorage.getItem('OneWay') : true,
+	ActiveDashboard: localStorage.getItem('ActiveDashboard') ? localStorage.getItem('ActiveDashboard') : false,
+	HideBarCode_Left: localStorage.getItem('HideBarCode_Left') ? localStorage.getItem('HideBarCode_Left') : '72',
+	HideBarCode_Top: localStorage.getItem('HideBarCode_Top') ? localStorage.getItem('HideBarCode_Top') : '150',
+	HideBarCode_Width: localStorage.getItem('HideBarCode_Width') ? localStorage.getItem('HideBarCode_Width') : '170',
+	HideBarCode_Height: localStorage.getItem('HideBarCode_Height') ? localStorage.getItem('HideBarCode_Height') : '70',
+	HideBarCode_Bg: localStorage.getItem('HideBarCode_Bg') ? localStorage.getItem('HideBarCode_Bg') : '#FF0000'
+}
+
+for (var key in Settings) {
+	if (Settings.hasOwnProperty(key)) {
+		var element = Settings[key];
+		localStorage.setItem(key, element);
+	}
+}
+
 function checkNull(params) {
 	var g = params
 	if (g) {
@@ -26,6 +46,51 @@ function checkNull(params) {
 		return 'Chưa xác định'
 	}
 
+}
+
+function __main__callAction() {
+	$(".pdf").each(function () {
+		$(this).click(function () {
+			var title = $(this).parents('.content').find('h3').html()
+			var pdf = $(this).attr('data-files')
+			$('#pdfModal .modal-title').html(title)
+			$('#pdfModal .modal-body').html('<iframe></iframe>')
+			$('#pdfModal .modal-body iframe').attr('src', Global.URLPath + '/pdfjs/web/viewer.html?files=/files/' + pdf)
+			setTimeout(() => {
+				var height = $('#pdfModal .modal-body').height()
+				$('#pdfModal .modal-body iframe').css({
+					'height': height + 'px'
+				})
+				$('#pdfModal .modal-body').css({
+					'height': height + 'px'
+				})
+			}, 1000);
+
+		})
+	})
+}
+function __main__addForm() {
+	__main__checkContent()
+	$('#pdfModal').on('hidden.bs.modal', function (e) {
+		$('#pdfModal .modal-body').html('Đang tải...')
+	})
+	$('#activecode').click(function () {
+		$('#pdfModal .modal-body iframe').contents().find('#viewerContainer .canvasWrapper .hidebarcode').remove()
+	})
+}
+
+function __main__checkContent() {
+	$("#hainam-task .sortable").each(function () {
+		if ($(this).html().length > 0) {
+			$(this).removeClass('active')
+		} else {
+			$(this).addClass('active')
+		}
+	})
+}
+
+function initIframe() {
+	$('#pdfModal .modal-body iframe').contents().find('#viewerContainer .page:first-child .canvasWrapper').append('<div class="hidebarcode" style="position: absolute; left: ' + Settings.HideBarCode_Left + 'px; top: ' + Settings.HideBarCode_Top + 'px; width: ' + Settings.HideBarCode_Width + 'px; height: ' + Settings.HideBarCode_Height + 'px; background: ' + Settings.HideBarCode_Bg + '; z-index: 9999;"></div>')
 }
 
 function getParameterByName(t, e) {

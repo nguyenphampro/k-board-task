@@ -23,3 +23,18 @@ section.toolbarleft
 		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Danh sách nhân viên")
 			a.nav-link.active(href='/users')
 				i.fa.fa-user
+		li.nav-item.cr(data-toggle="tooltip" data-placement="bottom" title="Tuỳ chỉnh")
+			a.nav-link.active(href='/settings')
+				i.fa.fa-cog
+// Modal
+#pdfModal.modal(tabindex='-1', role='dialog', aria-labelledby='pdfModalLabel', aria-hidden='true')
+	.modal-dialog(role='document')
+		.modal-content
+			.modal-header
+				h5#pdfModalLabel.modal-title
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+			.modal-body Đang tải...
+			.modal-footer
+				button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+				button#activecode.btn.btn-primary(type='button') Active Code

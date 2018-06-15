@@ -10183,11 +10183,14 @@ function webViewerLoad() {
 }
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
   webViewerLoad();
-	setTimeout(function() {
-		parent.initIframe()
-	})
 } else {
-	document.addEventListener('DOMContentLoaded', webViewerLoad, true);
+  document.addEventListener('DOMContentLoaded', webViewerLoad, true);
+  // Khi hoàn thành render page 
+  document.addEventListener('textlayerrendered', function (e) {
+    if (e.detail.pageNumber === PDFViewerApplication.page) {
+      parent.initIframe()
+    }
+  }, true);
 }
 
 
