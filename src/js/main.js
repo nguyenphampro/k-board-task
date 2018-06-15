@@ -1,5 +1,5 @@
 var Global = {
-	API_URL: "http://localhost:8080/data",
+	API_URL: "/data",
 		URLPath: ""
 	},
 	App = {
