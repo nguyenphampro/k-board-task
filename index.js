@@ -383,4 +383,5 @@ PugCom(site.views + '/__getuser.pug', site.views + '/__getuser.js')
 PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
 PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
 PugCom(site.views + '/__adduser.pug', site.views + '/__adduser.js')
+PugCom(site.views + '/_nopermission.pug', site.views + '/_nopermission.js')
 

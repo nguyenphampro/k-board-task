@@ -9,10 +9,14 @@ block content
 		script
 			if(ck.permision_userlist === 'true')
 				include __getuser.js
+			else
+				include _nopermission.js
 			include ./assets/getuser.min.js
 	else
 		if(ck.permision_userlist === 'true')
 			include __getuser
+		else
+			include _nopermission
 		script(key=val, src='./js/getuser.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'

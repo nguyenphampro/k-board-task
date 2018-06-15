@@ -7,12 +7,16 @@ block header
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			if(ck.permision_modifytask === 'true')
+			if(ck.permision_createtask === 'true')
 				include __addtask.js
+			else
+				include _nopermission.js
 			include ./assets/addtask.min.js
 	else
-		if(ck.permision_modifytask === 'true')
+		if(ck.permision_createtask === 'true')
 			include __addtask
+		else
+			include _nopermission
 		script(key=val, src='./js/addtask.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'

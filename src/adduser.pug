@@ -9,10 +9,14 @@ block content
 		script
 			if(ck.permision_adduser === 'true')
 				include __adduser.js
+			else
+				include _nopermission.js
 			include ./assets/adduser.min.js
 	else
 		if(ck.permision_adduser === 'true')
 			include __adduser
+		else
+			include _nopermission
 		script(key=val, src='./js/adduser.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'
