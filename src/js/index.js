@@ -88,7 +88,6 @@ function __index__updateTask(id, i) {
 		complete: function (data) {
 			var val
 			val = data.responseJSON;
-			// Phần này chưa viết update JSON
 		}
 	})
 }
@@ -196,13 +195,32 @@ $(function () {
      **************************************************/
 	$.contextMenu.types.label = function (item, opt, root) {
 		$('<span>Độ ưu tiên<ul>'
-			+ '<li class="label1" title="label 1">Thấp</li>'
-			+ '<li class="label2" title="label 2">Bình thường</li>'
-			+ '<li class="label3" title="label 3">Trung bình</li>'
-			+ '<li class="label4" title="label 4">Cao</li></ul></span>')
+			+ '<li class="label1" data-val="0">Thấp</li>'
+			+ '<li class="label2" data-val="1">Bình thường</li>'
+			+ '<li class="label3" data-val="2">Trung bình</li>'
+			+ '<li class="label4" data-val="3">Cao</li></ul></span>')
 			.appendTo(this)
 			.on('click', 'li', function () {
-				console.log('Clicked on ' + $(this).text());
+				var re = $(root.$trigger[0]).parents('.list-group').attr('data-step')
+				$.ajax({
+					url: "/modify",
+					type: "POST",
+					dataType: "json",
+					cache: !0,
+					data: {
+						id: $(root.$trigger[0]).attr('id'),
+						MetaIndex: $(this).attr('data-val')
+					},
+					complete: function (data) {
+						if (re === 'step-1') {
+							reFresh(1)
+						} else if (re === 'step-2') {
+							reFresh(2)
+						} else {
+							reFresh(3)
+						}
+					}
+				})
 				root.$menu.trigger('contextmenu:hide');
 			});
 
@@ -220,13 +238,11 @@ $(function () {
 				$.ajax({
 					url: "/delete",
 					type: "POST",
-					async: true,
 					dataType: "json",
 					cache: !0,
 					data: {
 						id: newId
 					},
-					contentType: "application/json; charset=utf-8",
 					beforeSend: function (xhr) {
 						xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
 					},

@@ -109,9 +109,17 @@ dd {
     transform: rotate(0deg);
 }
 
-[data-step="step-2"] .btn-tg{
+.hasfile .btn-tg{
 	top: 2rem;
 	right: .5rem
+}
+
+.list-group-item-action .pdf {
+	display: none;
+}
+
+.list-group-item-action.hasfile .pdf {
+	display: block;
 }
 
 [ripple]{
@@ -291,11 +299,6 @@ header.topbar .nav-item .nav-link img {
 .list-group {
 	min-height: 3.5rem;
 	background: #f9f9f9;
-}
-
-[data-step="step-1"] .pdf,
-[data-step="step-3"] .pdf {
-	display: none;
 }
 
 .sortable .pdf {

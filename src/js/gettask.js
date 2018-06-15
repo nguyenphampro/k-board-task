@@ -5,18 +5,15 @@ function __delTask() {
 		$.ajax({
 			url: "/delete",
 			type: "POST",
-			async: true,
 			dataType: "json",
 			cache: !0,
 			data: {
 				id: URLID
 			},
-			contentType: "application/json; charset=utf-8",
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
 			},
 			complete: function (data) {
-				var getContents = JSON.parse(data.responseText)
 				window.location.href = '/'
 			}
 		})

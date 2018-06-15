@@ -91,6 +91,26 @@ app.post('/upload', function (req, res) {
 	});
 });
 
+app.post('/save', function (req, res) {
+	var json = req.body
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var getDat = JSON.parse(data)
+			getDat.push(json)
+			var jsonJS = JSON.stringify(getDat, null, 4);
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+
+		}
+	});
+	return res.end("done");
+});
+
 app.post('/newuser', function (req, res) {
 	var json = req.body
 	var checkUser = req.body.username
@@ -127,34 +147,6 @@ app.post('/newuser', function (req, res) {
 	});
 });
 
-app.post('/delete', function (req, res) {
-	var json = req.body
-	console.log(json)
-	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
-		if (err) {
-			console.log(err);
-		} else {
-			var indata = JSON.parse(data)
-			for (var key in indata) {
-				if (indata.hasOwnProperty(key)) {
-					var element = indata[key].ObjectId;
-					if (element === json.id) {
-						indata[key] = null
-						var jsonJS = JSON.stringify(indata, null, 4);
-					}
-				}
-			}
-			console.log(jsonJS)
-			// fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
-			// 	if (err) {
-			// 		return console.log(err);
-			// 	}
-			// });
-		}
-	});
-
-	return res.end("done");
-});
 
 app.post('/update', function (req, res) {
 	var json = req.body
@@ -169,10 +161,63 @@ app.post('/update', function (req, res) {
 					var element = indata[key].ObjectId;
 					if (element === json.id) {
 						indata[key].State = json.State
-						var jsonJS = JSON.stringify(indata, null, 4);
 					}
 				}
 			}
+			var jsonJS = JSON.stringify(indata, null, 4);
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
+app.post('/modify', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].ObjectId;
+					if (element === json.id) {
+						indata[key].MetaIndex = json.MetaIndex
+					}
+				}
+			}
+			var jsonJS = JSON.stringify(indata, null, 4);
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
+app.post('/delete', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var i = 0; i < indata.length; i++) {
+				if (indata[i].ObjectId === json.id) {
+					indata.splice(i, 1);
+				}
+			}
+			var jsonJS = JSON.stringify(indata, null, 4);
 			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
 				if (err) {
 					return console.log(err);
