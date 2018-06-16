@@ -219,6 +219,12 @@ function logOut() {
 	Cookies.remove("CurrentUser"), Cookies.remove("CurrentUserID"), Cookies.remove("Token"), window.location.href = "/login"
 }
 
+function getInfoUser() {
+	if (localStorage.getItem("CurrentUserID") && localStorage.getItem("CurrentUserID").length>0) {
+		window.location.href = '/getuser?id=' + localStorage.getItem("CurrentUserID")
+	}
+}
+
 function b64EncodeUnicode(str) {
 	return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
 		function toSolidBytes(match, p1) {
@@ -260,8 +266,15 @@ function ccCreateRipple() {
 	});
 }
 
+function checkPermissionOnMenu() {
+	localStorage.getItem('permision_userlist') === 'false' ? null : $('#pr_users').removeClass('d-none')
+	localStorage.getItem('permision_createtask') === 'false' ? null : $('#pr_createtask').removeClass('d-none')
+	localStorage.getItem('permision_settings') === 'false' ? null : $('#pr_settings').removeClass('d-none')
+}
+
 $(document).ready(function () {
 	ccCreateRipple()
+	checkPermissionOnMenu()
 	$('header .name').html(localStorage.getItem('FullName'))
 });
 
