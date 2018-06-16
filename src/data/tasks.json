@@ -214,24 +214,5 @@
         "Est": "2h",
         "from": "Bảo Nguyên <baonguyenyam@gmail.com>",
         "to": "Thanh Nguyễn <thanhnguyen.baonguyen@gmail.com>"
-    },
-    {
-        "ObjectType": "K-DB-13",
-        "ObjectId": "163677e86ba19c360c9828f293154a7c",
-        "MetaIndex": 1,
-        "Name": "Demo Test MCE",
-        "order": 0,
-        "CreatedDate": "2018-06-16 18:58",
-        "MetaDescription": "Demo Test MCE",
-        "MetaTextValue": "",
-        "CreateID": 1,
-        "workID": 1,
-        "State": "P",
-        "ActivatedTS": "2018-06-20 00:00",
-        "Project": "",
-        "Material": "",
-        "Est": "",
-        "from": null,
-        "to": null
     }
 ]
