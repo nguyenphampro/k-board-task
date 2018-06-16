@@ -279,3 +279,23 @@ $(document).ready(function () {
 });
 
 checkLogin()
+
+function setFooter() {
+	var bodyHeight = $("body").outerHeight(),
+		headerHeight = $("header").outerHeight(),
+		footerHeight = $("footer").outerHeight(),
+		newHeight = bodyHeight - (headerHeight + footerHeight),
+		newfixedHeight = bodyHeight - footerHeight;
+	if ($(window).width() <= 768) {
+		$("main").css('min-height', newfixedHeight + 'px')
+	} else {
+		$("main").css('min-height', newfixedHeight + 'px')
+	}
+}
+$(document).ready(function () {
+	setFooter()
+});
+
+$(window).resize(function () {
+	setFooter()
+})

@@ -7,13 +7,15 @@ function __addTask_submitForm() {
 			selector: '#message',
 			forced_root_block: 'div',
 			height: 100,
-			menubar: false,
+			menubar: true,
+			theme: 'modern',
+
 			plugins: [
 				'advlist autolink lists link image charmap print preview anchor textcolor',
 				'searchreplace visualblocks code fullscreen',
 				'insertdatetime media table contextmenu paste code help wordcount code'
 			],
-			toolbar: 'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code'
+			toolbar: 'formatselect | bold italic forecolor backcolor  | alignleft aligncenter alignright | bullist numlist removeformat | code'
 		});
 	}
 	$("#datepicker").datetimepicker({
