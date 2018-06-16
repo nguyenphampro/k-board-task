@@ -393,7 +393,8 @@ header.topbar .nav-item .nav-link img {
 	color: #333;
 }
 
-.content p {
+.content p,
+.content .gm {
 	font-size: .9rem;
 	line-height: 1rem;
 	color: #afafaf

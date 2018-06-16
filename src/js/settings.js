@@ -4,7 +4,7 @@ $(document).ready(function () {
 	for (var key in Settings) {
 		if (Settings.hasOwnProperty(key)) {
 			var element = Settings[key];
-			if(key === 'OneWay') {
+			if (key === 'OneWay' || key === 'Editor') {
 				if(!element || element === 'false') {
 					$('#'+key).prop("checked", false)
 				} else {

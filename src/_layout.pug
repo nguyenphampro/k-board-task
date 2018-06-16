@@ -30,6 +30,7 @@ html(lang='en')
 		meta(name="msapplication-TileColor" content="#ffffff")
 		meta(name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png")
 		meta(name="theme-color" content="#ffffff")
+		script(key=val, src='./vendor/tinymce/tinymce.min.js?v='+text)
 		if process.env.ENVGLOBAL === 'true'
 			link(rel='stylesheet', key=val, href='./css/core.min.css?v='+text)
 			link(rel='stylesheet', key=val, href='./css/main.min.css?v='+text)

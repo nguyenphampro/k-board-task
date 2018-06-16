@@ -1,6 +1,21 @@
 checkPermission('createtask')
 
 function __addTask_submitForm() {
+	if (Settings.Editor && Settings.Editor === 'true') {
+		$('label[for="message"]').hide()
+		tinymce.init({
+			selector: '#message',
+			forced_root_block: 'div',
+			height: 100,
+			menubar: false,
+			plugins: [
+				'advlist autolink lists link image charmap print preview anchor textcolor',
+				'searchreplace visualblocks code fullscreen',
+				'insertdatetime media table contextmenu paste code help wordcount code'
+			],
+			toolbar: 'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code'
+		});
+	}
 	$("#datepicker").datetimepicker({
 		controlType: 'select',
 		oneLine: true,
@@ -15,9 +30,13 @@ function __addTask_submitForm() {
 		if (e.isDefaultPrevented()) {
 			alert('Vui lòng kiểm tra lại thông tin')
 		} else {
+			if (Settings.Editor && Settings.Editor === 'true') {
+				App.txtNewMesage = $('#message').val();
+			} else {
+				App.txtNewMesage = $('#message').val();
+			}
 			App.txtNewTitle = $('#text').val();
 			App.txtNewSelect = $('#select').val();
-			App.txtNewMesage = $('#message').val();
 			App.txtNewDate = $('#datepicker').val();
 			App.txtNewProject = $('#namepro').val();
 			App.txtNewColor = $('#color').val();
