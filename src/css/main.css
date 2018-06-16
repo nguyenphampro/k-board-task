@@ -317,7 +317,9 @@ header.topbar .nav-item .nav-link img {
 	content: none
 }
 .list-group.on-load:before{
-	content: 'Đang tải...'
+	content: 'Đang tải...';
+	z-index: 999;
+	background: rgba(255,255,255,.9)
 }
 
 .sortable .pdf {

@@ -61,6 +61,13 @@ function __index__getData(e, go) {
 				}
 			}
 			$('[data-step="' + e + '"]').html(newTemplate)
+			App.Data.sort((a, b) => parseFloat(a.CreatedDate) - parseFloat(b.CreatedDate));
+			console.log(App.Data);
+
+			// App.Data = _.sortBy(App.Data, 'CreatedDate');
+			// _.forEach(App.Data, function (result) {
+			// 	console.log(result);
+			// });
 			$('[data-toggle="tooltip"]').tooltip()
 			__main__callAction()
 			__main__checkContent()

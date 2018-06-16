@@ -49,6 +49,7 @@ gulp.task('concatmain', () => {
 });
 gulp.task('concatjs', () => {
 	return gulp.src([
+		'./src/vendor/lodash.min.js',
 		'./src/vendor/jquery.min.js',
 		'./src/vendor/jquery-ui.min.js',
 		'./src/vendor/js.cookie.js',

@@ -34,6 +34,7 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 		ObjectId: md5(txtNewTitle),
 		MetaIndex: parseInt(txtNewSelect),
 		Name: txtNewTitle,
+		order: 0,
 		CreatedDate: gettime,
 		MetaDescription: txtNewMesage,
 		MetaTextValue: files,
