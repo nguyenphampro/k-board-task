@@ -204,6 +204,34 @@ app.post('/modify', function (req, res) {
 	return res.end("done");
 });
 
+app.post('/order', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].ObjectId;
+					if (element === json.id) {
+						indata[key].order = parseInt(json.order)
+					}
+				}
+			}
+			var jsonJS = JSON.stringify(indata, null, 4);
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
 app.post('/delete', function (req, res) {
 	var json = req.body
 

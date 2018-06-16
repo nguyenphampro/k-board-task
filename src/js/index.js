@@ -24,12 +24,25 @@ function __index__getData(e, go) {
 		},
 		complete: function (data) {
 			App.Data = data.responseJSON;
+			var filtered = App.Data.filter(function (item) {
+				return item.State === go;
+			});
+			filtered.sort(function compare(a, b) {
+				var dateA = new Date(a.CreatedDate);
+				var dateB = new Date(b.CreatedDate);
+				return dateB - dateA;
+			});
+			filtered.sort(function compare(a, b) {
+				var dateA = new Date(a.order);
+				var dateB = new Date(b.order);
+				return dateA - dateB;
+			});
 			var newTemplate = []
-			for (const key in App.Data) {
-				if (App.Data.hasOwnProperty(key)) {
-					if (App.Data[key]) {
-						var varsame = App.Data[key].State
-						var element = App.Data[key];
+			for (const key in filtered) {
+				if (filtered.hasOwnProperty(key)) {
+					if (filtered[key]) {
+						var varsame = filtered[key].State
+						var element = filtered[key];
 						if (varsame === go) {
 							newTemplate.push(App.__template(
 							element.ObjectId,
@@ -43,7 +56,8 @@ function __index__getData(e, go) {
 							element.ActivatedTS,
 							element.Project,
 							element.Est,
-							element.Material))
+							element.Material,
+							element.order))
 						}
 					}
 				}
@@ -61,13 +75,6 @@ function __index__getData(e, go) {
 				}
 			}
 			$('[data-step="' + e + '"]').html(newTemplate)
-			App.Data.sort((a, b) => parseFloat(a.CreatedDate) - parseFloat(b.CreatedDate));
-			console.log(App.Data);
-
-			// App.Data = _.sortBy(App.Data, 'CreatedDate');
-			// _.forEach(App.Data, function (result) {
-			// 	console.log(result);
-			// });
 			$('[data-toggle="tooltip"]').tooltip()
 			__main__callAction()
 			__main__checkContent()
@@ -117,10 +124,12 @@ function __index__sortAble() {
 		},
 		update: function (e, ui) {
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		},
 		receive: function (e, ui) {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		}
 	}).disableSelection()
 	// Step 2
@@ -137,6 +146,7 @@ function __index__sortAble() {
 		},
 		update: function (e, ui) {
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		},
 		receive: function (e, ui) {
 			if ($(this).children().length > Settings.ActiveNumberStep2Drop) {
@@ -148,6 +158,7 @@ function __index__sortAble() {
 				}
 			}
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		}
 	}).disableSelection();
 	// Step 3
@@ -164,6 +175,7 @@ function __index__sortAble() {
 		},
 		update: function (e, ui) {
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		},
 		receive: function (e, ui) {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
@@ -171,6 +183,7 @@ function __index__sortAble() {
 				reFresh(2)
 			}
 			__main__checkContent()
+			__main__updateOrder($(e.target).attr('data-step'))
 		}
 	}).disableSelection();
 	// ALL Step

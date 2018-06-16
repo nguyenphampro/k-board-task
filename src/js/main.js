@@ -1,7 +1,7 @@
 var Global = {
 	API_URL: "/data",
-		URLPath: ""
-	},
+	URLPath: ""
+},
 	App = {
 		Data: null,
 		txtNewSelect: "",
@@ -12,13 +12,13 @@ var Global = {
 		txtNewColor: "",
 		txtNewMaterial: "",
 		workID: 1,
-		__template: function (t, e, a, o, n, i, r, s, u, w, x, g ) {
+		__template: function (t, e, a, o, n, i, r, s, u, w, x, g, m) {
 			var meuy = makeid(10)
 			var checkFiles = ''
-			if(i && i.length>0) {
+			if (i && i.length > 0) {
 				checkFiles = ' hasfile'
 			}
-			return '<li class="list-group-item list-group-item-action status-' + e + '' + checkFiles +'" id="' + checkNull(t) + '"><div class="move"></div><div class="content"><div class="pot pot-' + checkNull(e) + '"><a href="/gettask?id=' + t + '"><h3>' + checkNull(a) + '</h3></a><p class="mb-0 pb-2 pr-5">' + checkNull(n) + '<button class="pdf btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#pdfModal" data-backdrop="static" data-keyboard="false" data-files="' + checkNull(i) + '">Xem PDF<i class="fa fa-file-pdf ml-2"></i></button><button class="btn btn-sm btn-tg collapsed" type="button" data-toggle="collapse" data-target="#' + meuy + '" aria-expanded="false" aria-controls="' + meuy + '"><i class="fa fa-angle-down"></i></button></p></div><div class="collapse" id="' + meuy + '"><div class="details small"><hr><div class="row"><div class="col"><i class="fa fa-briefcase mr-2"></i>' + checkNull(w) + '</div><div class="col-auto"><span>' + checkNull(x) + '</span></div><div class="col-auto"><span>' + checkNull(g) + '</span></div></div></div><hr><div class="create small"><div class="row no-gutters"><div class="col"><i class="fa fa-user mr-2"></i><a href="/getuser?id=' + r + '">' + checkNull(getUserName(r)) + '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(o)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(o)).format('HH:mm') + '">' + moment(checkNull(o), "YYYYMMDD").fromNow() + '</span></div></div><hr><div class="row no-gutters"><div class="col"><i class="fa fa-cog mr-2"></i><a href="/getuser?id=' + s + '">' + checkNull(getUserName(s))+ '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(u)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(u)).format('HH:mm') +'">' + moment(checkNull(u), "YYYYMMDD").fromNow() + '</span></div></div></div></div></div></li>'
+			return '<li class="list-group-item list-group-item-action status-' + e + '' + checkFiles + ' order-'+ m + '" id="' + checkNull(t) + '"><div class="move"></div><div class="content"><div class="pot pot-' + checkNull(e) + '"><a href="/gettask?id=' + t + '"><h3>' + checkNull(a) + '</h3></a><p class="mb-0 pb-2 pr-5">' + checkNull(n) + '<button class="pdf btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#pdfModal" data-backdrop="static" data-keyboard="false" data-files="' + checkNull(i) + '">Xem PDF<i class="fa fa-file-pdf ml-2"></i></button><button class="btn btn-sm btn-tg collapsed" type="button" data-toggle="collapse" data-target="#' + meuy + '" aria-expanded="false" aria-controls="' + meuy + '"><i class="fa fa-angle-down"></i></button></p></div><div class="collapse" id="' + meuy + '"><div class="details small"><hr><div class="row"><div class="col"><i class="fa fa-briefcase mr-2"></i>' + checkNull(w) + '</div><div class="col-auto"><span>' + checkNull(x) + '</span></div><div class="col-auto"><span>' + checkNull(g) + '</span></div></div></div><hr><div class="create small"><div class="row no-gutters"><div class="col"><i class="fa fa-user mr-2"></i><a href="/getuser?id=' + r + '">' + checkNull(getUserName(r)) + '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(o)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(o)).format('HH:mm') + '">' + moment(checkNull(o), "YYYYMMDD").fromNow() + '</span></div></div><hr><div class="row no-gutters"><div class="col"><i class="fa fa-cog mr-2"></i><a href="/getuser?id=' + s + '">' + checkNull(getUserName(s)) + '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(u)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(u)).format('HH:mm') + '">' + moment(checkNull(u), "YYYYMMDD").fromNow() + '</span></div></div></div></div></div></li>'
 		}
 	};
 
@@ -48,7 +48,7 @@ for (var key in Settings) {
 
 function checkNull(params) {
 	var g = params
-	if (g || g.length>0) {
+	if (g || g.length > 0) {
 		return g
 	} else {
 		return 'Chưa xác định'
@@ -81,6 +81,33 @@ function __main__addForm() {
 	__main__checkContent()
 	$('#pdfModal').on('hidden.bs.modal', function (e) {
 		$('#pdfModal .modal-body').html('Đang tải...')
+	})
+}
+
+function __main__updateOrder(e) {
+	$('[data-step="' + e + '"]').each(function () {
+		var index = 0
+		$(this).find('li').each(function () {
+			var num = $(this).attr('id')
+			$.ajax({
+				url: "/order",
+				type: "POST",
+				async: false,
+				dataType: "json",
+				cache: !0,
+				data: {
+					id: num,
+					order: index
+				},
+				complete: function (data) {
+					for (var u = 0; u < 100; u++) {
+						$(this).removeClass('order-' + u)
+					}
+				}
+			})
+			$(this).addClass('order-' + index)
+			index++
+		})
 	})
 }
 
