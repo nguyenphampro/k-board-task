@@ -92,11 +92,10 @@ dd {
 .context-menu-list .labels > span > ul > li.label3 { background: #55a746; }
 .context-menu-list .labels > span > ul > li.label4 { background: #dd3c45; }
 
-
 .btn-tg {
 	position: absolute;
 	top: 1.2rem;
-	right: 1rem;
+	right: 2rem;
 	    background: #f9f9f9;
     border: 1px solid #eaeaea;
     padding: 0;
@@ -111,7 +110,7 @@ dd {
 
 .hasfile .btn-tg{
 	top: 2rem;
-	right: .5rem
+	right: 2rem
 }
 
 .list-group-item-action .pdf {
@@ -325,7 +324,7 @@ header.topbar .nav-item .nav-link img {
 .sortable .pdf {
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 1.5rem;
 
 }
 
@@ -373,7 +372,7 @@ header.topbar .nav-item .nav-link img {
 .content h3 {
 	color: #007bff;
 	font-size: 1rem;
-	padding-right: 6rem;
+	padding-right: 6.5rem;
 	text-transform: uppercase;
 }
 .content h3 small {
@@ -410,7 +409,37 @@ header.topbar .nav-item .nav-link img {
 	line-height: .7rem;
 }
 
+.btn-move{
+	    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: #eaeaea;
+    border-radius: 0;
+}
 
+[data-step="step-3"] .btn-tg {
+	right: .5rem;
+}
+[data-step="step-3"] .pdf {
+	right: 0;
+}
+[data-step="step-3"] .btn-move {
+	display: none;
+}
+.list-group .list-group-item .content {
+	padding-right: 1.75rem;
+}
+[data-step="step-3"].list-group .list-group-item .content {
+	padding-right: 0;
+}
+
+.list-group-item.disabled .btn-move {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}
 
 /* /////// Login  */
 .canhcam-form-4 {

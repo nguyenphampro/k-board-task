@@ -66,17 +66,15 @@ function __index__getData(e, go) {
 				}
 			}
 			$('[data-step="' + e + '"]').html(newTemplate)
-			if (Settings.OneWay && Settings.OneWay === 'true') {
-				if (e === 'step-1') {
-					var index = 1
-					$('[data-step="' + e + '"]').find('li').each(function () {
-						if (index <= Settings.ActiveNumberStep1Drag) {
-						} else {
-							$(this).addClass('disabled')
-						}
-						index++
-					})
-				}
+			if (e === 'step-1') {
+				var index = 1
+				$('[data-step="' + e + '"]').find('li').each(function () {
+					if (index <= Settings.ActiveNumberStep1Drag) {
+					} else {
+						$(this).addClass('disabled')
+					}
+					index++
+				})
 			}
 			$('[data-toggle="tooltip"]').tooltip()
 			__main__callAction()
@@ -215,6 +213,37 @@ function __index__onResize() {
 		})
 		initIframe()
 	}, 1000);
+}
+
+function moveTask(e) {
+	var getFather = $(e).parents('ul').attr('data-step')
+	var getChild = $(e).parents('li')
+	var getID = $(e).parents('li').attr('id')
+	if (confirm("Bạn có chắc chắn di dời task này?")) {
+		if (getFather === 'step-1') {
+			if ($('[data-step="step-2"]').children().length >= Settings.ActiveNumberStep2Drop) {
+				alert('Đã vượt quá giới hạn của nhiệm vụ')
+			} else {
+				$(getChild).clone().prependTo('[data-step="step-2"]');
+				$(getChild).remove()
+				__index__updateTask(getID, 'step-2')
+				__main__checkContent()
+				__main__updateOrder('step-1')
+				__main__updateOrder('step-2')
+				reFresh(1)
+			}
+		} else if (getFather === 'step-2') {
+			$(getChild).clone().prependTo('[data-step="step-3"]');
+			$(getChild).remove()
+			__index__updateTask(getID, 'step-3')
+			__main__checkContent()
+			__main__updateOrder('step-2')
+			__main__updateOrder('step-3')
+			reFresh(2)
+		}
+	} else {
+		return false
+	}
 }
 
 
