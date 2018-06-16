@@ -1,3 +1,5 @@
+checkPermission('settings')
+
 $(document).ready(function () {
 	for (var key in Settings) {
 		if (Settings.hasOwnProperty(key)) {
@@ -26,6 +28,7 @@ $(document).ready(function () {
 				localStorage.setItem($(this).attr('id'), e.target.value);
 				Cookies.set($(this).attr('id'), e.target.value, Settings.Cookies);
 			}
+			toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
 		})
 	})
 });

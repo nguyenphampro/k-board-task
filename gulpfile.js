@@ -57,6 +57,7 @@ gulp.task('concatjs', () => {
 		'./src/vendor/bootstrap.min.js',
 		'./src/vendor/validator.min.js',
 		'./src/vendor/moment.min.js',
+		'./src/vendor/toastr.min.js',
 		'./src/vendor/jquery.contextMenu.min.js',
 		'./src/vendor/jquery-ui-timepicker-addon.min.js',
 		'./src/vendor/select2.min.js',

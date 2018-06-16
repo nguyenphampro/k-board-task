@@ -1,3 +1,4 @@
+checkPermission('userlist')
 
 function __user_getLists() {
 	$.ajax({

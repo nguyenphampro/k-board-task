@@ -10,7 +10,9 @@ function reFresh(params) {
 			__index__getData('step-3', 'D')
 		}
 		$('[data-step="step-' + params + '"]').removeClass('on-load')
+
 	}, 1000);
+	toastrMsg('Cập nhật danh sách hoàn tất', 'Cập nhật', 2000)
 }
 
 function __index__getData(e, go) {
@@ -57,12 +59,14 @@ function __index__getData(e, go) {
 							element.Project,
 							element.Est,
 							element.Material,
-							element.order))
+							element.order,
+							element.ObjectType))
 						}
 					}
 				}
 			}
-			if (Settings.OneWay || Settings.OneWay === 'true') {
+			$('[data-step="' + e + '"]').html(newTemplate)
+			if (Settings.OneWay && Settings.OneWay === 'true') {
 				if (e === 'step-1') {
 					var index = 1
 					$('[data-step="' + e + '"]').find('li').each(function () {
@@ -74,7 +78,6 @@ function __index__getData(e, go) {
 					})
 				}
 			}
-			$('[data-step="' + e + '"]').html(newTemplate)
 			$('[data-toggle="tooltip"]').tooltip()
 			__main__callAction()
 			__main__checkContent()
@@ -130,6 +133,9 @@ function __index__sortAble() {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
 			__main__checkContent()
 			__main__updateOrder($(e.target).attr('data-step'))
+		},
+		stop: function (e, ui) {
+			toastrMsg('Cập nhật danh sách hoàn tất', 'Cập nhật', 2000)
 		}
 	}).disableSelection()
 	// Step 2
@@ -159,6 +165,9 @@ function __index__sortAble() {
 			}
 			__main__checkContent()
 			__main__updateOrder($(e.target).attr('data-step'))
+		},
+		stop: function (e, ui) {
+			toastrMsg('Cập nhật danh sách hoàn tất', 'Cập nhật', 2000)
 		}
 	}).disableSelection();
 	// Step 3
@@ -184,6 +193,9 @@ function __index__sortAble() {
 			}
 			__main__checkContent()
 			__main__updateOrder($(e.target).attr('data-step'))
+		},
+		stop: function (e, ui) {
+			toastrMsg('Cập nhật danh sách hoàn tất', 'Cập nhật', 2000)
 		}
 	}).disableSelection();
 	// ALL Step

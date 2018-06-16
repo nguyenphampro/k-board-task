@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>APIs</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/fa-brands.css">
+	<link rel="stylesheet" href="./css/fa-regular.css">
+	<link rel="stylesheet" href="./css/fa-solid.css">
+	<link rel="stylesheet" href="./css/fontawesome.min.css">
+	<script src="./vendor/jquery.min.js"></script>
+	<script src="./vendor/popper.min.js"></script>
+	<script src="./vendor/bootstrap.min.js"></script>
+	<style>
+		.list-group .list-group-item {
+			padding: .5rem .5rem;
+			margin-bottom: -1px;
+			border-radius: 0 !important
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col mt-5">
+				<h4>K-BOARD-TASK</h4>
+				<h5>Công cụ quản lý tác vụ trên nền Web</h5>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-3 pt-4">
+				<div class="list-group p-0" style="position: -webkit-sticky; position: sticky; top: 1rem; ">
+					<div class="list-group-item active">Danh mục</div>
+					<a href="#sec1" class="list-group-item list-group-item-action">Lệnh build</a>
+					<a href="https://www.youtube.com/watch?v=2ebLHbag6dU&list=PLsd7C5Bpj3ZEMrP6HMrn6jT1Dt4cXrYvP&index=1" class="list-group-item list-group-item-action">Videos Demo</a>
+				</div>
+			</div>
+			<div class="col p-4">
+				<div class="jumbotron pt-4 pb-4">
+					<p class="lead mb-0">Trước khi sử dụng bộ Kit này bạn phải hiểu rằng đây là ứng dụng được cung cấp miễn phí nhằm vào mục đích quản lý công việc và học tập, bạn không nên thương mại hóa nó dưới mọi hình thức
+					</p>
+				</div>
+
+
+				<figure>
+					<img src="./img/demo.png" class="img-fluid img-thumbnail" alt="">
+				</figure>
+
+
+
+				<h1 class="mt-6" id="sec5">Lệnh build trên K-BOARD-TASK</h1>
+				<p class="lead">Sau khi clone mã nguồn về máy bạn thực hiện chạy các lệnh sau:</p>
+				<div class="card card-body text-left text-danger mb-3">
+					- npm i
+					<br> - bower update
+				</div>
+				<p>Muốn run dev chạy lệnh</p>
+				<blockquote class="blockquote text-primary">npm start</blockquote>
+				<p class="lead">Chú ý: Có thể bạn phả chạy lại lệnh
+					<code>npm i sass node-sass</code> để rebuild lại sass trong project</p>
+				<blockquote class="blockquote text-primary">npm run build</blockquote>
+				<p>Đây là lệnh chạy dự án thực tế trên production</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

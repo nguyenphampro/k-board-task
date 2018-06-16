@@ -1,3 +1,4 @@
+checkPermission('createtask')
 
 function __addTask_submitForm() {
 	$("#datepicker").datetimepicker({
@@ -30,7 +31,7 @@ function __addTask_submitForm() {
 function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDate, files, txtNewProject, txtNewColor, txtNewMaterial) {
 	var gettime = moment(Date.now()).format('YYYY-MM-DD') + ' ' + moment(Date.now()).format('HH:mm')
 	var newData = JSON.stringify({
-		ObjectType: "k.task",
+		ObjectType: Settings.GlobalName,
 		ObjectId: md5(txtNewTitle),
 		MetaIndex: parseInt(txtNewSelect),
 		Name: txtNewTitle,
@@ -44,7 +45,9 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 		ActivatedTS: txtNewDate,
 		Project: txtNewProject,
 		Material: txtNewMaterial,
-		Est: txtNewColor
+		Est: txtNewColor,
+		from: App.from,
+		to: App.to
 	})
 	$.ajax({
 		url: "/save",
@@ -79,6 +82,7 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 			} else {
 				__addTask_createTask(a, b, c, d, data, e, f, g)
 				alert('Đã cập nhật task mới!')
+				toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
 				$('#addtask')[0].reset();
 				$('#customFileLabel').html('')
 			}
@@ -129,14 +133,18 @@ $(document).ready(function () {
 			for (var key in getContents) {
 				if (getContents.hasOwnProperty(key)) {
 					var element = getContents[key];
-					var item = '<option value="' + key +'">' + element.fullname + ' (' + element.username + ')</option>';
+					var item = '<option value="' + key + '" data-email="' + element.email + '" data-fullname="' + element.fullname +'">' + element.fullname + ' (' + element.username + ')</option>';
 					iTems.push(item)
 				}
 			}
 			$('#asuser').html(iTems).select2({}).on("select2:opening", function (e) {
 				App.workID = e.target.value
+				App.from = localStorage.getItem('FullName') + ' <' + localStorage.getItem('CurrentEmail') + '>'
+				App.to = $(this).find(":selected").data("fullname") + ' <' + $(this).find(":selected").data("email") + '>'
 			}).on("change", function (e) {
 				App.workID = e.target.value
+				App.from = localStorage.getItem('FullName') + ' <' + localStorage.getItem('CurrentEmail') + '>'
+				App.to = $(this).find(":selected").data("fullname") + ' <' + $(this).find(":selected").data("email") + '>'
 			});
 		}
 	})

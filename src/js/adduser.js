@@ -1,3 +1,4 @@
+checkPermission('adduser')
 
 function __user_addNew() {
 	$('form.validator').validator().on('submit', function (e) {
@@ -37,6 +38,7 @@ function __user_addNew() {
 						alert('Đã tồn tại tài khoản này')
 					} else {
 						alert('Đã cập nhật thành viên mới!')
+						toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
 						$('#adduserfrm')[0].reset();
 					}
 				}

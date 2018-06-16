@@ -7,16 +7,10 @@ block header
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			if(ck.permision_userlist === 'true')
-				include __getuser.js
-			else
-				include _nopermission.js
+			include __getuser.js
 			include ./assets/getuser.min.js
 	else
-		if(ck.permision_userlist === 'true')
-			include __getuser
-		else
-			include _nopermission
+		include __getuser
 		script(key=val, src='./js/getuser.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'

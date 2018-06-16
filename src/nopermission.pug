@@ -1,0 +1,18 @@
+extends _layout.pug
+block variables
+	- var title = 'Không có quyền'
+	- var hasmenu = 'hasmenu'
+block header
+	include _header.pug
+block content
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include __nopermission.js
+	else
+		include __nopermission
+block footer
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _footer.js
+	else
+		include _footer.pug

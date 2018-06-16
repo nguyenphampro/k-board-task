@@ -7,16 +7,10 @@ block header
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			if(ck.permision_settings === 'true')
-				include __settings.js
-			else
-				include _nopermission.js
+			include __settings.js
 			include ./assets/settings.min.js
 	else
-		if(ck.permision_settings === 'true')
-			include __settings
-		else
-			include _nopermission
+		include __settings
 		script(key=val, src='./js/settings.js?v='+text)
 block footer
 	if process.env.ENVGLOBAL === 'true'

@@ -7,16 +7,10 @@ block header
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script
-			if(ck.permision_userlist === 'true')
-				include __users.js
-			else
-				include _nopermission.js
+			include __users.js
 			include ./assets/users.min.js
 	else
-		if(ck.permision_userlist === 'true')
-			include __users
-		else
-			include _nopermission
+		include __users
 		script(key=val, src='./js/users.js?v='+text)
 block script
 	script(key=val, src='./vendor/pagination.min.js?v='+text)

@@ -11,6 +11,7 @@ var multer = require('multer');
 var minify = require('express-minify');
 var crypto = require('crypto');
 var cookie = require('cookie');
+var nodemailer = require('nodemailer');
 var json_body_parser = bodyParser.json();
 var urlencoded_body_parser = bodyParser.urlencoded({ extended: true });
 var site = {
@@ -19,6 +20,13 @@ var site = {
 	views: './src'
 }
 var files = ''
+var smtpTransport = nodemailer.createTransport({
+	service: "gmail",
+	auth: {
+		user: "baonguyenyam@gmail.com",
+		pass: "tntcntctcmklgn"
+	}
+});
 
 app.use(json_body_parser);
 app.use(urlencoded_body_parser);
@@ -98,6 +106,8 @@ app.post('/save', function (req, res) {
 			console.log(err);
 		} else {
 			var getDat = JSON.parse(data)
+			var newLeng = getDat.length + 1
+			json.ObjectType = json.ObjectType + '' + newLeng
 			getDat.push(json)
 			var jsonJS = JSON.stringify(getDat, null, 4);
 			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
@@ -105,7 +115,7 @@ app.post('/save', function (req, res) {
 					return console.log(err);
 				}
 			});
-
+			sendMail(json.from, json.to, json.ObjectType, json.Name, json.MetaDescription)
 		}
 	});
 	return res.end("done");
@@ -271,36 +281,31 @@ var genall = {
 }
 
 router.get('/', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('index', genall)
 })
 router.get('/login', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('login', genall)
 })
 router.get('/addtask', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('addtask', genall)
 })
 router.get('/users', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('users', genall)
 })
 router.get('/getuser', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('getuser', genall)
 })
 router.get('/gettask', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('gettask', genall)
 })
 router.get('/settings', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('settings', genall)
 })
 router.get('/adduser', function (req, res) {
-	genall.ck = cookie.parse(req.headers.cookie)
 	res.render('adduser', genall)
+})
+router.get('/nopermission', function (req, res) {
+	res.render('nopermission', genall)
 })
 
 app.use('/', router);
@@ -311,6 +316,7 @@ app.use('/getuser', router);
 app.use('/gettask', router);
 app.use('/settings', router);
 app.use('/adduser', router);
+app.use('/nopermission', router);
 
 // handling 404 errors
 app.get('*', function (req, res, next) {
@@ -332,6 +338,25 @@ app.use(function (err, req, res, next) {
 	res.status(500);
 	res.render('500.pug', { title: "500 Internal server error", desc: "Application is shutting down on the web server." });
 });
+
+function sendMail(from,to, e, m, n) {
+	var mailOptions = {
+		from: from, // sender address
+		to: to, // list of receivers
+		subject: "Bạn có một nhiệm vụ mới " + e, // Subject line
+		text: m + n, // plaintext body
+		html: '<div>' + m + '<br>' + n + '</div>' // html body
+	}
+	smtpTransport.sendMail(mailOptions, function (error, response) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("Message sent: " + response.message);
+		}
+		// if you don't want to use this transport object anymore, uncomment following line
+		//smtpTransport.close(); // shut down the connection pool, no more messages
+	});
+}
 
 function ObjectLength(object) {
 	var length = 0;
@@ -411,5 +436,5 @@ PugCom(site.views + '/__getuser.pug', site.views + '/__getuser.js')
 PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
 PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
 PugCom(site.views + '/__adduser.pug', site.views + '/__adduser.js')
-PugCom(site.views + '/_nopermission.pug', site.views + '/_nopermission.js')
+PugCom(site.views + '/__nopermission.pug', site.views + '/__nopermission.js')
 
