@@ -79,6 +79,7 @@ function upLoadPDF(a, b, c, d, e, f, g) {
 				__addTask_createTask(a, b, c, d, data, e, f, g)
 				alert('Đã cập nhật task mới!')
 				$('#addtask')[0].reset();
+				$('#customFileLabel').html('')
 			}
 		},
 		error: function () {

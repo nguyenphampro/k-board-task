@@ -72,12 +72,14 @@ function __gettask_getLists() {
 				colp = '<span class="badge badge-secondary p-1">Nhiệm vụ</span>'
 			} else if (getContents.State === 'I') {
 				colp = '<span class="badge badge-info p-1">Đang thực thi</span>'
-				$('.viewpdf').removeClass('d-none')
 			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
 			}
 			if (localStorage.getItem('permision_deltassk') && localStorage.getItem('permision_deltassk') === 'true') {
 				$('.del').removeClass('d-none')
+			}
+			if (getContents.MetaTextValue && getContents.MetaTextValue.length>0) {
+				$('.viewpdf').removeClass('d-none')
 			}
 			$('#jobstates-state').html(colp)
 			$('#data-createuser').html('<a href="/getuser?id=' + getContents.CreateID+'">'+getUserName(getContents.CreateID)+'</a>')

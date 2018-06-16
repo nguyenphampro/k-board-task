@@ -3,7 +3,7 @@
         "username": "admin",
         "fullname": "Bảo Nguyên",
         "email": "baonguyenyam@gmail.com",
-        "password": "admin",
+        "password": "21232f297a57a5a743894a0e4a801fc3",
         "permision": {
             "dashboard": true,
             "createtask": true,
@@ -18,7 +18,7 @@
         "username": "demo",
         "fullname": "Thanh Nguyễn",
         "email": "thanhnguyen.baonguyen@gmail.com",
-        "password": "demo",
+        "password": "fe01ce2a7fbac8fafaed7c982a04e229",
         "permision": {
             "dashboard": false,
             "createtask": false,
@@ -31,7 +31,7 @@
     },
     "3": {
         "username": "mod",
-        "password": "mod",
+        "password": "ad148a3ca8bd0ef3b48c52454c493ec5",
         "email": "mod@mod.com",
         "fullname": "Trần Phạm",
         "permision": {
@@ -42,6 +42,21 @@
             "adduser": false,
             "userlist": true,
             "settings": true
+        }
+    },
+    "4": {
+        "username": "client",
+        "password": "62608e08adc29a8d6dbc9754e659f125",
+        "email": "client@client.com",
+        "fullname": "Client",
+        "permision": {
+            "dashboard": true,
+            "createtask": true,
+            "deltassk": true,
+            "modifytask": true,
+            "adduser": false,
+            "userlist": false,
+            "settings": false
         }
     }
 }

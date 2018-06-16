@@ -14,5 +14,53 @@
         "Project": "ABC",
         "Material": "",
         "Est": "5h"
+    },
+    {
+        "ObjectType": "k.task",
+        "ObjectId": "3bcbe094f4a7eb13cfccb70fac07d63e",
+        "MetaIndex": 3,
+        "Name": "Chế tạo CNC",
+        "CreatedDate": "2018-06-16 07:04",
+        "MetaDescription": "-",
+        "MetaTextValue": "",
+        "CreateID": 1,
+        "workID": 3,
+        "State": "I",
+        "ActivatedTS": "2018-06-20 07:03",
+        "Project": "HOTUSH",
+        "Material": "kẽm",
+        "Est": ""
+    },
+    {
+        "ObjectType": "k.task",
+        "ObjectId": "bbd47109890259c0127154db1af26c75",
+        "MetaIndex": 2,
+        "Name": "Full",
+        "CreatedDate": "2018-06-16 07:31",
+        "MetaDescription": "Gấp ",
+        "MetaTextValue": "ef70b59d74e64f235b9c495b27a672d2.pdf",
+        "CreateID": 1,
+        "workID": 3,
+        "State": "P",
+        "ActivatedTS": "2018-06-16 07:31",
+        "Project": "HOTEDHS",
+        "Material": "Vàng",
+        "Est": "5h"
+    },
+    {
+        "ObjectType": "k.task",
+        "ObjectId": "9a9ceb3e1883fe49d657de5c45f9af7b",
+        "MetaIndex": 0,
+        "Name": "Mua hàng",
+        "CreatedDate": "2018-06-16 07:36",
+        "MetaDescription": "Mua đồ cho phòng KT ",
+        "MetaTextValue": "ef70b59d74e64f235b9c495b27a672d2.pdf",
+        "CreateID": 1,
+        "workID": 1,
+        "State": "D",
+        "ActivatedTS": "2018-06-16 07:36",
+        "Project": "",
+        "Material": "",
+        "Est": "0.5h"
     }
 ]

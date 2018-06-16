@@ -297,14 +297,33 @@ header.topbar .nav-item .nav-link img {
 }
 
 .list-group {
-	min-height: 3.5rem;
+	min-height: 4rem;
 	background: #f9f9f9;
+	position: relative;
+}
+.list-group:before{
+	content: 'Chưa có nhiệm vụ nào!';
+	display: flex;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	color: #afafaf;
+}
+.list-group.active:before{
+	content: none
+}
+.list-group.on-load:before{
+	content: 'Đang tải...'
 }
 
 .sortable .pdf {
-	    position: absolute;
-	    top: 0;
-	    right: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 
 }
 
@@ -728,4 +747,7 @@ div.checkbox.switcher label, div.radio.switcher label {
 .select2.select2-container--default .select2-selection--single .select2-selection__arrow {
 	height: 100%;
 	    top: 0;
+}
+.ui-datepicker.ui-widget{
+	    font-size: 12px;
 }

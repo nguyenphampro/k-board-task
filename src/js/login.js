@@ -12,7 +12,7 @@ function __login__postData(u,p) {
 			for (const key in getToken) {
 				if (getToken.hasOwnProperty(key)) {
 					var element = getToken[key];
-					if (getToken[key].username === u && getToken[key].password === p) {
+					if (getToken[key].username === u && getToken[key].password === md5(p)) {
 						localStorage.Token = md5(getToken)
 						Cookies.set('Token', md5(getToken), Settings.Cookies);
 						localStorage.CurrentUser = u

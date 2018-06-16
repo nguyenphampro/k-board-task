@@ -1,6 +1,6 @@
 
 function reFresh(params) {
-	$('[data-step="step-' + params + '"]').html('Đang tải...')
+	$('[data-step="step-' + params + '"]').addClass('on-load')
 	setTimeout(() => {
 		if (params == 1) {
 			__index__getData('step-1', 'P')
@@ -9,6 +9,7 @@ function reFresh(params) {
 		} else {
 			__index__getData('step-3', 'D')
 		}
+		$('[data-step="step-' + params + '"]').removeClass('on-load')
 	}, 1000);
 }
 
@@ -62,6 +63,7 @@ function __index__getData(e, go) {
 			$('[data-step="' + e + '"]').html(newTemplate)
 			$('[data-toggle="tooltip"]').tooltip()
 			__main__callAction()
+			__main__checkContent()
 		},
 		error: function (jqXHR, textStatus, errorThrown) {}
 	})
@@ -104,12 +106,14 @@ function __index__sortAble() {
 			ui.placeholder.height(ui.item.outerHeight());
 			ui.placeholder.html(ui.item.html());
 			ui.placeholder.addClass('list-group-item list-group-item-action');
+			__main__checkContent()
 		},
 		update: function (e, ui) {
 			__main__checkContent()
 		},
 		receive: function (e, ui) {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
+			__main__checkContent()
 		}
 	}).disableSelection()
 	// Step 2
@@ -122,6 +126,7 @@ function __index__sortAble() {
 			ui.placeholder.height(ui.item.outerHeight());
 			ui.placeholder.html(ui.item.html());
 			ui.placeholder.addClass('list-group-item list-group-item-action');
+			__main__checkContent()
 		},
 		update: function (e, ui) {
 			__main__checkContent()
@@ -135,6 +140,7 @@ function __index__sortAble() {
 					reFresh(1)
 				}
 			}
+			__main__checkContent()
 		}
 	}).disableSelection();
 	// Step 3
@@ -147,6 +153,7 @@ function __index__sortAble() {
 			ui.placeholder.height(ui.item.outerHeight());
 			ui.placeholder.html(ui.item.html());
 			ui.placeholder.addClass('list-group-item list-group-item-action');
+			__main__checkContent()
 		},
 		update: function (e, ui) {
 			__main__checkContent()
@@ -156,6 +163,7 @@ function __index__sortAble() {
 			if (Settings.OneWay || Settings.OneWay === 'true') {
 				reFresh(2)
 			}
+			__main__checkContent()
 		}
 	}).disableSelection();
 	// ALL Step
@@ -176,6 +184,7 @@ function __index__onResize() {
 		initIframe()
 	}, 1000);
 }
+
 
 $(document).ready(function () {
 	__index__getData('step-1', 'P')

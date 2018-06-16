@@ -6,7 +6,7 @@ function __user_addNew() {
 		} else {
 			var newData = JSON.stringify({
 				username: $('#username').val(),
-				password: $('#password').val(),
+				password: md5($('#password').val()),
 				email: $('#email').val(),
 				fullname: $('#fullname').val(),
 				permision: {

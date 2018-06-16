@@ -8,11 +8,29 @@ section
 							li.nav-item
 								a.nav-link.active(href="#")
 									i.fa.fa-user.mr-2
-									span#FullName
+									span#con-fullname
 					.card-body.bg-white.p-4
 						.row
 							.col-auto.mb-3
 								img.img-thumbnail.img-fluid#avataruser(src="", alt="")
 							.col
-								h5.card-title#Email
-								p.card-text#UserName
+								h5.card-title#email
+								dl.row.mb-0
+									dt.col-sm-3 ID
+									dd.col-sm-9
+										#id
+								hr
+								dl.row.mb-0
+									dt.col-sm-3 Hash
+									dd.col-sm-9
+										#hash
+								hr
+								dl.row.mb-0
+									dt.col-sm-3#key-username
+									dd.col-sm-9
+										#con-username
+								hr
+								dl.row.mb-0
+									dt.col-sm-3#key-email
+									dd.col-sm-9
+										#con-email
