@@ -3,7 +3,11 @@ block variables
 	- var title = 'Thêm thành viên'
 	- var hasmenu = 'hasmenu'
 block header
-	include _header.pug
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _header.js
+	else
+		include _header.pug
 block content
 	if process.env.ENVGLOBAL === 'true'
 		script

@@ -428,6 +428,7 @@ function PugCom(a, b) {
 	parseFiles(a, b);
 }
 PugCom(site.views + '/_footer.pug', site.views + '/_footer.js')
+PugCom(site.views + '/_header.pug', site.views + '/_header.js')
 PugCom(site.views + '/__index.pug', site.views + '/__index.js')
 PugCom(site.views + '/__login.pug', site.views + '/__login.js')
 PugCom(site.views + '/__addtask.pug', site.views + '/__addtask.js')
