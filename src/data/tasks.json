@@ -2,14 +2,14 @@
     {
         "ObjectType": "k.task",
         "ObjectId": "f0258b6685684c113bad94d91b8fa02a",
-        "MetaIndex": 1,
+        "MetaIndex": "3",
         "Name": "Demo",
         "CreatedDate": "2018-06-15 23:35",
         "MetaDescription": "None ",
         "MetaTextValue": "0336f2a7503f21273a7519b6e4e5b194.pdf",
         "CreateID": 1,
         "workID": 2,
-        "State": "P",
+        "State": "I",
         "ActivatedTS": "2018-06-15 23:35",
         "Project": "ABC",
         "Material": "",
@@ -25,7 +25,7 @@
         "MetaTextValue": "",
         "CreateID": 1,
         "workID": 3,
-        "State": "I",
+        "State": "D",
         "ActivatedTS": "2018-06-20 07:03",
         "Project": "HOTUSH",
         "Material": "kẽm",
@@ -62,5 +62,21 @@
         "Project": "",
         "Material": "",
         "Est": "0.5h"
+    },
+    {
+        "ObjectType": "k.task",
+        "ObjectId": "961a9d6f3a8821797dfe4c74e08764db",
+        "MetaIndex": 2,
+        "Name": "Demo-1",
+        "CreatedDate": "2018-06-16 08:06",
+        "MetaDescription": "lorem",
+        "MetaTextValue": "46b52697af04500f5c965f0838fa8ee9.pdf",
+        "CreateID": 1,
+        "workID": 4,
+        "State": "P",
+        "ActivatedTS": "2018-06-16 08:05",
+        "Project": "ABC",
+        "Material": "unknown",
+        "Est": "5h"
     }
 ]
