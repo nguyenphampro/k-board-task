@@ -186,6 +186,34 @@ app.post('/update', function (req, res) {
 	return res.end("done");
 });
 
+app.post('/archive', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/tasks.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var indata = JSON.parse(data)
+			for (var key in indata) {
+				if (indata.hasOwnProperty(key)) {
+					var element = indata[key].ObjectId;
+					if (element === json.id) {
+						indata[key].State = json.State
+					}
+				}
+			}
+			var jsonJS = JSON.stringify(indata, null, 4);
+			fs.writeFileSync(site.root + 'src/data/tasks.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
 app.post('/modify', function (req, res) {
 	var json = req.body
 
@@ -307,6 +335,9 @@ router.get('/adduser', function (req, res) {
 router.get('/nopermission', function (req, res) {
 	res.render('nopermission', genall)
 })
+router.get('/archivetask', function (req, res) {
+	res.render('archivetask', genall)
+})
 
 app.use('/', router);
 app.use('/login', router);
@@ -317,6 +348,7 @@ app.use('/gettask', router);
 app.use('/settings', router);
 app.use('/adduser', router);
 app.use('/nopermission', router);
+app.use('/archivetask', router);
 
 // handling 404 errors
 app.get('*', function (req, res, next) {
@@ -438,4 +470,5 @@ PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
 PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
 PugCom(site.views + '/__adduser.pug', site.views + '/__adduser.js')
 PugCom(site.views + '/__nopermission.pug', site.views + '/__nopermission.js')
+PugCom(site.views + '/__archivetask.pug', site.views + '/__archivetask.js')
 

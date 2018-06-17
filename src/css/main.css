@@ -942,3 +942,13 @@ div.radio.switcher label input:checked + span small {
 .tt-suggestion p {
   margin: 0;
 }
+.context-menu-list.step-1 .archive-item,
+.context-menu-list.step-2 .archive-item {
+	display: none !important;
+}
+.context-menu-list.step-3 .position-item {
+	display: none !important;
+}
+.context-menu-list.step-3 .context-menu-separator {
+	display: none !important;
+}

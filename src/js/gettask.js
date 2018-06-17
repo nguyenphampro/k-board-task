@@ -21,6 +21,29 @@ function __delTask() {
 		return false
 	}
 }
+function __archiveTask() {
+	var URLID = getParameterByName('id')
+	if (confirm("Bạn có chắc chắn lưu trữ task này?")) {
+		$.ajax({
+			url: "/archive",
+			type: "POST",
+			dataType: "json",
+			cache: !0,
+			data: {
+				id: URLID,
+				State: 'N'
+			},
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			},
+			complete: function (data) {
+				window.location.href = '/'
+			}
+		})
+	} else {
+		return false
+	}
+}
 
 function __gettask_getLists() {
 	var URLID = getParameterByName('id')
@@ -85,6 +108,11 @@ function __gettask_getLists() {
 			$('#data-createuser').html('<a href="/getuser?id=' + getContents.CreateID+'">'+getUserName(getContents.CreateID)+'</a>')
 			$('#data-workuser').html('<a href="/getuser?id=' + getContents.workID + '">' + getUserName(getContents.workID) + '</a>')
 			$('#pdffiles').attr('data-files', getContents.MetaTextValue)
+			var archive = getParameterByName('archive')
+			if (archive === 'true') {
+				$('.archive').remove()
+				$('.archivenote').removeClass('d-none')
+			}
 		}
 	})
 }

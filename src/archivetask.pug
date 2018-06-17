@@ -1,0 +1,27 @@
+extends _layout.pug
+block variables
+	- var title = 'Đã lưu trữ'
+	- var hasmenu = 'hasmenu'
+block header
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _header.js
+	else
+		include _header.pug
+block content
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include __archivetask.js
+			include ./assets/archivetask.min.js
+	else
+		include __archivetask
+		script(key=val, src='./js/archivetask.js?v='+text)
+block script
+	script(key=val, src='./vendor/pagination.min.js?v='+text)
+block footer
+	if process.env.ENVGLOBAL === 'true'
+		script
+			include _footer.js
+	else
+		include _footer.pug
+

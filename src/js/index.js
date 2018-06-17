@@ -215,6 +215,26 @@ function __index__onResize() {
 	}, 1000);
 }
 
+function doArchive(newIdg) {
+	if (confirm("Bạn có chắc chắn lưu trữ task này?")) {
+		$.ajax({
+			url: "/archive",
+			type: "POST",
+			dataType: "json",
+			cache: !0,
+			data: {
+				id: newIdg,
+				State: 'N'
+			},
+			complete: function (data) {
+				$('#' + newIdg).remove()
+			}
+		})
+	} else {
+		return false
+	}
+}
+
 function moveTask(e) {
 	var getFather = $(e).parents('ul').attr('data-step')
 	var getChild = $(e).parents('li')
@@ -301,6 +321,18 @@ $(function () {
 	};
 	$.contextMenu({
 		selector: '.list-group-item-action',
+		events: {
+			show: function (options) {
+				var e = $($(options)[0].$trigger[0]).attr('id')
+				var m = $('#'+e).parents('ul').attr('data-step')
+				$(options.$menu).addClass(m)
+			},
+			hide: function (options) {
+				var e = $($(options)[0].$trigger[0]).attr('id')
+				var m = $('#' + e).parents('ul').attr('data-step')
+				$(options.$menu).removeClass(m)
+			}
+		},
 		callback: function (itemKey, opt, rootMenu, originalEvent) {
 			var el = $(this)
 			var newId = $(this).attr('id')
@@ -331,8 +363,14 @@ $(function () {
 					window.location.href = '/gettask?id=' + newIdg
 				}},
 			sep1: "---------",
-			label: { type: "label", customName: "Label", callback: $.noop },
+			label: { type: "label", className: "position-item", customName: "Label", callback: $.noop },
 			sep2: "---------",
+			archive: {
+				name: "Lưu lại", icon: "copy", className: "archive-item", callback: function (itemKey, opt, rootMenu, originalEvent) {
+					var newIdg = $(this).attr('id')
+					doArchive(newIdg)
+				}
+			},
 			delete: { name: "Xóa", icon: "delete" }
 		} : {
 				open: {

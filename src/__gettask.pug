@@ -70,10 +70,18 @@ section.taskdetails
 										dl.row.mb-0
 											dt.col-sm-3#key-activatedts-1 Ngày Active
 											dd.col-sm-9#data-activatedts.text-muted
+										hr.d-none.del.archive
+										dl.row.mb-0.d-none.del.archive
+											dt.col-sm-3 Lưu lại
+											dd.col-sm-9
+												button.btn.btn-warning.btn-sm(onclick="__archiveTask()") Lưu trữ
 										hr.d-none.del
 										dl.row.mb-0.d-none.del
 											dt.col-sm-3 Xóa Task
 											dd.col-sm-9
-												button.btn.btn-danger#pdffiles(onclick="__delTask()") Xóa
+												button.btn.btn-danger.btn-sm#pdffiles(onclick="__delTask()") Xóa
 
 
+		.row.mt-4.archivenote.d-none
+			.col-lg-8.offset-lg-2
+				.alert.alert-warning Nhiệm vụ này hiện không còn khả thi do đã được lưu trữ trước đó
