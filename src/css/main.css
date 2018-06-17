@@ -242,6 +242,11 @@ main {
   align-items: center;
 }
 
+.toolbarleft .nav-item.cr .nav-link:hover{
+	background: #848484;
+	color: #fff;
+}
+
 header {
   z-index: 100;
   background: #fff;
@@ -284,7 +289,15 @@ header.topbar .nav-item .nav-link img {
 }
 
 .topbar .logo img {
-  max-height: 45px;
+  max-height: 35px;
+}
+.topbar .logo a {
+  color: #333;
+  text-decoration: none;
+}
+.topbar .logo span {
+	padding-left: .5rem;
+	font-weight: bold;
 }
 
 .box {
