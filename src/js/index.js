@@ -364,14 +364,14 @@ $(function () {
 				}},
 			sep1: "---------",
 			label: { type: "label", className: "position-item", customName: "Label", callback: $.noop },
-			sep2: "---------",
+			// sep2: "---------",
 			archive: {
 				name: "Lưu lại", icon: "copy", className: "archive-item", callback: function (itemKey, opt, rootMenu, originalEvent) {
 					var newIdg = $(this).attr('id')
 					doArchive(newIdg)
 				}
 			},
-			delete: { name: "Xóa", icon: "delete" }
+			delete: { name: "Xóa", icon: "delete", className: "archive-item"}
 		} : {
 				open: {
 					name: "Xem chi tiết", icon: "edit", callback: function (itemKey, opt, rootMenu, originalEvent) {

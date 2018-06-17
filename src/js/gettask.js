@@ -97,9 +97,10 @@ function __gettask_getLists() {
 				colp = '<span class="badge badge-info p-1">Đang thực thi</span>'
 			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
-			}
-			if (localStorage.getItem('permision_deltassk') && localStorage.getItem('permision_deltassk') === 'true') {
-				$('.del').removeClass('d-none')
+				if (localStorage.getItem('permision_deltassk') && localStorage.getItem('permision_deltassk') === 'true') {
+					$('.archive').removeClass('d-none')
+					$('.del').removeClass('d-none')
+				}
 			}
 			if (getContents.MetaTextValue && getContents.MetaTextValue.length>0) {
 				$('.viewpdf').removeClass('d-none')
@@ -110,8 +111,8 @@ function __gettask_getLists() {
 			$('#pdffiles').attr('data-files', getContents.MetaTextValue)
 			var archive = getParameterByName('archive')
 			if (archive === 'true') {
-				$('.archive').remove()
 				$('.archivenote').removeClass('d-none')
+				$('.del').removeClass('d-none')
 			}
 		}
 	})
