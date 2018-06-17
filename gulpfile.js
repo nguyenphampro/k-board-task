@@ -63,6 +63,7 @@ gulp.task('concatjs', () => {
 		'./src/vendor/select2.min.js',
 		'./src/vendor/bootstrap-colorpicker.min.js',
 		'./src/vendor/md5.min.js',
+		'./src/vendor/typeahead.bundle.min.js',
 		'!./src/vendor/core.min.js'
 	])
 		.pipe(concat('core.js'))

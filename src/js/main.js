@@ -88,7 +88,7 @@ function __main__addForm() {
 	})
 }
 
-function toastrMsg(a,b,c) {
+function toastrMsg(a, b, c) {
 	toastr.success('Cập nhật danh sách hoàn tất', 'Cập nhật', {
 		closeButton: false,
 		debug: false,
@@ -192,7 +192,7 @@ function checkLogin() {
 }
 
 function checkPermission(e) {
-	if (localStorage.getItem('permision_'+e) && localStorage.getItem('permision_'+e) === 'true') {
+	if (localStorage.getItem('permision_' + e) && localStorage.getItem('permision_' + e) === 'true') {
 	} else {
 		window.location.href = '/nopermission'
 	}
@@ -220,7 +220,7 @@ function logOut() {
 }
 
 function getInfoUser() {
-	if (localStorage.getItem("CurrentUserID") && localStorage.getItem("CurrentUserID").length>0) {
+	if (localStorage.getItem("CurrentUserID") && localStorage.getItem("CurrentUserID").length > 0) {
 		window.location.href = '/getuser?id=' + localStorage.getItem("CurrentUserID")
 	}
 }
@@ -272,14 +272,6 @@ function checkPermissionOnMenu() {
 	localStorage.getItem('permision_settings') === 'false' ? null : $('#pr_settings').removeClass('d-none')
 }
 
-$(document).ready(function () {
-	ccCreateRipple()
-	checkPermissionOnMenu()
-	$('header .name').html(localStorage.getItem('FullName'))
-});
-
-checkLogin()
-
 function setFooter() {
 	var bodyHeight = $("body").outerHeight(),
 		headerHeight = $("header").outerHeight(),
@@ -292,10 +284,84 @@ function setFooter() {
 		$("main").css('min-height', newfixedHeight + 'px')
 	}
 }
+
+function searchGlobal() {
+
+	$.ajax({
+		url: Global.API_URL + "/tasks.json",
+		type: "GET",
+		async: false,
+		dataType: "json",
+		cache: !0,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+		},
+		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+
+			$('#searchsite .typeahead').typeahead(null, {
+				source: function (query, process) {
+					states = [];
+					map = {};
+					$.each(getContents, function (i, state) {
+						map[state] = state;
+						states.push(state);
+					});
+					process(states);
+				},
+				updater: function (item) {
+					selectedState = map[item].ObjectType;
+					return item;
+				},
+				matcher: function (item) {
+					if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1) {
+						return true;
+					}
+				},
+				sorter: function (items) {
+					return items.sort();
+				},
+				highlighter: function (item) {
+					var regex = new RegExp('(' + this.query + ')', 'gi');
+					return item.replace(regex, "<strong>$1</strong>");
+				},
+				hint: true,
+				highlight: true,
+				minLength: 1,
+				limit: 5,
+				name: 'dataSource',
+				display: ['ObjectType', 'Name', 'MetaDescription', 'Material'],
+				templates: {
+					empty: [
+						'<div class="empty-message">',
+						'Không tìm thấy nhiệm vụ nào!',
+						'</div>'
+					].join('\n'),
+					suggestion: function (data) {
+						return '<div><strong>' + data.ObjectType + '</strong><div><small>' + data.Name + '</small></div></div>'
+					}
+				}
+			}).bind('typeahead:select', function (ev, suggestion) {
+				console.log(ev, suggestion);
+			});
+		}
+	})
+
+}
+
 $(document).ready(function () {
+	ccCreateRipple()
+	checkPermissionOnMenu()
+	$('header .name').html(localStorage.getItem('FullName'))
 	setFooter()
+	searchGlobal()
 });
 
 $(window).resize(function () {
 	setFooter()
 })
+
+checkLogin()
+

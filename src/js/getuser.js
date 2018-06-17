@@ -26,7 +26,7 @@ function __getuser_getLists() {
 			var Email = checkNull(getContents.email), avartar = md5(Email)
 			$('#hash').html(avartar)
 			$('#id').html(URLID)
-			$('#avataruser').attr('src', 'https://www.gravatar.com/avatar/' + avartar + '?s=250')
+			$('#avataruser').attr('src', 'https://s.gravatar.com/avatar/' + avartar + '?s=180')
 			for (var key in getContents) {
 				if (getContents.hasOwnProperty(key)) {
 					var element = getContents[key];
