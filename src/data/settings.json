@@ -1,0 +1,20 @@
+{
+	"GlobalName": "K-DB-",
+	"Editor": true,
+	"pageSize": 5,
+	"ActiveNumberStep1Drag": 3,
+	"ActiveNumberStep2Drop": 1,
+	"OneWay": true,
+	"Cookies": {
+		"expires": 365,
+		"path": "/"
+	},
+	"Permission": {
+		"ActiveDashboard": false,
+		"CreateTask": false,
+		"Settings": false,
+		"DeleteTask": false,
+		"ModifyTask": false,
+		"UserList": false,
+	}
+}

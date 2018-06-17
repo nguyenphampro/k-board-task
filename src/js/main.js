@@ -25,7 +25,7 @@ var Global = {
 	};
 
 var Settings = {
-	GlobalName: 'K-DB-',
+	GlobalName: localStorage.getItem('GlobalName') ? localStorage.getItem('GlobalName') : 'K-DB-',
 	Editor: localStorage.getItem('Editor') ? localStorage.getItem('Editor') : true,
 	pageSize: localStorage.getItem('pageSize') ? localStorage.getItem('pageSize') : 5,
 	ActiveNumberStep1Drag: localStorage.getItem('ActiveNumberStep1Drag') ? localStorage.getItem('ActiveNumberStep1Drag') : 3,
@@ -304,7 +304,7 @@ function searchGlobal() {
 			$('#searchsite .typeahead').typeahead(null, {
 				source: function (query, process) {
 					var el = getContents.filter(function (item) {
-						return (item.ObjectType.includes(query) || item.Name.includes(query) || item.MetaDescription.includes(query) || item.Material.includes(query))
+						return ((item.State !== 'N') && (item.ObjectType.includes(query) || item.Name.includes(query) || item.MetaDescription.includes(query) || item.Material.includes(query)))
 					});
 					process(el);
 				},
