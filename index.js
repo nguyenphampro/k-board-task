@@ -344,7 +344,7 @@ function sendMail(from,to, e, m, n) {
 		from: from, // sender address
 		to: to, // list of receivers
 		subject: "Bạn có một nhiệm vụ mới " + e, // Subject line
-		text: stripHtml(m + n), // plaintext body
+		text: m + n, // plaintext body
 		html: '<div>' + m + '<br>' + n + '</div>' // html body
 	}
 	smtpTransport.sendMail(mailOptions, function (error, response) {
@@ -356,12 +356,6 @@ function sendMail(from,to, e, m, n) {
 		// if you don't want to use this transport object anymore, uncomment following line
 		//smtpTransport.close(); // shut down the connection pool, no more messages
 	});
-}
-
-function stripHtml(html) {
-	var temporalDivElement = document.createElement("div");
-	temporalDivElement.innerHTML = html;
-	return temporalDivElement.textContent || temporalDivElement.innerText || "";
 }
 
 function ObjectLength(object) {

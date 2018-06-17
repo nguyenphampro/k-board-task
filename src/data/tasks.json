@@ -1,7 +1,7 @@
 [
     {
         "ObjectType": "K-DB-1",
-        "ObjectId": "f0258b6685684c113bad94d91b8fa02a",
+        "ObjectId": "f0258b668-5684c1-13bad9-4d91b8fa02a",
         "MetaIndex": 3,
         "Name": "Demo",
         "CreatedDate": "2018-06-15 23:35",
@@ -18,7 +18,7 @@
     },
     {
         "ObjectType": "K-DB-2",
-        "ObjectId": "3bcbe094f4a7eb13cfccb70fac07d63e",
+        "ObjectId": "3bcbe094-f4a7e-b13cfcc-b70fac07d63e",
         "MetaIndex": 3,
         "Name": "Chế tạo CNC",
         "CreatedDate": "2018-06-16 07:04",
@@ -35,7 +35,7 @@
     },
     {
         "ObjectType": "K-DB-3",
-        "ObjectId": "bbd47109890259c0127154db1af26c75",
+        "ObjectId": "bbd471098-90259c-01271-54db1af26c75",
         "MetaIndex": 2,
         "Name": "Full",
         "CreatedDate": "2018-06-16 07:31",
@@ -52,7 +52,7 @@
     },
     {
         "ObjectType": "K-DB-4",
-        "ObjectId": "9a9ceb3e1883fe49d657de5c45f9af7b",
+        "ObjectId": "9a9ceb3e-1883fe-49d657de-5c45f9af7b",
         "MetaIndex": 0,
         "Name": "Mua hàng",
         "CreatedDate": "2018-06-16 07:36",
@@ -69,7 +69,7 @@
     },
     {
         "ObjectType": "K-DB-5",
-        "ObjectId": "961a9d6f3a8821797dfe4c74e08764db",
+        "ObjectId": "961a9d6f3a-88217-97dfe4c-74e08764db",
         "MetaIndex": "1",
         "Name": "Demo-1",
         "CreatedDate": "2018-06-16 08:06",
@@ -86,7 +86,7 @@
     },
     {
         "ObjectType": "K-DB-6",
-        "ObjectId": "4f1f6016fc9f3f2353c0cc7c67b292bd",
+        "ObjectId": "4f1f6016f-c9f3f-2353c0c-c7c67b292bd",
         "MetaIndex": "3",
         "Name": "Center",
         "order": 0,
@@ -103,7 +103,7 @@
     },
     {
         "ObjectType": "K-DB-7",
-        "ObjectId": "ad8a6d95f8e9b8e375b441721b0d11a8",
+        "ObjectId": "ad8a6d95f-8e9b8e3-75b4-41721b0d11a8",
         "MetaIndex": 1,
         "Name": "Mua xe",
         "order": 1,
@@ -122,7 +122,7 @@
     },
     {
         "ObjectType": "K-DB-8",
-        "ObjectId": "967b7a22bc0825932428159787eefc91",
+        "ObjectId": "967b7a22b-c08259-324281-59787eefc91",
         "MetaIndex": 0,
         "Name": "Nhiệm vụ mới",
         "order": 7,
@@ -141,7 +141,7 @@
     },
     {
         "ObjectType": "K-DB-9",
-        "ObjectId": "3bd60d04779eb3faf90767a0c04058ad",
+        "ObjectId": "3bd60d0477-9eb3faf-90767-a0c04058ad",
         "MetaIndex": 1,
         "Name": "Thư nghiệm",
         "order": 6,
@@ -160,7 +160,7 @@
     },
     {
         "ObjectType": "K-DB-10",
-        "ObjectId": "6fa465e85dd11dbc7190b087b5e9999f",
+        "ObjectId": "6fa465e85d-d11dbc7-190b08-7b5e9999f",
         "MetaIndex": 1,
         "Name": "Mua quà tết",
         "order": 5,
@@ -179,7 +179,7 @@
     },
     {
         "ObjectType": "K-DB-11",
-        "ObjectId": "56181509f692416cd6726e83d492979e",
+        "ObjectId": "56181509-f692416-cd6726-e83d492979e",
         "MetaIndex": 2,
         "Name": "Test Email Sender",
         "order": 0,
@@ -198,7 +198,7 @@
     },
     {
         "ObjectType": "K-DB-12",
-        "ObjectId": "5d5d657c3948d16d06cef709373059a3",
+        "ObjectId": "5d5d657c3-948d16-d06cef-709373059a3",
         "MetaIndex": 3,
         "Name": "Test Demo ",
         "order": 4,

@@ -53,7 +53,7 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 	var gettime = moment(Date.now()).format('YYYY-MM-DD') + ' ' + moment(Date.now()).format('HH:mm')
 	var newData = JSON.stringify({
 		ObjectType: Settings.GlobalName,
-		ObjectId: md5(txtNewTitle),
+		ObjectId: md5(txtNewTitle).substring(0, 10) + '-' + md5(gettime).substring(0, 5) + '-' + md5(makeid(5)).substring(0, 5) + '-' + md5(makeid(10)).substring(0, 10) + '-' + md5(makeid(5)).substring(0, 15),
 		MetaIndex: parseInt(txtNewSelect),
 		Name: txtNewTitle,
 		order: 0,
