@@ -303,13 +303,10 @@ function searchGlobal() {
 
 			$('#searchsite .typeahead').typeahead(null, {
 				source: function (query, process) {
-					states = [];
-					map = {};
-					$.each(getContents, function (i, state) {
-						map[state] = state;
-						states.push(state);
+					var el = getContents.filter(function (item) {
+						return (item.ObjectType.includes(query) || item.Name.includes(query) || item.MetaDescription.includes(query) || item.Material.includes(query))
 					});
-					process(states);
+					process(el);
 				},
 				updater: function (item) {
 					selectedState = map[item].ObjectType;
@@ -335,7 +332,7 @@ function searchGlobal() {
 				display: ['ObjectType', 'Name', 'MetaDescription', 'Material'],
 				templates: {
 					empty: [
-						'<div class="empty-message">',
+						'<div class="p-2 small text-center">',
 						'Không tìm thấy nhiệm vụ nào!',
 						'</div>'
 					].join('\n'),
@@ -344,7 +341,7 @@ function searchGlobal() {
 					}
 				}
 			}).bind('typeahead:select', function (ev, suggestion) {
-				console.log(ev, suggestion);
+				window.location.href = '/gettask?id=' + suggestion.ObjectId
 			});
 		}
 	})
