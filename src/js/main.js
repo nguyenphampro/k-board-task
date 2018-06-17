@@ -41,6 +41,7 @@ var Settings = {
 		AddUser: false,
 		ViewTask: false,
 		ArchiveTask: false,
+		MoveTask: false,
 		ViewUser: false
 	}
 }
@@ -217,6 +218,7 @@ function checkPermission(e) {
 						Settings.Permission.ArchiveTask = getContents[key].permision.archivetask
 						Settings.Permission.ViewTask = getContents[key].permision.viewtask
 						Settings.Permission.ViewUser = getContents[key].permision.viewuser
+						Settings.Permission.MoveTask = getContents[key].permision.movetask
 						// Call Permission
 						if (e && e == true) {
 							checkready = true
@@ -228,6 +230,7 @@ function checkPermission(e) {
 							(e === 'viewtask') ? Settings.Permission.ViewTask ? checkready = true : checkready = false  : null;
 							(e === 'userlist') ? Settings.Permission.UserList ? checkready = true : checkready = false : null;
 							(e === 'viewuser') ? Settings.Permission.ViewUser ? checkready = true : checkready = false  : null;
+							(e === 'movetask') ? Settings.Permission.MoveTask ? checkready = true : checkready = false  : null;
 						}
 					}
 				}

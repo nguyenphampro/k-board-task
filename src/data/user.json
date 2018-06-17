@@ -6,15 +6,16 @@
         "password": "21232f297a57a5a743894a0e4a801fc3",
         "permision": {
             "dashboard": true,
+            "movetask": true,
             "createtask": true,
             "settings": true,
             "deltassk": true,
             "modifytask": true,
             "adduser": true,
-			"userlist": true,
-			"archivetask": true,
-			"viewtask": true,
-			"viewuser": true
+            "userlist": true,
+            "archivetask": true,
+            "viewtask": true,
+            "viewuser": true
         }
     },
     "2": {
@@ -24,15 +25,16 @@
         "password": "fe01ce2a7fbac8fafaed7c982a04e229",
         "permision": {
             "dashboard": true,
-			"createtask": true,
-			"settings": true,
-			"deltassk": false,
-			"modifytask": true,
-			"adduser": true,
-			"userlist": true,
-			"archivetask": false,
-			"viewtask": true,
-			"viewuser": true
+            "movetask": true,
+            "createtask": true,
+            "settings": true,
+            "deltassk": false,
+            "modifytask": true,
+            "adduser": true,
+            "userlist": true,
+            "archivetask": false,
+            "viewtask": true,
+            "viewuser": true
         }
     },
     "3": {
@@ -42,15 +44,16 @@
         "fullname": "Trần Phạm",
         "permision": {
             "dashboard": true,
-			"createtask": true,
-			"settings": true,
-			"deltassk": true,
-			"modifytask": true,
-			"adduser": false,
-			"userlist": false,
-			"archivetask": true,
-			"viewtask": true,
-			"viewuser": false
+            "movetask": true,
+            "createtask": true,
+            "settings": true,
+            "deltassk": true,
+            "modifytask": true,
+            "adduser": false,
+            "userlist": false,
+            "archivetask": true,
+            "viewtask": true,
+            "viewuser": false
         }
     },
     "4": {
@@ -60,15 +63,35 @@
         "fullname": "Client",
         "permision": {
             "dashboard": false,
-			"createtask": false,
-			"settings": false,
-			"deltassk": false,
-			"modifytask": false,
-			"adduser": false,
-			"userlist": false,
-			"archivetask": false,
-			"viewtask": false,
-			"viewuser": false
+            "movetask": false,
+            "createtask": false,
+            "settings": false,
+            "deltassk": false,
+            "modifytask": false,
+            "adduser": false,
+            "userlist": false,
+            "archivetask": false,
+            "viewtask": false,
+            "viewuser": false
+        }
+    },
+    "5": {
+        "username": "user",
+        "password": "ee11cbb19052e40b07aac0ca060c23ee",
+        "email": "user@user.com",
+        "fullname": "User",
+        "permision": {
+            "dashboard": false,
+            "movetask": false,
+            "createtask": false,
+            "deltassk": false,
+            "modifytask": false,
+            "adduser": false,
+            "userlist": false,
+            "settings": false,
+            "archivetask": false,
+            "viewtask": false,
+            "viewuser": false
         }
     }
 }

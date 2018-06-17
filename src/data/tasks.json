@@ -104,7 +104,7 @@
     {
         "ObjectType": "K-DB-7",
         "ObjectId": "ad8a6d95f-8e9b8e3-75b4-41721b0d11a8",
-        "MetaIndex": 1,
+        "MetaIndex": "0",
         "Name": "Mua xe",
         "order": 0,
         "CreatedDate": "2018-06-16 14:20",

@@ -20,6 +20,7 @@ function __user_addNew() {
 					settings: $('#settings').prop("checked"),
 					archivetask: $('#archivetask').prop("checked"),
 					viewtask: $('#viewtask').prop("checked"),
+					movetask: $('#movetask').prop("checked"),
 					viewuser: $('#viewuser').prop("checked")
 				}
 			})
