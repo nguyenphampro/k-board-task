@@ -1,7 +1,7 @@
 checkLogin('createtask')
 
 function __addTask_submitForm() {
-	if (Settings.Editor && Settings.Editor === 'true') {
+	if (Settings.Editor && Settings.Editor == true) {
 		$('label[for="message"]').hide()
 		tinymce.init({
 			selector: '#message',
@@ -32,7 +32,7 @@ function __addTask_submitForm() {
 		if (e.isDefaultPrevented()) {
 			alert('Vui lòng kiểm tra lại thông tin')
 		} else {
-			if (Settings.Editor && Settings.Editor === 'true') {
+			if (Settings.Editor && Settings.Editor == true) {
 				App.txtNewMesage = $('#message').val();
 			} else {
 				App.txtNewMesage = $('#message').val();

@@ -1,13 +1,56 @@
 checkLogin('adduser')
 
-function __user_addNew() {
+var oldPaswToEdit = null
+
+function __edituser_getLists() {
+	var URLID = getParameterByName('id')
+	$.ajax({
+		url: Global.API_URL + "/user.json?id=" + URLID,
+		type: "GET",
+		async: true,
+		dataType: "json",
+		cache: !0,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+		},
+		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+			// Filter ID
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					if (key === URLID) {
+						getContents = getContents[key]
+					}
+				}
+			}
+			oldPaswToEdit = getContents.password
+			$('#username').val(getContents.username).prop('disabled', true);
+			$('#email').val(getContents.email).prop('disabled', true);
+			$('#fullname').val(getContents.fullname)
+			for (var key in getContents.permision) {
+				if (getContents.permision.hasOwnProperty(key)) {
+					var element = getContents.permision[key];
+					if (!element || element == false || element === 'false') {
+						$('#' + key).prop("checked", false)
+					} else {
+						$('#' + key).prop("checked", true)
+					}
+				}
+			}
+		}
+	})
+}
+
+function __user_editNew() {
 	$('form.validator').validator().on('submit', function (e) {
 		if (e.isDefaultPrevented()) {
 			alert('Vui lòng kiểm tra lại thông tin')
 		} else {
 			var newData = JSON.stringify({
 				username: $('#username').val(),
-				password: md5($('#password').val()),
+				password: ($('#password').val() && $('#password').val().length>0) ? md5($('#password').val()) : oldPaswToEdit,
 				email: $('#email').val(),
 				fullname: $('#fullname').val(),
 				permision: {
@@ -32,7 +75,7 @@ function __user_addNew() {
 				}
 			})
 			$.ajax({
-				url: "/newuser",
+				url: "/edit",
 				type: "POST",
 				async: true,
 				dataType: "json",
@@ -46,11 +89,9 @@ function __user_addNew() {
 				},
 				complete: function (data) {
 					if (data.responseText === 'error'){
-						alert('Đã tồn tại tài khoản này')
+						alert('Có lỗi xảy ra')
 					} else {
-						alert('Đã cập nhật thành viên mới!')
 						toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
-						$('#adduserfrm')[0].reset();
 					}
 				}
 			})
@@ -60,5 +101,6 @@ function __user_addNew() {
 }
 
 $(document).ready(function () {
-	__user_addNew()
+	__edituser_getLists()
+	__user_editNew()
 });

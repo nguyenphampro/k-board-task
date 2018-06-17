@@ -5,7 +5,7 @@ $(document).ready(function () {
 		if (Settings.hasOwnProperty(key)) {
 			var element = Settings[key];
 			if (key === 'OneWay' || key === 'Editor') {
-				if(!element || element === 'false') {
+				if (!element || element == false || element === 'false') {
 					$('#'+key).prop("checked", false)
 				} else {
 					$('#'+key).prop("checked", true)
@@ -19,13 +19,31 @@ $(document).ready(function () {
 	$('#settingspage input').each(function(){
 		$(this).on('change', function(e){
 			if($(this).attr('type') === 'number') {
-				// localStorage.setItem($(this).attr('id'), e.target.value);
+				Settings[$(this).attr('id')] = parseInt(e.target.value)
 			} else if($(this).attr('type') === 'checkbox') {
-				// localStorage.setItem($(this).attr('id'), $(this).prop("checked"));
+				Settings[$(this).attr('id')] = $(this).prop("checked")
 			} else if($(this).attr('type') === 'text') {
-				// localStorage.setItem($(this).attr('id'), e.target.value);
+				Settings[$(this).attr('id')] = e.target.value
 			}
-			toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
+			$.ajax({
+				url: "/control",
+				type: "POST",
+				dataType: "json",
+				cache: !0,
+				data: {
+					id: localStorage.getItem('CurrentUserID') ,
+					settings: {
+						editor: Settings.Editor,
+						pagesize: Settings.pageSize,
+						activenumberstep1drag: Settings.ActiveNumberStep1Drag,
+						activenumberstep2drop: Settings.ActiveNumberStep2Drop,
+						oneway: Settings.OneWay
+					}
+				},
+				complete: function (data) {
+					toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
+				}
+			})
 		})
 	})
 });

@@ -19,7 +19,6 @@ function __getuser_getLists() {
 			// Filter ID
 			for (var key in getContents) {
 				if (getContents.hasOwnProperty(key)) {
-					var element = getContents[key].ObjectId;
 					if (key === URLID) {
 						getContents = getContents[key]
 					}

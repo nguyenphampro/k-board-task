@@ -22,29 +22,28 @@ var Global = {
 			}
 			return '<li class="list-group-item list-group-item-action status-' + e + '' + checkFiles + '" id="' + checkNull(t) + '"><div class="move"></div><div class="content"><div class="pot pot-' + checkNull(e) + '"><a href="/gettask?id=' + t + '"><h3 class="text-bold">' + checkNull(v) + ': <small>' + checkNull(a) + '</small></h3></a><div class="gm mb-0 pt-1 pb-1 pr-5">' + checkNull(n) + '<button class="pdf btn btn-link btn-sm" type="button" data-toggle="modal" data-target="#pdfModal" data-backdrop="static" data-keyboard="false" data-files="' + checkNull(i) + '">Xem PDF<i class="fa fa-file-pdf ml-2"></i></button><button class="btn btn-sm btn-tg collapsed" type="button" data-toggle="collapse" data-target="#' + meuy + '" aria-expanded="false" aria-controls="' + meuy + '"><i class="fa fa-angle-down"></i></button><button class="btn btn-sm btn-move" type="button" onclick="moveTask(this)"><i class="fa fa-angle-right"></i></button></div></div><div class="collapse" id="' + meuy + '"><div class="details small"><hr><div class="row"><div class="col"><i class="fa fa-briefcase mr-2"></i>' + checkNull(w) + '</div><div class="col-auto"><span>' + checkNull(x) + '</span></div><div class="col-auto"><span>' + checkNull(g) + '</span></div></div></div><hr><div class="create small"><div class="row no-gutters"><div class="col"><i class="fa fa-user mr-2"></i><a href="/getuser?id=' + r + '">' + checkNull(getUserName(r)) + '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(o)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(o)).format('HH:mm') + '">' + moment(checkNull(o), "YYYYMMDD").fromNow() + '</span></div></div><hr><div class="row no-gutters"><div class="col"><i class="fa fa-cog mr-2"></i><a href="/getuser?id=' + s + '">' + checkNull(getUserName(s)) + '</a></div><div class="col-auto"><span class="text-date" data-toggle="tooltip" data-placement="top" title="' + moment(checkNull(u)).format('DD/MM/YYYY') + ' lúc ' + moment(checkNull(u)).format('HH:mm') + '">' + moment(checkNull(u), "YYYYMMDD").fromNow() + '</span></div></div></div></div></div></li>'
 		}
-	};
-
-var Settings = {
-	GlobalName: 'K-DB-',
-	Editor: true,
-	pageSize: 5,
-	ActiveNumberStep1Drag: 3,
-	ActiveNumberStep2Drop: 1,
-	OneWay: true,
-	Permission: {
-		ActiveDashboard: false,
-		CreateTask: false,
-		Settings: false,
-		DeleteTask: false,
-		ModifyTask: false,
-		UserList: false,
-		AddUser: false,
-		ViewTask: false,
-		ArchiveTask: false,
-		MoveTask: false,
-		ViewUser: false
+	},
+	Settings = {
+		GlobalName: 'K-DB-',
+		Editor: true,
+		pageSize: 5,
+		ActiveNumberStep1Drag: 3,
+		ActiveNumberStep2Drop: 1,
+		OneWay: true,
+		Permission: {
+			ActiveDashboard: false,
+			CreateTask: false,
+			Settings: false,
+			DeleteTask: false,
+			ModifyTask: false,
+			UserList: false,
+			AddUser: false,
+			ViewTask: false,
+			ArchiveTask: false,
+			MoveTask: false,
+			ViewUser: false
+		}
 	}
-}
 
 function checkNull(params) {
 	var g = params
@@ -84,7 +83,7 @@ function __main__addForm() {
 }
 
 function toastrMsg(a, b, c) {
-	toastr.success('Cập nhật danh sách hoàn tất', 'Cập nhật', {
+	toastr.success(a, b, {
 		closeButton: false,
 		debug: false,
 		newestOnTop: false,
@@ -219,18 +218,25 @@ function checkPermission(e) {
 						Settings.Permission.ViewTask = getContents[key].permision.viewtask
 						Settings.Permission.ViewUser = getContents[key].permision.viewuser
 						Settings.Permission.MoveTask = getContents[key].permision.movetask
+
+						Settings.Editor = getContents[key].settings.editor
+						Settings.pageSize = getContents[key].settings.pagesize
+						Settings.ActiveNumberStep1Drag = getContents[key].settings.activenumberstep1drag
+						Settings.ActiveNumberStep2Drop = getContents[key].settings.activenumberstep2drop
+						Settings.OneWay = getContents[key].settings.oneway
+
 						// Call Permission
 						if (e && e == true) {
 							checkready = true
 						} else {
-							(e === 'createtask') ? Settings.Permission.CreateTask ? checkready = true : checkready = false  : null;
-							(e === 'settings') ? Settings.Permission.Settings ? checkready = true : checkready = false  : null;
-							(e === 'adduser') ? Settings.Permission.AddUser ? checkready = true : checkready = false  : null;
-							(e === 'archivetask') ? Settings.Permission.ArchiveTask ? checkready = true : checkready = false  : null;
-							(e === 'viewtask') ? Settings.Permission.ViewTask ? checkready = true : checkready = false  : null;
+							(e === 'createtask') ? Settings.Permission.CreateTask ? checkready = true : checkready = false : null;
+							(e === 'settings') ? Settings.Permission.Settings ? checkready = true : checkready = false : null;
+							(e === 'adduser') ? Settings.Permission.AddUser ? checkready = true : checkready = false : null;
+							(e === 'archivetask') ? Settings.Permission.ArchiveTask ? checkready = true : checkready = false : null;
+							(e === 'viewtask') ? Settings.Permission.ViewTask ? checkready = true : checkready = false : null;
 							(e === 'userlist') ? Settings.Permission.UserList ? checkready = true : checkready = false : null;
-							(e === 'viewuser') ? Settings.Permission.ViewUser ? checkready = true : checkready = false  : null;
-							(e === 'movetask') ? Settings.Permission.MoveTask ? checkready = true : checkready = false  : null;
+							(e === 'viewuser') ? Settings.Permission.ViewUser ? checkready = true : checkready = false : null;
+							(e === 'movetask') ? Settings.Permission.MoveTask ? checkready = true : checkready = false : null;
 						}
 					}
 				}

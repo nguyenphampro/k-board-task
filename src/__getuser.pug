@@ -1,36 +1,40 @@
-section
+section.taskdetails
 	article.container.mt-3
 		.row
 			.col
-				.card
-					.card-header
-						ul.nav.nav-tabs.card-header-tabs
+				.card.border-primary
+					.card-header.bg-primary.card.border-primary
+						ul.nav.nav-tabs.card-header-tabs(id="myTab" role="tablist")
 							li.nav-item
-								a.nav-link.active(href="#")
+								a.nav-link.active(id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true")
 									i.fa.fa-user.mr-2
 									span#con-fullname
 					.card-body.bg-white.p-4
 						.row
-							.col-auto.mb-3
-								img.img-thumbnail.img-fluid#avataruser(src="", alt="")
 							.col
-								h5.card-title#email
-								dl.row.mb-0
-									dt.col-sm-3 ID
-									dd.col-sm-9
-										#id
-								hr
-								dl.row.mb-0
-									dt.col-sm-3 Hash
-									dd.col-sm-9
-										#hash
-								hr
-								dl.row.mb-0
-									dt.col-sm-3#key-username
-									dd.col-sm-9
-										#con-username
-								hr
-								dl.row.mb-0
-									dt.col-sm-3#key-email
-									dd.col-sm-9
-										#con-email
+								#myTabContent.tab-content
+									#home.tab-pane.fade.show.active(role="tabpanel" aria-labelledby="home-tab")
+										.row
+											.col-auto.mb-3
+												img.img-thumbnail.img-fluid#avataruser(src="", alt="")
+											.col
+												h5.card-title#email
+												dl.row.mb-0
+													dt.col-sm-3 ID
+													dd.col-sm-9
+														#id
+												hr
+												dl.row.mb-0
+													dt.col-sm-3 Hash
+													dd.col-sm-9
+														#hash
+												hr
+												dl.row.mb-0
+													dt.col-sm-3#key-username
+													dd.col-sm-9
+														#con-username
+												hr
+												dl.row.mb-0
+													dt.col-sm-3#key-email
+													dd.col-sm-9
+														#con-email

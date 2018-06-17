@@ -242,6 +242,42 @@ app.post('/modify', function (req, res) {
 	return res.end("done");
 });
 
+app.post('/control', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/user.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var getContents = JSON.parse(data), newVal
+			for (var key in json.settings) {
+				if (json.settings.hasOwnProperty(key)) {
+					if (json.settings[key] === 'true') {
+						json.settings[key] = true
+					} else {
+						json.settings[key] = parseInt(json.settings[key])
+					}
+				}
+			}
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					if (key === json.id) {
+						getContents[key].settings = json.settings
+					}
+				}
+			}
+			var jsonJS = JSON.stringify(getContents, null, 4);
+			fs.writeFileSync(site.root + 'src/data/user.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
 app.post('/order', function (req, res) {
 	var json = req.body
 
@@ -332,6 +368,9 @@ router.get('/settings', function (req, res) {
 router.get('/adduser', function (req, res) {
 	res.render('adduser', genall)
 })
+router.get('/edituser', function (req, res) {
+	res.render('edituser', genall)
+})
 router.get('/nopermission', function (req, res) {
 	res.render('nopermission', genall)
 })
@@ -347,6 +386,7 @@ app.use('/getuser', router);
 app.use('/gettask', router);
 app.use('/settings', router);
 app.use('/adduser', router);
+app.use('/edituser', router);
 app.use('/nopermission', router);
 app.use('/archivetask', router);
 
@@ -469,6 +509,7 @@ PugCom(site.views + '/__getuser.pug', site.views + '/__getuser.js')
 PugCom(site.views + '/__gettask.pug', site.views + '/__gettask.js')
 PugCom(site.views + '/__settings.pug', site.views + '/__settings.js')
 PugCom(site.views + '/__adduser.pug', site.views + '/__adduser.js')
+PugCom(site.views + '/__edituser.pug', site.views + '/__edituser.js')
 PugCom(site.views + '/__nopermission.pug', site.views + '/__nopermission.js')
 PugCom(site.views + '/__archivetask.pug', site.views + '/__archivetask.js')
 
