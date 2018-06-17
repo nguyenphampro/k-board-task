@@ -121,6 +121,34 @@ app.post('/save', function (req, res) {
 	return res.end("done");
 });
 
+app.post('/edit', function (req, res) {
+	var json = req.body
+
+	fs.readFile(site.root + 'src/data/user.json', 'utf8', function readFileCallback(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			var getContents = JSON.parse(data), newVal
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					if (key === json.id) {
+						delete json.id;
+						getContents[key] = json
+					}
+				}
+			}
+			var jsonJS = JSON.stringify(getContents, null, 4);
+			fs.writeFileSync(site.root + 'src/data/user.json', jsonJS, 'utf8', function (err) {
+				if (err) {
+					return console.log(err);
+				}
+			});
+		}
+	});
+
+	return res.end("done");
+});
+
 app.post('/newuser', function (req, res) {
 	var json = req.body
 	var checkUser = req.body.username

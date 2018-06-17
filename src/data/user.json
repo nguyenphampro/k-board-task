@@ -27,25 +27,25 @@
     },
     "2": {
         "username": "demo",
-        "fullname": "Thanh Nguyễn",
-        "email": "thanhnguyen.baonguyen@gmail.com",
         "password": "fe01ce2a7fbac8fafaed7c982a04e229",
+        "email": "thanhnguyen.baonguyen@gmail.com",
+        "fullname": "Thanh Nguyễn Trần",
         "permision": {
             "dashboard": true,
-            "movetask": true,
             "createtask": true,
-            "settings": true,
-            "deltassk": false,
+            "deltassk": true,
             "modifytask": true,
-            "adduser": true,
-            "userlist": true,
-            "archivetask": false,
+            "adduser": false,
+            "userlist": false,
+            "settings": true,
+            "archivetask": true,
             "viewtask": true,
-            "viewuser": true
+            "movetask": true,
+            "viewuser": false
         },
         "settings": {
             "editor": true,
-            "pagesize": 5,
+            "pagesize": 6,
             "activenumberstep1drag": 3,
             "activenumberstep2drop": 1,
             "oneway": true
@@ -57,21 +57,21 @@
         "email": "mod@mod.com",
         "fullname": "Trần Phạm",
         "permision": {
-            "dashboard": true,
-            "movetask": true,
-            "createtask": true,
-            "settings": true,
-            "deltassk": true,
-            "modifytask": true,
-            "adduser": false,
-            "userlist": false,
-            "archivetask": true,
-            "viewtask": true,
-            "viewuser": false
+            "dashboard": false,
+            "createtask": false,
+            "deltassk": false,
+            "modifytask": false,
+            "adduser": true,
+            "userlist": true,
+            "settings": false,
+            "archivetask": false,
+            "viewtask": false,
+            "movetask": false,
+            "viewuser": true
         },
         "settings": {
             "editor": true,
-            "pagesize": 5,
+            "pagesize": 6,
             "activenumberstep1drag": 3,
             "activenumberstep2drop": 1,
             "oneway": true
@@ -84,20 +84,20 @@
         "fullname": "Client",
         "permision": {
             "dashboard": false,
-            "movetask": false,
-            "createtask": false,
-            "settings": false,
-            "deltassk": false,
-            "modifytask": false,
+            "createtask": true,
+            "deltassk": true,
+            "modifytask": true,
             "adduser": false,
             "userlist": false,
-            "archivetask": false,
-            "viewtask": false,
+            "settings": false,
+            "archivetask": true,
+            "viewtask": true,
+            "movetask": true,
             "viewuser": false
         },
         "settings": {
             "editor": true,
-            "pagesize": 5,
+            "pagesize": 6,
             "activenumberstep1drag": 3,
             "activenumberstep2drop": 1,
             "oneway": true
@@ -110,7 +110,6 @@
         "fullname": "User",
         "permision": {
             "dashboard": false,
-            "movetask": false,
             "createtask": false,
             "deltassk": false,
             "modifytask": false,
@@ -119,11 +118,12 @@
             "settings": false,
             "archivetask": false,
             "viewtask": false,
+            "movetask": false,
             "viewuser": false
         },
         "settings": {
             "editor": true,
-            "pagesize": 5,
+            "pagesize": 6,
             "activenumberstep1drag": 3,
             "activenumberstep2drop": 1,
             "oneway": true

@@ -1,5 +1,15 @@
 checkLogin('adduser')
 
+if (md5(localStorage.getItem('CurrentUser') + localStorage.getItem('CurrentEmail')) === Cookies.get('Token')) {
+	if (getParameterByName('id') === localStorage.getItem('CurrentUserID') || localStorage.getItem('CurrentUserID') === '1') {
+		$('.waitforpermission-sec').removeClass('waitforpermission-sec')
+	} else {
+		window.location.href = '/nopermission'
+	}
+} else {
+	window.location.href = '/nopermission'
+}
+
 var oldPaswToEdit = null
 
 function __edituser_getLists() {
@@ -44,11 +54,13 @@ function __edituser_getLists() {
 }
 
 function __user_editNew() {
+	var URLID = getParameterByName('id')
 	$('form.validator').validator().on('submit', function (e) {
 		if (e.isDefaultPrevented()) {
 			alert('Vui lòng kiểm tra lại thông tin')
 		} else {
 			var newData = JSON.stringify({
+				id: URLID,
 				username: $('#username').val(),
 				password: ($('#password').val() && $('#password').val().length>0) ? md5($('#password').val()) : oldPaswToEdit,
 				email: $('#email').val(),
@@ -67,11 +79,11 @@ function __user_editNew() {
 					viewuser: $('#viewuser').prop("checked")
 				},
 				settings: {
-					editor: true,
-					pagesize: 5,
-					activenumberstep1drag: 3,
-					activenumberstep2drop: 1,
-					oneway: true
+					editor: Settings.Editor,
+					pagesize: Settings.pageSize,
+					activenumberstep1drag: Settings.ActiveNumberStep1Drag,
+					activenumberstep2drop: Settings.ActiveNumberStep2Drop,
+					oneway: Settings.OneWay
 				}
 			})
 			$.ajax({

@@ -246,6 +246,8 @@ function checkPermission(e) {
 	})
 	if (!checkready) {
 		window.location.href = '/nopermission'
+	} else {
+		$('.waitforpermission').removeClass('waitforpermission')
 	}
 }
 
@@ -405,6 +407,9 @@ $(document).ready(function () {
 	$('header .name').html(localStorage.getItem('FullName'))
 	setFooter()
 	searchGlobal()
+	if (!Settings.Permission.AddUser) {
+		$('header #info').remove()
+	}
 });
 
 $(window).resize(function () {

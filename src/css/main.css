@@ -952,3 +952,6 @@ div.radio.switcher label input:checked + span small {
 .context-menu-list.step-3 .context-menu-separator {
 	display: none !important;
 }
+.waitforpermission, .waitforpermission-sec {
+	display: none;
+}
