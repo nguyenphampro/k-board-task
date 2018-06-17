@@ -1,3 +1,4 @@
+checkLogin(true)
 
 function reFresh(params) {
 	$('[data-step="step-' + params + '"]').addClass('on-load')
@@ -22,7 +23,7 @@ function __index__getData(e, go) {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		complete: function (data) {
 			App.Data = data.responseJSON;
@@ -113,7 +114,7 @@ function __index__updateTask(id, i) {
 function __index__sortAble() {
 	// Step 1
 	$("#k-board-task .sortable[data-step='step-1']").sortable({
-		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-2']",
+		connectWith: (!Settings.OneWay || Settings.OneWay == false) ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-2']",
 		items: "li:not(.disabled)",
 		placeholder: "ui-highlight",
 		// handle: ".move",
@@ -138,7 +139,7 @@ function __index__sortAble() {
 	}).disableSelection()
 	// Step 2
 	$("#k-board-task .sortable[data-step='step-2']").sortable({
-		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-3']",
+		connectWith: (!Settings.OneWay || Settings.OneWay == false) ? ".connectedSortable" : "#k-board-task .sortable[data-step='step-3']",
 		items: "li:not(.disabled)",
 		placeholder: "ui-highlight",
 		// handle: ".move",
@@ -157,7 +158,7 @@ function __index__sortAble() {
 				$(ui.sender).sortable('cancel');
 			} else {
 				__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
-				if (Settings.OneWay || Settings.OneWay === 'true') {
+				if (Settings.OneWay || Settings.OneWay == true) {
 					reFresh(1)
 				}
 			}
@@ -170,7 +171,7 @@ function __index__sortAble() {
 	}).disableSelection();
 	// Step 3
 	$("#k-board-task .sortable[data-step='step-3']").sortable({
-		connectWith: (!Settings.OneWay || Settings.OneWay === 'false') ? ".connectedSortable" : "",
+		connectWith: (!Settings.OneWay || Settings.OneWay == false) ? ".connectedSortable" : "",
 		items: "li:not(.disabled)",
 		placeholder: "ui-highlight",
 		// handle: ".move",
@@ -186,7 +187,7 @@ function __index__sortAble() {
 		},
 		receive: function (e, ui) {
 			__index__updateTask(ui.item.attr('id'), $(e.target).attr('data-step'))
-			if (Settings.OneWay || Settings.OneWay === 'true') {
+			if (Settings.OneWay || Settings.OneWay == true) {
 				reFresh(2)
 			}
 			__main__checkContent()
@@ -197,7 +198,7 @@ function __index__sortAble() {
 		}
 	}).disableSelection();
 	// ALL Step
-	if (!Settings.Permission.ActiveDashboard || Settings.Permission.ActiveDashboard === 'false') {
+	if (!Settings.Permission.ActiveDashboard || Settings.Permission.ActiveDashboard == false) {
 		$(".connectedSortable").sortable('disable')
 	}
 }
@@ -346,7 +347,7 @@ $(function () {
 						id: newId
 					},
 					beforeSend: function (xhr) {
-						xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+						xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 					},
 					complete: function (data) {
 						$(el).remove()
@@ -356,29 +357,22 @@ $(function () {
 				return false
 			}
 		},
-		items: localStorage.getItem('permision_modifytask') === 'true' ? {
-			open: {
+		items: {
+			open: Settings.Permission.ViewTask ? {
 				name: "Xem chi tiết", icon: "edit", callback: function (itemKey, opt, rootMenu, originalEvent) {
 					var newIdg = $(this).attr('id')
 					window.location.href = '/gettask?id=' + newIdg
-				}},
-			sep1: "---------",
-			label: { type: "label", className: "position-item", customName: "Label", callback: $.noop },
+				}} : "---------",
+			// sep1: "---------",
+			label: Settings.Permission.ModifyTask ? { type: "label", className: "position-item", customName: "Label", callback: $.noop } : "---------",
 			// sep2: "---------",
-			archive: {
+			archive: Settings.Permission.ArchiveTask ? {
 				name: "Lưu lại", icon: "copy", className: "archive-item", callback: function (itemKey, opt, rootMenu, originalEvent) {
 					var newIdg = $(this).attr('id')
 					doArchive(newIdg)
 				}
-			},
-			delete: { name: "Xóa", icon: "delete", className: "archive-item"}
-		} : {
-				open: {
-					name: "Xem chi tiết", icon: "edit", callback: function (itemKey, opt, rootMenu, originalEvent) {
-						var newIdg = $(this).attr('id')
-						window.location.href = '/gettask?id=' + newIdg
-					}
-				}
+			} : "---------",
+			delete: Settings.Permission.DeleteTask ? { name: "Xóa", icon: "delete", className: "archive-item" } : "---------"
 		}
 	});
 });

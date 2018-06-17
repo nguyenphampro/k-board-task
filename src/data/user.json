@@ -11,7 +11,10 @@
             "deltassk": true,
             "modifytask": true,
             "adduser": true,
-            "userlist": true
+			"userlist": true,
+			"archivetask": true,
+			"viewtask": true,
+			"viewuser": true
         }
     },
     "2": {
@@ -20,13 +23,16 @@
         "email": "thanhnguyen.baonguyen@gmail.com",
         "password": "fe01ce2a7fbac8fafaed7c982a04e229",
         "permision": {
-            "dashboard": false,
-            "createtask": false,
-            "settings": false,
-            "deltassk": false,
-            "modifytask": false,
-            "adduser": false,
-            "userlist": false
+            "dashboard": true,
+			"createtask": true,
+			"settings": true,
+			"deltassk": false,
+			"modifytask": true,
+			"adduser": true,
+			"userlist": true,
+			"archivetask": false,
+			"viewtask": true,
+			"viewuser": true
         }
     },
     "3": {
@@ -36,12 +42,15 @@
         "fullname": "Trần Phạm",
         "permision": {
             "dashboard": true,
-            "createtask": true,
-            "deltassk": false,
-            "modifytask": false,
-            "adduser": false,
-            "userlist": true,
-            "settings": true
+			"createtask": true,
+			"settings": true,
+			"deltassk": true,
+			"modifytask": true,
+			"adduser": false,
+			"userlist": false,
+			"archivetask": true,
+			"viewtask": true,
+			"viewuser": false
         }
     },
     "4": {
@@ -50,13 +59,16 @@
         "email": "client@client.com",
         "fullname": "Client",
         "permision": {
-            "dashboard": true,
-            "createtask": true,
-            "deltassk": true,
-            "modifytask": true,
-            "adduser": false,
-            "userlist": false,
-            "settings": false
+            "dashboard": false,
+			"createtask": false,
+			"settings": false,
+			"deltassk": false,
+			"modifytask": false,
+			"adduser": false,
+			"userlist": false,
+			"archivetask": false,
+			"viewtask": false,
+			"viewuser": false
         }
     }
 }

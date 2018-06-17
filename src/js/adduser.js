@@ -1,4 +1,4 @@
-checkPermission('adduser')
+checkLogin('adduser')
 
 function __user_addNew() {
 	$('form.validator').validator().on('submit', function (e) {
@@ -17,7 +17,10 @@ function __user_addNew() {
 					modifytask: $('#modifytask').prop("checked"),
 					adduser: $('#adduser').prop("checked"),
 					userlist: $('#userlist').prop("checked"),
-					settings: $('#settings').prop("checked")
+					settings: $('#settings').prop("checked"),
+					archivetask: $('#archivetask').prop("checked"),
+					viewtask: $('#viewtask').prop("checked"),
+					viewuser: $('#viewuser').prop("checked")
 				}
 			})
 			$.ajax({
@@ -29,7 +32,7 @@ function __user_addNew() {
 				data: newData,
 				contentType: "application/json; charset=utf-8",
 				beforeSend: function (xhr) {
-					xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+					xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 				},

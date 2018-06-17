@@ -1,4 +1,4 @@
-checkPermission('settings')
+checkLogin('settings')
 
 $(document).ready(function () {
 	for (var key in Settings) {
@@ -19,14 +19,11 @@ $(document).ready(function () {
 	$('#settingspage input').each(function(){
 		$(this).on('change', function(e){
 			if($(this).attr('type') === 'number') {
-				localStorage.setItem($(this).attr('id'), e.target.value);
-				Cookies.set($(this).attr('id'), e.target.value, Settings.Cookies);
+				// localStorage.setItem($(this).attr('id'), e.target.value);
 			} else if($(this).attr('type') === 'checkbox') {
-				localStorage.setItem($(this).attr('id'), $(this).prop("checked"));
-				Cookies.set($(this).attr('id'), $(this).prop("checked"), Settings.Cookies);
+				// localStorage.setItem($(this).attr('id'), $(this).prop("checked"));
 			} else if($(this).attr('type') === 'text') {
-				localStorage.setItem($(this).attr('id'), e.target.value);
-				Cookies.set($(this).attr('id'), e.target.value, Settings.Cookies);
+				// localStorage.setItem($(this).attr('id'), e.target.value);
 			}
 			toastrMsg('Cập nhật hoàn tất', 'Cập nhật', 2000)
 		})

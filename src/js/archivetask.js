@@ -1,3 +1,5 @@
+checkLogin('archivetask')
+
 function __archive__getData(go) {
 	$.ajax({
 		url: Global.API_URL + "/tasks.json",
@@ -5,7 +7,7 @@ function __archive__getData(go) {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		complete: function (data) {
 			App.Data = data.responseJSON;

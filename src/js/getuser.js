@@ -1,4 +1,6 @@
 
+checkLogin('viewuser')
+
 function __getuser_getLists() {
 	var URLID = getParameterByName('id')
 	$.ajax({
@@ -8,7 +10,7 @@ function __getuser_getLists() {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},

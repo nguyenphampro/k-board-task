@@ -25,28 +25,23 @@ var Global = {
 	};
 
 var Settings = {
-	GlobalName: localStorage.getItem('GlobalName') ? localStorage.getItem('GlobalName') : 'K-DB-',
-	Editor: localStorage.getItem('Editor') ? localStorage.getItem('Editor') : true,
-	pageSize: localStorage.getItem('pageSize') ? localStorage.getItem('pageSize') : 5,
-	ActiveNumberStep1Drag: localStorage.getItem('ActiveNumberStep1Drag') ? localStorage.getItem('ActiveNumberStep1Drag') : 3,
-	ActiveNumberStep2Drop: localStorage.getItem('ActiveNumberStep2Drop') ? localStorage.getItem('ActiveNumberStep2Drop') : 1,
-	OneWay: localStorage.getItem('OneWay') ? localStorage.getItem('OneWay') : true,
-	Cookies: localStorage.getItem('Cookies') ? localStorage.getItem('Cookies') : { expires: 365, path: '/' },
+	GlobalName: 'K-DB-',
+	Editor: true,
+	pageSize: 5,
+	ActiveNumberStep1Drag: 3,
+	ActiveNumberStep2Drop: 1,
+	OneWay: true,
 	Permission: {
-		ActiveDashboard: localStorage.getItem('permision_dashboard') ? localStorage.getItem('permision_dashboard') : false,
-		CreateTask: localStorage.getItem('permision_createtask') ? localStorage.getItem('permision_createtask') : false,
-		Settings: localStorage.getItem('permision_settings') ? localStorage.getItem('permision_settings') : false,
-		DeleteTask: localStorage.getItem('permision_deltassk') ? localStorage.getItem('permision_deltassk') : false,
-		ModifyTask: localStorage.getItem('permision_modifytask') ? localStorage.getItem('permision_modifytask') : false,
-		UserList: localStorage.getItem('permision_userlist') ? localStorage.getItem('permision_userlist') : false
-	}
-}
-
-for (var key in Settings) {
-	if (Settings.hasOwnProperty(key)) {
-		var element = Settings[key];
-		localStorage.setItem(key, element);
-		Cookies.set(key, element, Settings.Cookies);
+		ActiveDashboard: false,
+		CreateTask: false,
+		Settings: false,
+		DeleteTask: false,
+		ModifyTask: false,
+		UserList: false,
+		AddUser: false,
+		ViewTask: false,
+		ArchiveTask: false,
+		ViewUser: false
 	}
 }
 
@@ -57,7 +52,6 @@ function checkNull(params) {
 	} else {
 		return 'Chưa xác định'
 	}
-
 }
 
 function __main__callAction() {
@@ -156,7 +150,7 @@ function getUserName(params) {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
@@ -178,25 +172,72 @@ function getUserName(params) {
 	}
 }
 
-function checkLogin() {
-	if (window.location.pathname === '/login') {
-		if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
+function checkLogin(e) {
+	if (md5(localStorage.getItem('CurrentUser') + localStorage.getItem('CurrentEmail')) === Cookies.get('Token')) {
+		if (window.location.pathname === '/login') {
 			window.location.href = '/'
+		} else {
+			checkPermission(e)
 		}
 	} else {
-		if (localStorage.getItem('Token') && localStorage.getItem('Token').length > 0) {
-		} else {
+		if (e) {
 			window.location.href = '/login'
 		}
 	}
 }
 
 function checkPermission(e) {
-	if (localStorage.getItem('permision_' + e) && localStorage.getItem('permision_' + e) === 'true') {
-	} else {
+	var URLID = localStorage.getItem('CurrentUserID')
+	var checkready = false
+	$.ajax({
+		url: Global.API_URL + "/user.json?id=" + URLID,
+		type: "GET",
+		async: false,
+		dataType: "json",
+		cache: !0,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+		},
+		complete: function (data) {
+			var getContents = JSON.parse(data.responseText)
+			// Filter ID
+			for (var key in getContents) {
+				if (getContents.hasOwnProperty(key)) {
+					var element = md5(getContents[key].username + getContents[key].email);
+					if (key === URLID && element === Cookies.get('Token')) {
+						Settings.Permission.ActiveDashboard = getContents[key].permision.dashboard
+						Settings.Permission.CreateTask = getContents[key].permision.createtask
+						Settings.Permission.Settings = getContents[key].permision.settings
+						Settings.Permission.DeleteTask = getContents[key].permision.deltassk
+						Settings.Permission.ModifyTask = getContents[key].permision.modifytask
+						Settings.Permission.UserList = getContents[key].permision.userlist
+						Settings.Permission.AddUser = getContents[key].permision.adduser
+						Settings.Permission.ArchiveTask = getContents[key].permision.archivetask
+						Settings.Permission.ViewTask = getContents[key].permision.viewtask
+						Settings.Permission.ViewUser = getContents[key].permision.viewuser
+						// Call Permission
+						if (e && e == true) {
+							checkready = true
+						} else {
+							(e === 'createtask') ? Settings.Permission.CreateTask ? checkready = true : checkready = false  : null;
+							(e === 'settings') ? Settings.Permission.Settings ? checkready = true : checkready = false  : null;
+							(e === 'adduser') ? Settings.Permission.AddUser ? checkready = true : checkready = false  : null;
+							(e === 'archivetask') ? Settings.Permission.ArchiveTask ? checkready = true : checkready = false  : null;
+							(e === 'viewtask') ? Settings.Permission.ViewTask ? checkready = true : checkready = false  : null;
+							(e === 'userlist') ? Settings.Permission.UserList ? checkready = true : checkready = false : null;
+							(e === 'viewuser') ? Settings.Permission.ViewUser ? checkready = true : checkready = false  : null;
+						}
+					}
+				}
+			}
+
+		}
+	})
+	if (!checkready) {
 		window.location.href = '/nopermission'
 	}
-
 }
 
 function getParameterByName(t, e) {
@@ -215,8 +256,8 @@ function checkReadyLogin() {
 }
 
 function logOut() {
-	localStorage.removeItem("CurrentUser"), localStorage.removeItem("CurrentUserID"), localStorage.removeItem("Token"), window.location.href = "/login"
-	Cookies.remove("CurrentUser"), Cookies.remove("CurrentUserID"), Cookies.remove("Token"), window.location.href = "/login"
+	localStorage.removeItem("CurrentUser"), localStorage.removeItem("CurrentUserID"), localStorage.removeItem("CurrentEmail"), localStorage.removeItem("FullName"), window.location.href = "/login"
+	Cookies.remove("Token"), window.location.href = "/login"
 }
 
 function getInfoUser() {
@@ -267,9 +308,10 @@ function ccCreateRipple() {
 }
 
 function checkPermissionOnMenu() {
-	localStorage.getItem('permision_userlist') === 'false' ? null : $('#pr_users').removeClass('d-none')
-	localStorage.getItem('permision_createtask') === 'false' ? null : $('#pr_createtask').removeClass('d-none')
-	localStorage.getItem('permision_settings') === 'false' ? null : $('#pr_settings').removeClass('d-none')
+	Settings.Permission.UserList ? $('#pr_users').removeClass('d-none') : null
+	Settings.Permission.CreateTask ? $('#pr_createtask').removeClass('d-none') : null
+	Settings.Permission.Settings ? $('#pr_settings').removeClass('d-none') : null
+	Settings.Permission.ArchiveTask ? $('#pr_archive').removeClass('d-none') : null
 }
 
 function setFooter() {
@@ -294,7 +336,7 @@ function searchGlobal() {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
@@ -360,5 +402,4 @@ $(window).resize(function () {
 	setFooter()
 })
 
-checkLogin()
 

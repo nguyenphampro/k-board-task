@@ -1,8 +1,10 @@
+checkLogin(false)
+
 function __login__postData(u,p) {
 	$.ajax({
 		url: Global.API_URL + "/user.json",
 		type: "GET",
-		async: true,
+		async: false,
 		dataType: "text",
 		cache: !0,
 		data: "username=" + u + "&password=" + p + "",
@@ -12,24 +14,12 @@ function __login__postData(u,p) {
 			for (const key in getToken) {
 				if (getToken.hasOwnProperty(key)) {
 					var element = getToken[key];
-					if (getToken[key].username === u && getToken[key].password === md5(p)) {
-						localStorage.Token = md5(getToken)
-						Cookies.set('Token', md5(getToken), Settings.Cookies);
+					if (element.username === u && element.password === md5(p)) {
+						Cookies.set('Token', md5(u + element.email), { expires: 365, path: '/' });
 						localStorage.CurrentUser = u
-						Cookies.set('CurrentUser', u, Settings.Cookies);
-						localStorage.FullName = getToken[key].fullname
-						Cookies.set('FullName', getToken[key].fullname, Settings.Cookies);
+						localStorage.FullName = element.fullname
 						localStorage.CurrentUserID = key
-						Cookies.set('CurrentUserID', key, Settings.Cookies);
-						localStorage.CurrentEmail = getToken[key].email
-						Cookies.set('CurrentEmail', getToken[key].email, Settings.Cookies);
-						for (var keyloged in getToken[key].permision) {
-							if (getToken[key].permision.hasOwnProperty(keyloged)) {
-								var element = getToken[key].permision[keyloged];
-								localStorage.setItem('permision_'+keyloged, element);
-								Cookies.set('permision_' + keyloged, element, Settings.Cookies);
-							}
-						}
+						localStorage.CurrentEmail = element.email
 						ready = true
 					}
 				}

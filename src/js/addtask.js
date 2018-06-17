@@ -1,4 +1,4 @@
-checkPermission('createtask')
+checkLogin('createtask')
 
 function __addTask_submitForm() {
 	if (Settings.Editor && Settings.Editor === 'true') {
@@ -79,7 +79,7 @@ function __addTask_createTask(txtNewTitle, txtNewSelect, txtNewMesage, txtNewDat
 		data: newData,
 		contentType: "application/json; charset=utf-8",
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
@@ -144,7 +144,7 @@ $(document).ready(function () {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},

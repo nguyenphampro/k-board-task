@@ -1,3 +1,4 @@
+checkLogin('viewtask')
 
 function __delTask() {
 	var URLID = getParameterByName('id')
@@ -11,7 +12,7 @@ function __delTask() {
 				id: URLID
 			},
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+				xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 			},
 			complete: function (data) {
 				window.location.href = '/'
@@ -34,7 +35,7 @@ function __archiveTask() {
 				State: 'N'
 			},
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+				xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 			},
 			complete: function (data) {
 				window.location.href = '/'
@@ -54,7 +55,7 @@ function __gettask_getLists() {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
@@ -97,9 +98,11 @@ function __gettask_getLists() {
 				colp = '<span class="badge badge-info p-1">Đang thực thi</span>'
 			} else if (getContents.State === 'D') {
 				colp = '<span class="badge badge-success p-1">Hoàn thành</span>'
-				if (localStorage.getItem('permision_deltassk') && localStorage.getItem('permision_deltassk') === 'true') {
-					$('.archive').removeClass('d-none')
+				if (Settings.Permission.DeleteTask) {
 					$('.del').removeClass('d-none')
+				}
+				if (Settings.Permission.ArchiveTask) {
+					$('.archive').removeClass('d-none')
 				}
 			}
 			if (getContents.MetaTextValue && getContents.MetaTextValue.length>0) {

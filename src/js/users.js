@@ -1,4 +1,4 @@
-checkPermission('userlist')
+checkLogin('userlist')
 
 function __user_getLists() {
 	$.ajax({
@@ -8,7 +8,7 @@ function __user_getLists() {
 		dataType: "json",
 		cache: !0,
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.getItem('Token'));
+			xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('Token'));
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 		},
