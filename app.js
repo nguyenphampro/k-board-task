@@ -1,27 +1,27 @@
-var express = require('express');
-var compression = require('compression');
-var app = express();
-var router = express.Router();
-var path = require('path');
-var bodyParser = require("body-parser");
-var fs = require('fs');
-var browserSync = require('browser-sync');
-var pug = require('pug');
-var multer = require('multer');
-var minify = require('express-minify');
-var crypto = require('crypto');
-var cookie = require('cookie');
-var nodemailer = require('nodemailer');
-var json_body_parser = bodyParser.json();
-var urlencoded_body_parser = bodyParser.urlencoded({ extended: true });
-var site = {
+const express = require('express');
+const compression = require('compression');
+const app = express();
+const router = express.Router();
+const path = require('path');
+const bodyParser = require("body-parser");
+const fs = require('fs');
+const browserSync = require('browser-sync');
+const pug = require('pug');
+const multer = require('multer');
+const minify = require('express-minify');
+const crypto = require('crypto');
+const cookie = require('cookie');
+const nodemailer = require('nodemailer');
+const json_body_parser = bodyParser.json();
+const urlencoded_body_parser = bodyParser.urlencoded({ extended: true });
+const site = {
 	port: process.env.PORT || 8080,
 	root: './',
 	views: './src'
 }
-var files = ''
-var OpensendMail = true
-var smtpTransport = nodemailer.createTransport({
+const files = ''
+const OpensendMail = true
+const smtpTransport = nodemailer.createTransport({
 	service: "gmail",
 	auth: {
 		user: "baonguyenyam@gmail.com",
@@ -64,7 +64,7 @@ if (!process.env.ENVGLOBAL) {
 app.set('view engine', 'pug')
 app.set('views', site.views)
 
-var Storage = multer.diskStorage({
+const Storage = multer.diskStorage({
 	destination: function (req, file, callback) {
 		callback(null, site.views + "/files");
 	},
@@ -73,7 +73,7 @@ var Storage = multer.diskStorage({
 		callback(null, files);
 	}
 });
-var upload = multer({
+const upload = multer({
 	storage: Storage,
 	fileFilter: function (req, file, callback) {
 		var ext = path.extname(file.originalname);
@@ -365,7 +365,7 @@ router.use(function (req, res, next) {
 	next();
 });
 
-var genall = {
+const genall = {
 	key: makeid(200),
 	val: makeid(20),
 	memory: process.memoryUsage(),
