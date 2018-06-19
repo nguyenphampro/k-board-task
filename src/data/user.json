@@ -19,7 +19,7 @@
         },
         "settings": {
             "editor": true,
-            "pagesize": 6,
+            "pagesize": 2,
             "activenumberstep1drag": 3,
             "activenumberstep2drop": 1,
             "oneway": true

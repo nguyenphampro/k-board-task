@@ -57,7 +57,6 @@ if (!process.env.ENVGLOBAL) {
 	app.use(minify());
 	app.listen(site.port, function () {
 		console.log('App listening on port !' + site.port);
-		require("openurl").open("http://localhost:" + site.port + '/')
 	});
 
 }
@@ -439,7 +438,7 @@ app.use(function (err, req, res, next) {
 	res.render('500.pug', { title: "500 Internal server error", desc: "Application is shutting down on the web server." });
 });
 
-function sendMail(from,to, e, m, n) {
+function sendMail(from, to, e, m, n) {
 	var mailOptions = {
 		from: from, // sender address
 		to: to, // list of receivers
