@@ -52,22 +52,21 @@ gulp.task('concatjs', () => {
 		'./src/vendor/lodash.min.js',
 		'./src/vendor/jquery.min.js',
 		'./src/vendor/jquery-ui.min.js',
-		'./src/vendor/js.cookie.js',
+		'./src/vendor/js.cookie.min.js',
 		'./src/vendor/popper.min.js',
 		'./src/vendor/bootstrap.min.js',
 		'./src/vendor/validator.min.js',
 		'./src/vendor/moment.min.js',
-		'./src/vendor/toastr.min.js',
 		'./src/vendor/jquery.contextMenu.min.js',
 		'./src/vendor/jquery-ui-timepicker-addon.min.js',
 		'./src/vendor/select2.min.js',
 		'./src/vendor/bootstrap-colorpicker.min.js',
 		'./src/vendor/md5.min.js',
+		'./src/vendor/toastr.min.js',
 		'./src/vendor/typeahead.bundle.min.js',
 		'!./src/vendor/core.min.js'
 	])
 		.pipe(concat('core.js'))
-		.pipe(minifyJS())
 		.pipe(rename({
 			suffix: '.min'
 		}))
