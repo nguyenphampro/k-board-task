@@ -20,6 +20,7 @@ var site = {
 	views: './src'
 }
 var files = ''
+var OpensendMail = true
 var smtpTransport = nodemailer.createTransport({
 	service: "gmail",
 	auth: {
@@ -114,7 +115,9 @@ app.post('/save', function (req, res) {
 					return console.log(err);
 				}
 			});
-			sendMail(json.from, json.to, json.ObjectType, json.Name, json.MetaDescription)
+			if (OpensendMail && OpensendMail == true) {
+				sendMail(json.from, json.to, json.ObjectType, json.Name, json.MetaDescription)
+			}
 		}
 	});
 	return res.end("done");
