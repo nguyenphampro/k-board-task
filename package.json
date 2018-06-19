@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js --production",
     "build": "gulp && node app.js --production",
-    "pro": "node app.js --production",
+    "dev": "node app.js",
     "update": "ncu -u && ncu -u -m bower && npm i && npm i sass node-sass && bower update"
   },
   "dependencies": {
