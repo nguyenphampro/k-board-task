@@ -13,21 +13,6 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const json_body_parser = bodyParser.json();
 
-
-const pg = require('pg');
-const pool = new pg.Pool({
-	user: 'baonguyen',
-	host: '127.0.0.1',
-	database: 'demo',
-	password: 'admin',
-	port: '5432'
-});
-
-pool.query("SELECT NOW()", (err, res) => {
-	console.log(err, res);
-	pool.end();
-});
-
 const urlencoded_body_parser = bodyParser.urlencoded({ extended: true });
 const site = {
 	port: process.env.PORT || 8080,
